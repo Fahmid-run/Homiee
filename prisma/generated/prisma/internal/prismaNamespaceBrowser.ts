@@ -99,6 +99,7 @@ export type TenantProfileScalarFieldEnum = (typeof TenantProfileScalarFieldEnum)
 export const ApplicationScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  roomId: 'roomId',
   message: 'message',
   status: 'status',
   reviewedBy: 'reviewedBy',
@@ -167,10 +168,12 @@ export type RentalDocumentsScalarFieldEnum = (typeof RentalDocumentsScalarFieldE
 
 export const RoomScalarFieldEnum = {
   id: 'id',
-  rent: 'rent',
+  roomNumber: 'roomNumber',
+  propertyId: 'propertyId',
+  roomType: 'roomType',
+  monthlyRent: 'monthlyRent',
   capacity: 'capacity',
-  availability: 'availability',
-  available_beds: 'available_beds'
+  roomstatus: 'roomstatus'
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
@@ -179,6 +182,7 @@ export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof Room
 export const TenancyScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  roomId: 'roomId',
   applicationId: 'applicationId',
   startDate: 'startDate',
   endDate: 'endDate',
@@ -250,6 +254,7 @@ export type UtilityBillShareScalarFieldEnum = (typeof UtilityBillShareScalarFiel
 export const ViewingRequestScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  roomId: 'roomId',
   propertyId: 'propertyId',
   requestedAt: 'requestedAt',
   message: 'message',

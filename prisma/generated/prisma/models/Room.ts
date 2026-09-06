@@ -20,58 +20,92 @@ export type RoomModel = runtime.Types.Result.DefaultSelection<Prisma.$RoomPayloa
 
 export type AggregateRoom = {
   _count: RoomCountAggregateOutputType | null
+  _avg: RoomAvgAggregateOutputType | null
+  _sum: RoomSumAggregateOutputType | null
   _min: RoomMinAggregateOutputType | null
   _max: RoomMaxAggregateOutputType | null
 }
 
+export type RoomAvgAggregateOutputType = {
+  monthlyRent: number | null
+  capacity: number | null
+}
+
+export type RoomSumAggregateOutputType = {
+  monthlyRent: number | null
+  capacity: number | null
+}
+
 export type RoomMinAggregateOutputType = {
   id: string | null
-  rent: string | null
-  capacity: string | null
-  availability: $Enums.RoomAvailability | null
-  available_beds: string | null
+  roomNumber: string | null
+  propertyId: string | null
+  roomType: $Enums.RoomType | null
+  monthlyRent: number | null
+  capacity: number | null
+  roomstatus: $Enums.RoomStatus | null
 }
 
 export type RoomMaxAggregateOutputType = {
   id: string | null
-  rent: string | null
-  capacity: string | null
-  availability: $Enums.RoomAvailability | null
-  available_beds: string | null
+  roomNumber: string | null
+  propertyId: string | null
+  roomType: $Enums.RoomType | null
+  monthlyRent: number | null
+  capacity: number | null
+  roomstatus: $Enums.RoomStatus | null
 }
 
 export type RoomCountAggregateOutputType = {
   id: number
-  rent: number
+  roomNumber: number
+  propertyId: number
+  roomType: number
+  monthlyRent: number
   capacity: number
-  availability: number
-  available_beds: number
+  roomstatus: number
   _all: number
 }
 
 
+export type RoomAvgAggregateInputType = {
+  monthlyRent?: true
+  capacity?: true
+}
+
+export type RoomSumAggregateInputType = {
+  monthlyRent?: true
+  capacity?: true
+}
+
 export type RoomMinAggregateInputType = {
   id?: true
-  rent?: true
+  roomNumber?: true
+  propertyId?: true
+  roomType?: true
+  monthlyRent?: true
   capacity?: true
-  availability?: true
-  available_beds?: true
+  roomstatus?: true
 }
 
 export type RoomMaxAggregateInputType = {
   id?: true
-  rent?: true
+  roomNumber?: true
+  propertyId?: true
+  roomType?: true
+  monthlyRent?: true
   capacity?: true
-  availability?: true
-  available_beds?: true
+  roomstatus?: true
 }
 
 export type RoomCountAggregateInputType = {
   id?: true
-  rent?: true
+  roomNumber?: true
+  propertyId?: true
+  roomType?: true
+  monthlyRent?: true
   capacity?: true
-  availability?: true
-  available_beds?: true
+  roomstatus?: true
   _all?: true
 }
 
@@ -113,6 +147,18 @@ export type RoomAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: RoomAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: RoomSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: RoomMinAggregateInputType
@@ -143,17 +189,23 @@ export type RoomGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: RoomCountAggregateInputType | true
+  _avg?: RoomAvgAggregateInputType
+  _sum?: RoomSumAggregateInputType
   _min?: RoomMinAggregateInputType
   _max?: RoomMaxAggregateInputType
 }
 
 export type RoomGroupByOutputType = {
   id: string
-  rent: string
-  capacity: string
-  availability: $Enums.RoomAvailability
-  available_beds: string
+  roomNumber: string
+  propertyId: string
+  roomType: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus: $Enums.RoomStatus
   _count: RoomCountAggregateOutputType | null
+  _avg: RoomAvgAggregateOutputType | null
+  _sum: RoomSumAggregateOutputType | null
   _min: RoomMinAggregateOutputType | null
   _max: RoomMaxAggregateOutputType | null
 }
@@ -178,40 +230,62 @@ export type RoomWhereInput = {
   OR?: Prisma.RoomWhereInput[]
   NOT?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
   id?: Prisma.StringFilter<"Room"> | string
-  rent?: Prisma.StringFilter<"Room"> | string
-  capacity?: Prisma.StringFilter<"Room"> | string
-  availability?: Prisma.EnumRoomAvailabilityFilter<"Room"> | $Enums.RoomAvailability
-  available_beds?: Prisma.StringFilter<"Room"> | string
+  roomNumber?: Prisma.StringFilter<"Room"> | string
+  propertyId?: Prisma.StringFilter<"Room"> | string
+  roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+  monthlyRent?: Prisma.IntFilter<"Room"> | number
+  capacity?: Prisma.IntFilter<"Room"> | number
+  roomstatus?: Prisma.EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  applications?: Prisma.ApplicationListRelationFilter
+  viewingRequests?: Prisma.ViewingRequestListRelationFilter
+  tenancy?: Prisma.TenancyListRelationFilter
 }
 
 export type RoomOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  rent?: Prisma.SortOrder
+  roomNumber?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
+  roomType?: Prisma.SortOrder
+  monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
-  availability?: Prisma.SortOrder
-  available_beds?: Prisma.SortOrder
+  roomstatus?: Prisma.SortOrder
+  property?: Prisma.PropertyOrderByWithRelationInput
+  applications?: Prisma.ApplicationOrderByRelationAggregateInput
+  viewingRequests?: Prisma.ViewingRequestOrderByRelationAggregateInput
+  tenancy?: Prisma.TenancyOrderByRelationAggregateInput
 }
 
 export type RoomWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  roomNumber?: string
   AND?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
   OR?: Prisma.RoomWhereInput[]
   NOT?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
-  rent?: Prisma.StringFilter<"Room"> | string
-  capacity?: Prisma.StringFilter<"Room"> | string
-  availability?: Prisma.EnumRoomAvailabilityFilter<"Room"> | $Enums.RoomAvailability
-  available_beds?: Prisma.StringFilter<"Room"> | string
-}, "id">
+  propertyId?: Prisma.StringFilter<"Room"> | string
+  roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+  monthlyRent?: Prisma.IntFilter<"Room"> | number
+  capacity?: Prisma.IntFilter<"Room"> | number
+  roomstatus?: Prisma.EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  applications?: Prisma.ApplicationListRelationFilter
+  viewingRequests?: Prisma.ViewingRequestListRelationFilter
+  tenancy?: Prisma.TenancyListRelationFilter
+}, "id" | "roomNumber">
 
 export type RoomOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  rent?: Prisma.SortOrder
+  roomNumber?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
+  roomType?: Prisma.SortOrder
+  monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
-  availability?: Prisma.SortOrder
-  available_beds?: Prisma.SortOrder
+  roomstatus?: Prisma.SortOrder
   _count?: Prisma.RoomCountOrderByAggregateInput
+  _avg?: Prisma.RoomAvgOrderByAggregateInput
   _max?: Prisma.RoomMaxOrderByAggregateInput
   _min?: Prisma.RoomMinOrderByAggregateInput
+  _sum?: Prisma.RoomSumOrderByAggregateInput
 }
 
 export type RoomScalarWhereWithAggregatesInput = {
@@ -219,141 +293,673 @@ export type RoomScalarWhereWithAggregatesInput = {
   OR?: Prisma.RoomScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomScalarWhereWithAggregatesInput | Prisma.RoomScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Room"> | string
-  rent?: Prisma.StringWithAggregatesFilter<"Room"> | string
-  capacity?: Prisma.StringWithAggregatesFilter<"Room"> | string
-  availability?: Prisma.EnumRoomAvailabilityWithAggregatesFilter<"Room"> | $Enums.RoomAvailability
-  available_beds?: Prisma.StringWithAggregatesFilter<"Room"> | string
+  roomNumber?: Prisma.StringWithAggregatesFilter<"Room"> | string
+  propertyId?: Prisma.StringWithAggregatesFilter<"Room"> | string
+  roomType?: Prisma.EnumRoomTypeWithAggregatesFilter<"Room"> | $Enums.RoomType
+  monthlyRent?: Prisma.IntWithAggregatesFilter<"Room"> | number
+  capacity?: Prisma.IntWithAggregatesFilter<"Room"> | number
+  roomstatus?: Prisma.EnumRoomStatusWithAggregatesFilter<"Room"> | $Enums.RoomStatus
 }
 
 export type RoomCreateInput = {
   id?: string
-  rent: string
-  capacity: string
-  availability?: $Enums.RoomAvailability
-  available_beds: string
+  roomNumber: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutRoomInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyCreateNestedManyWithoutRoomInput
 }
 
 export type RoomUncheckedCreateInput = {
   id?: string
-  rent: string
-  capacity: string
-  availability?: $Enums.RoomAvailability
-  available_beds: string
+  roomNumber: string
+  propertyId: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  rent?: Prisma.StringFieldUpdateOperationsInput | string
-  capacity?: Prisma.StringFieldUpdateOperationsInput | string
-  availability?: Prisma.EnumRoomAvailabilityFieldUpdateOperationsInput | $Enums.RoomAvailability
-  available_beds?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutRoomNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  rent?: Prisma.StringFieldUpdateOperationsInput | string
-  capacity?: Prisma.StringFieldUpdateOperationsInput | string
-  availability?: Prisma.EnumRoomAvailabilityFieldUpdateOperationsInput | $Enums.RoomAvailability
-  available_beds?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateManyInput = {
   id?: string
-  rent: string
-  capacity: string
-  availability?: $Enums.RoomAvailability
-  available_beds: string
+  roomNumber: string
+  propertyId: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
 }
 
 export type RoomUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  rent?: Prisma.StringFieldUpdateOperationsInput | string
-  capacity?: Prisma.StringFieldUpdateOperationsInput | string
-  availability?: Prisma.EnumRoomAvailabilityFieldUpdateOperationsInput | $Enums.RoomAvailability
-  available_beds?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
 }
 
 export type RoomUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  rent?: Prisma.StringFieldUpdateOperationsInput | string
-  capacity?: Prisma.StringFieldUpdateOperationsInput | string
-  availability?: Prisma.EnumRoomAvailabilityFieldUpdateOperationsInput | $Enums.RoomAvailability
-  available_beds?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+}
+
+export type RoomScalarRelationFilter = {
+  is?: Prisma.RoomWhereInput
+  isNot?: Prisma.RoomWhereInput
+}
+
+export type RoomListRelationFilter = {
+  every?: Prisma.RoomWhereInput
+  some?: Prisma.RoomWhereInput
+  none?: Prisma.RoomWhereInput
+}
+
+export type RoomOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type RoomCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  rent?: Prisma.SortOrder
+  roomNumber?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
+  roomType?: Prisma.SortOrder
+  monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
-  availability?: Prisma.SortOrder
-  available_beds?: Prisma.SortOrder
+  roomstatus?: Prisma.SortOrder
+}
+
+export type RoomAvgOrderByAggregateInput = {
+  monthlyRent?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
 }
 
 export type RoomMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  rent?: Prisma.SortOrder
+  roomNumber?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
+  roomType?: Prisma.SortOrder
+  monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
-  availability?: Prisma.SortOrder
-  available_beds?: Prisma.SortOrder
+  roomstatus?: Prisma.SortOrder
 }
 
 export type RoomMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  rent?: Prisma.SortOrder
+  roomNumber?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
+  roomType?: Prisma.SortOrder
+  monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
-  availability?: Prisma.SortOrder
-  available_beds?: Prisma.SortOrder
+  roomstatus?: Prisma.SortOrder
 }
 
-export type EnumRoomAvailabilityFieldUpdateOperationsInput = {
-  set?: $Enums.RoomAvailability
+export type RoomSumOrderByAggregateInput = {
+  monthlyRent?: Prisma.SortOrder
+  capacity?: Prisma.SortOrder
 }
 
+export type RoomNullableScalarRelationFilter = {
+  is?: Prisma.RoomWhereInput | null
+  isNot?: Prisma.RoomWhereInput | null
+}
+
+export type RoomCreateNestedOneWithoutApplicationsInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutApplicationsInput, Prisma.RoomUncheckedCreateWithoutApplicationsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutApplicationsInput
+  connect?: Prisma.RoomWhereUniqueInput
+}
+
+export type RoomUpdateOneRequiredWithoutApplicationsNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutApplicationsInput, Prisma.RoomUncheckedCreateWithoutApplicationsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutApplicationsInput
+  upsert?: Prisma.RoomUpsertWithoutApplicationsInput
+  connect?: Prisma.RoomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutApplicationsInput, Prisma.RoomUpdateWithoutApplicationsInput>, Prisma.RoomUncheckedUpdateWithoutApplicationsInput>
+}
+
+export type RoomCreateNestedManyWithoutPropertyInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutPropertyInput, Prisma.RoomUncheckedCreateWithoutPropertyInput> | Prisma.RoomCreateWithoutPropertyInput[] | Prisma.RoomUncheckedCreateWithoutPropertyInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutPropertyInput | Prisma.RoomCreateOrConnectWithoutPropertyInput[]
+  createMany?: Prisma.RoomCreateManyPropertyInputEnvelope
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+}
+
+export type RoomUncheckedCreateNestedManyWithoutPropertyInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutPropertyInput, Prisma.RoomUncheckedCreateWithoutPropertyInput> | Prisma.RoomCreateWithoutPropertyInput[] | Prisma.RoomUncheckedCreateWithoutPropertyInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutPropertyInput | Prisma.RoomCreateOrConnectWithoutPropertyInput[]
+  createMany?: Prisma.RoomCreateManyPropertyInputEnvelope
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+}
+
+export type RoomUpdateManyWithoutPropertyNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutPropertyInput, Prisma.RoomUncheckedCreateWithoutPropertyInput> | Prisma.RoomCreateWithoutPropertyInput[] | Prisma.RoomUncheckedCreateWithoutPropertyInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutPropertyInput | Prisma.RoomCreateOrConnectWithoutPropertyInput[]
+  upsert?: Prisma.RoomUpsertWithWhereUniqueWithoutPropertyInput | Prisma.RoomUpsertWithWhereUniqueWithoutPropertyInput[]
+  createMany?: Prisma.RoomCreateManyPropertyInputEnvelope
+  set?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  disconnect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  delete?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  update?: Prisma.RoomUpdateWithWhereUniqueWithoutPropertyInput | Prisma.RoomUpdateWithWhereUniqueWithoutPropertyInput[]
+  updateMany?: Prisma.RoomUpdateManyWithWhereWithoutPropertyInput | Prisma.RoomUpdateManyWithWhereWithoutPropertyInput[]
+  deleteMany?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+}
+
+export type RoomUncheckedUpdateManyWithoutPropertyNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutPropertyInput, Prisma.RoomUncheckedCreateWithoutPropertyInput> | Prisma.RoomCreateWithoutPropertyInput[] | Prisma.RoomUncheckedCreateWithoutPropertyInput[]
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutPropertyInput | Prisma.RoomCreateOrConnectWithoutPropertyInput[]
+  upsert?: Prisma.RoomUpsertWithWhereUniqueWithoutPropertyInput | Prisma.RoomUpsertWithWhereUniqueWithoutPropertyInput[]
+  createMany?: Prisma.RoomCreateManyPropertyInputEnvelope
+  set?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  disconnect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  delete?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  connect?: Prisma.RoomWhereUniqueInput | Prisma.RoomWhereUniqueInput[]
+  update?: Prisma.RoomUpdateWithWhereUniqueWithoutPropertyInput | Prisma.RoomUpdateWithWhereUniqueWithoutPropertyInput[]
+  updateMany?: Prisma.RoomUpdateManyWithWhereWithoutPropertyInput | Prisma.RoomUpdateManyWithWhereWithoutPropertyInput[]
+  deleteMany?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+}
+
+export type EnumRoomTypeFieldUpdateOperationsInput = {
+  set?: $Enums.RoomType
+}
+
+export type EnumRoomStatusFieldUpdateOperationsInput = {
+  set?: $Enums.RoomStatus
+}
+
+export type RoomCreateNestedOneWithoutTenancyInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutTenancyInput, Prisma.RoomUncheckedCreateWithoutTenancyInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutTenancyInput
+  connect?: Prisma.RoomWhereUniqueInput
+}
+
+export type RoomUpdateOneRequiredWithoutTenancyNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutTenancyInput, Prisma.RoomUncheckedCreateWithoutTenancyInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutTenancyInput
+  upsert?: Prisma.RoomUpsertWithoutTenancyInput
+  connect?: Prisma.RoomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutTenancyInput, Prisma.RoomUpdateWithoutTenancyInput>, Prisma.RoomUncheckedUpdateWithoutTenancyInput>
+}
+
+export type RoomCreateNestedOneWithoutViewingRequestsInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutViewingRequestsInput, Prisma.RoomUncheckedCreateWithoutViewingRequestsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutViewingRequestsInput
+  connect?: Prisma.RoomWhereUniqueInput
+}
+
+export type RoomUpdateOneWithoutViewingRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutViewingRequestsInput, Prisma.RoomUncheckedCreateWithoutViewingRequestsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutViewingRequestsInput
+  upsert?: Prisma.RoomUpsertWithoutViewingRequestsInput
+  disconnect?: Prisma.RoomWhereInput | boolean
+  delete?: Prisma.RoomWhereInput | boolean
+  connect?: Prisma.RoomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutViewingRequestsInput, Prisma.RoomUpdateWithoutViewingRequestsInput>, Prisma.RoomUncheckedUpdateWithoutViewingRequestsInput>
+}
+
+export type RoomCreateWithoutApplicationsInput = {
+  id?: string
+  roomNumber: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyCreateNestedManyWithoutRoomInput
+}
+
+export type RoomUncheckedCreateWithoutApplicationsInput = {
+  id?: string
+  roomNumber: string
+  propertyId: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutApplicationsInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutApplicationsInput, Prisma.RoomUncheckedCreateWithoutApplicationsInput>
+}
+
+export type RoomUpsertWithoutApplicationsInput = {
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutApplicationsInput, Prisma.RoomUncheckedUpdateWithoutApplicationsInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutApplicationsInput, Prisma.RoomUncheckedCreateWithoutApplicationsInput>
+  where?: Prisma.RoomWhereInput
+}
+
+export type RoomUpdateToOneWithWhereWithoutApplicationsInput = {
+  where?: Prisma.RoomWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutApplicationsInput, Prisma.RoomUncheckedUpdateWithoutApplicationsInput>
+}
+
+export type RoomUpdateWithoutApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutApplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUncheckedUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomCreateWithoutPropertyInput = {
+  id?: string
+  roomNumber: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  applications?: Prisma.ApplicationCreateNestedManyWithoutRoomInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyCreateNestedManyWithoutRoomInput
+}
+
+export type RoomUncheckedCreateWithoutPropertyInput = {
+  id?: string
+  roomNumber: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutPropertyInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutPropertyInput, Prisma.RoomUncheckedCreateWithoutPropertyInput>
+}
+
+export type RoomCreateManyPropertyInputEnvelope = {
+  data: Prisma.RoomCreateManyPropertyInput | Prisma.RoomCreateManyPropertyInput[]
+  skipDuplicates?: boolean
+}
+
+export type RoomUpsertWithWhereUniqueWithoutPropertyInput = {
+  where: Prisma.RoomWhereUniqueInput
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutPropertyInput, Prisma.RoomUncheckedUpdateWithoutPropertyInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutPropertyInput, Prisma.RoomUncheckedCreateWithoutPropertyInput>
+}
+
+export type RoomUpdateWithWhereUniqueWithoutPropertyInput = {
+  where: Prisma.RoomWhereUniqueInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutPropertyInput, Prisma.RoomUncheckedUpdateWithoutPropertyInput>
+}
+
+export type RoomUpdateManyWithWhereWithoutPropertyInput = {
+  where: Prisma.RoomScalarWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateManyMutationInput, Prisma.RoomUncheckedUpdateManyWithoutPropertyInput>
+}
+
+export type RoomScalarWhereInput = {
+  AND?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+  OR?: Prisma.RoomScalarWhereInput[]
+  NOT?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
+  id?: Prisma.StringFilter<"Room"> | string
+  roomNumber?: Prisma.StringFilter<"Room"> | string
+  propertyId?: Prisma.StringFilter<"Room"> | string
+  roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
+  monthlyRent?: Prisma.IntFilter<"Room"> | number
+  capacity?: Prisma.IntFilter<"Room"> | number
+  roomstatus?: Prisma.EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+}
+
+export type RoomCreateWithoutTenancyInput = {
+  id?: string
+  roomNumber: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutRoomInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutRoomInput
+}
+
+export type RoomUncheckedCreateWithoutTenancyInput = {
+  id?: string
+  roomNumber: string
+  propertyId: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutTenancyInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutTenancyInput, Prisma.RoomUncheckedCreateWithoutTenancyInput>
+}
+
+export type RoomUpsertWithoutTenancyInput = {
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutTenancyInput, Prisma.RoomUncheckedUpdateWithoutTenancyInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutTenancyInput, Prisma.RoomUncheckedCreateWithoutTenancyInput>
+  where?: Prisma.RoomWhereInput
+}
+
+export type RoomUpdateToOneWithWhereWithoutTenancyInput = {
+  where?: Prisma.RoomWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutTenancyInput, Prisma.RoomUncheckedUpdateWithoutTenancyInput>
+}
+
+export type RoomUpdateWithoutTenancyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutRoomNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutTenancyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomCreateWithoutViewingRequestsInput = {
+  id?: string
+  roomNumber: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyCreateNestedManyWithoutRoomInput
+}
+
+export type RoomUncheckedCreateWithoutViewingRequestsInput = {
+  id?: string
+  roomNumber: string
+  propertyId: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
+  tenancy?: Prisma.TenancyUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutViewingRequestsInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutViewingRequestsInput, Prisma.RoomUncheckedCreateWithoutViewingRequestsInput>
+}
+
+export type RoomUpsertWithoutViewingRequestsInput = {
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutViewingRequestsInput, Prisma.RoomUncheckedUpdateWithoutViewingRequestsInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutViewingRequestsInput, Prisma.RoomUncheckedCreateWithoutViewingRequestsInput>
+  where?: Prisma.RoomWhereInput
+}
+
+export type RoomUpdateToOneWithWhereWithoutViewingRequestsInput = {
+  where?: Prisma.RoomWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutViewingRequestsInput, Prisma.RoomUncheckedUpdateWithoutViewingRequestsInput>
+}
+
+export type RoomUpdateWithoutViewingRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutViewingRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUncheckedUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomCreateManyPropertyInput = {
+  id?: string
+  roomNumber: string
+  roomType?: $Enums.RoomType
+  monthlyRent: number
+  capacity: number
+  roomstatus?: $Enums.RoomStatus
+}
+
+export type RoomUpdateWithoutPropertyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  applications?: Prisma.ApplicationUpdateManyWithoutRoomNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutPropertyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput
+  tenancy?: Prisma.TenancyUncheckedUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomUncheckedUpdateManyWithoutPropertyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  roomType?: Prisma.EnumRoomTypeFieldUpdateOperationsInput | $Enums.RoomType
+  monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
+  capacity?: Prisma.IntFieldUpdateOperationsInput | number
+  roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+}
+
+
+/**
+ * Count Type RoomCountOutputType
+ */
+
+export type RoomCountOutputType = {
+  applications: number
+  viewingRequests: number
+  tenancy: number
+}
+
+export type RoomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  applications?: boolean | RoomCountOutputTypeCountApplicationsArgs
+  viewingRequests?: boolean | RoomCountOutputTypeCountViewingRequestsArgs
+  tenancy?: boolean | RoomCountOutputTypeCountTenancyArgs
+}
+
+/**
+ * RoomCountOutputType without action
+ */
+export type RoomCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoomCountOutputType
+   */
+  select?: Prisma.RoomCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RoomCountOutputType without action
+ */
+export type RoomCountOutputTypeCountApplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ApplicationWhereInput
+}
+
+/**
+ * RoomCountOutputType without action
+ */
+export type RoomCountOutputTypeCountViewingRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ViewingRequestWhereInput
+}
+
+/**
+ * RoomCountOutputType without action
+ */
+export type RoomCountOutputTypeCountTenancyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TenancyWhereInput
+}
 
 
 export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  rent?: boolean
+  roomNumber?: boolean
+  propertyId?: boolean
+  roomType?: boolean
+  monthlyRent?: boolean
   capacity?: boolean
-  availability?: boolean
-  available_beds?: boolean
+  roomstatus?: boolean
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  applications?: boolean | Prisma.Room$applicationsArgs<ExtArgs>
+  viewingRequests?: boolean | Prisma.Room$viewingRequestsArgs<ExtArgs>
+  tenancy?: boolean | Prisma.Room$tenancyArgs<ExtArgs>
+  _count?: boolean | Prisma.RoomCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
 export type RoomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  rent?: boolean
+  roomNumber?: boolean
+  propertyId?: boolean
+  roomType?: boolean
+  monthlyRent?: boolean
   capacity?: boolean
-  availability?: boolean
-  available_beds?: boolean
+  roomstatus?: boolean
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
 export type RoomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  rent?: boolean
+  roomNumber?: boolean
+  propertyId?: boolean
+  roomType?: boolean
+  monthlyRent?: boolean
   capacity?: boolean
-  availability?: boolean
-  available_beds?: boolean
+  roomstatus?: boolean
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
 export type RoomSelectScalar = {
   id?: boolean
-  rent?: boolean
+  roomNumber?: boolean
+  propertyId?: boolean
+  roomType?: boolean
+  monthlyRent?: boolean
   capacity?: boolean
-  availability?: boolean
-  available_beds?: boolean
+  roomstatus?: boolean
 }
 
-export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "rent" | "capacity" | "availability" | "available_beds", ExtArgs["result"]["room"]>
+export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomNumber" | "propertyId" | "roomType" | "monthlyRent" | "capacity" | "roomstatus", ExtArgs["result"]["room"]>
+export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  applications?: boolean | Prisma.Room$applicationsArgs<ExtArgs>
+  viewingRequests?: boolean | Prisma.Room$viewingRequestsArgs<ExtArgs>
+  tenancy?: boolean | Prisma.Room$tenancyArgs<ExtArgs>
+  _count?: boolean | Prisma.RoomCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type RoomIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+}
+export type RoomIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+}
 
 export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Room"
-  objects: {}
+  objects: {
+    property: Prisma.$PropertyPayload<ExtArgs>
+    applications: Prisma.$ApplicationPayload<ExtArgs>[]
+    viewingRequests: Prisma.$ViewingRequestPayload<ExtArgs>[]
+    tenancy: Prisma.$TenancyPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    rent: string
-    capacity: string
-    availability: $Enums.RoomAvailability
-    available_beds: string
+    roomNumber: string
+    propertyId: string
+    roomType: $Enums.RoomType
+    monthlyRent: number
+    capacity: number
+    roomstatus: $Enums.RoomStatus
   }, ExtArgs["result"]["room"]>
   composites: {}
 }
@@ -748,6 +1354,10 @@ readonly fields: RoomFieldRefs;
  */
 export interface Prisma__RoomClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  applications<T extends Prisma.Room$applicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  viewingRequests<T extends Prisma.Room$viewingRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$viewingRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViewingRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tenancy<T extends Prisma.Room$tenancyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$tenancyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -778,10 +1388,12 @@ export interface Prisma__RoomClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface RoomFieldRefs {
   readonly id: Prisma.FieldRef<"Room", 'String'>
-  readonly rent: Prisma.FieldRef<"Room", 'String'>
-  readonly capacity: Prisma.FieldRef<"Room", 'String'>
-  readonly availability: Prisma.FieldRef<"Room", 'RoomAvailability'>
-  readonly available_beds: Prisma.FieldRef<"Room", 'String'>
+  readonly roomNumber: Prisma.FieldRef<"Room", 'String'>
+  readonly propertyId: Prisma.FieldRef<"Room", 'String'>
+  readonly roomType: Prisma.FieldRef<"Room", 'RoomType'>
+  readonly monthlyRent: Prisma.FieldRef<"Room", 'Int'>
+  readonly capacity: Prisma.FieldRef<"Room", 'Int'>
+  readonly roomstatus: Prisma.FieldRef<"Room", 'RoomStatus'>
 }
     
 
@@ -798,6 +1410,10 @@ export type RoomFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Room
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
   /**
    * Filter, which Room to fetch.
    */
@@ -817,6 +1433,10 @@ export type RoomFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
+  /**
    * Filter, which Room to fetch.
    */
   where: Prisma.RoomWhereUniqueInput
@@ -834,6 +1454,10 @@ export type RoomFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Room
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
   /**
    * Filter, which Room to fetch.
    */
@@ -883,6 +1507,10 @@ export type RoomFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
+  /**
    * Filter, which Room to fetch.
    */
   where?: Prisma.RoomWhereInput
@@ -930,6 +1558,10 @@ export type RoomFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Room
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
   /**
    * Filter, which Rooms to fetch.
    */
@@ -979,6 +1611,10 @@ export type RoomCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
+  /**
    * The data needed to create a Room.
    */
   data: Prisma.XOR<Prisma.RoomCreateInput, Prisma.RoomUncheckedCreateInput>
@@ -1012,6 +1648,10 @@ export type RoomCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.RoomCreateManyInput | Prisma.RoomCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1026,6 +1666,10 @@ export type RoomUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the Room
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
   /**
    * The data needed to update a Room.
    */
@@ -1078,6 +1722,10 @@ export type RoomUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Rooms to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1092,6 +1740,10 @@ export type RoomUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the Room
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
   /**
    * The filter to search for the Room to update in case it exists.
    */
@@ -1119,6 +1771,10 @@ export type RoomDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
+  /**
    * Filter which Room to delete.
    */
   where: Prisma.RoomWhereUniqueInput
@@ -1139,6 +1795,78 @@ export type RoomDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Room.applications
+ */
+export type Room$applicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Application
+   */
+  select?: Prisma.ApplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Application
+   */
+  omit?: Prisma.ApplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ApplicationInclude<ExtArgs> | null
+  where?: Prisma.ApplicationWhereInput
+  orderBy?: Prisma.ApplicationOrderByWithRelationInput | Prisma.ApplicationOrderByWithRelationInput[]
+  cursor?: Prisma.ApplicationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ApplicationScalarFieldEnum | Prisma.ApplicationScalarFieldEnum[]
+}
+
+/**
+ * Room.viewingRequests
+ */
+export type Room$viewingRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ViewingRequest
+   */
+  select?: Prisma.ViewingRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ViewingRequest
+   */
+  omit?: Prisma.ViewingRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViewingRequestInclude<ExtArgs> | null
+  where?: Prisma.ViewingRequestWhereInput
+  orderBy?: Prisma.ViewingRequestOrderByWithRelationInput | Prisma.ViewingRequestOrderByWithRelationInput[]
+  cursor?: Prisma.ViewingRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ViewingRequestScalarFieldEnum | Prisma.ViewingRequestScalarFieldEnum[]
+}
+
+/**
+ * Room.tenancy
+ */
+export type Room$tenancyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tenancy
+   */
+  select?: Prisma.TenancySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tenancy
+   */
+  omit?: Prisma.TenancyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenancyInclude<ExtArgs> | null
+  where?: Prisma.TenancyWhereInput
+  orderBy?: Prisma.TenancyOrderByWithRelationInput | Prisma.TenancyOrderByWithRelationInput[]
+  cursor?: Prisma.TenancyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TenancyScalarFieldEnum | Prisma.TenancyScalarFieldEnum[]
+}
+
+/**
  * Room without action
  */
 export type RoomDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1150,4 +1878,8 @@ export type RoomDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Room
    */
   omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
 }

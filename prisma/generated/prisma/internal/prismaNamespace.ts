@@ -1373,6 +1373,7 @@ export type TenantProfileScalarFieldEnum = (typeof TenantProfileScalarFieldEnum)
 export const ApplicationScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  roomId: 'roomId',
   message: 'message',
   status: 'status',
   reviewedBy: 'reviewedBy',
@@ -1441,10 +1442,12 @@ export type RentalDocumentsScalarFieldEnum = (typeof RentalDocumentsScalarFieldE
 
 export const RoomScalarFieldEnum = {
   id: 'id',
-  rent: 'rent',
+  roomNumber: 'roomNumber',
+  propertyId: 'propertyId',
+  roomType: 'roomType',
+  monthlyRent: 'monthlyRent',
   capacity: 'capacity',
-  availability: 'availability',
-  available_beds: 'available_beds'
+  roomstatus: 'roomstatus'
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
@@ -1453,6 +1456,7 @@ export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof Room
 export const TenancyScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  roomId: 'roomId',
   applicationId: 'applicationId',
   startDate: 'startDate',
   endDate: 'endDate',
@@ -1524,6 +1528,7 @@ export type UtilityBillShareScalarFieldEnum = (typeof UtilityBillShareScalarFiel
 export const ViewingRequestScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  roomId: 'roomId',
   propertyId: 'propertyId',
   requestedAt: 'requestedAt',
   message: 'message',
@@ -1678,16 +1683,30 @@ export type ListEnumRentalDocumentsTypeFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
- * Reference to a field of type 'RoomAvailability'
+ * Reference to a field of type 'RoomType'
  */
-export type EnumRoomAvailabilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomAvailability'>
+export type EnumRoomTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomType'>
     
 
 
 /**
- * Reference to a field of type 'RoomAvailability[]'
+ * Reference to a field of type 'RoomType[]'
  */
-export type ListEnumRoomAvailabilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomAvailability[]'>
+export type ListEnumRoomTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RoomStatus'
+ */
+export type EnumRoomStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RoomStatus[]'
+ */
+export type ListEnumRoomStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoomStatus[]'>
     
 
 

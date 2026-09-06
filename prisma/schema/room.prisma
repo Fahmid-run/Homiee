@@ -3,7 +3,7 @@ model Room {
 
   roomNumber  String
   propertyId  String
-  roomType    RoomType
+  roomType    RoomType @default(SHARED)
   monthlyRent Int
   capacity    Int
 

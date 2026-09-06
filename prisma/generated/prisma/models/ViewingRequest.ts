@@ -27,6 +27,7 @@ export type AggregateViewingRequest = {
 export type ViewingRequestMinAggregateOutputType = {
   id: string | null
   tenantId: string | null
+  roomId: string | null
   propertyId: string | null
   requestedAt: Date | null
   message: string | null
@@ -38,6 +39,7 @@ export type ViewingRequestMinAggregateOutputType = {
 export type ViewingRequestMaxAggregateOutputType = {
   id: string | null
   tenantId: string | null
+  roomId: string | null
   propertyId: string | null
   requestedAt: Date | null
   message: string | null
@@ -49,6 +51,7 @@ export type ViewingRequestMaxAggregateOutputType = {
 export type ViewingRequestCountAggregateOutputType = {
   id: number
   tenantId: number
+  roomId: number
   propertyId: number
   requestedAt: number
   message: number
@@ -62,6 +65,7 @@ export type ViewingRequestCountAggregateOutputType = {
 export type ViewingRequestMinAggregateInputType = {
   id?: true
   tenantId?: true
+  roomId?: true
   propertyId?: true
   requestedAt?: true
   message?: true
@@ -73,6 +77,7 @@ export type ViewingRequestMinAggregateInputType = {
 export type ViewingRequestMaxAggregateInputType = {
   id?: true
   tenantId?: true
+  roomId?: true
   propertyId?: true
   requestedAt?: true
   message?: true
@@ -84,6 +89,7 @@ export type ViewingRequestMaxAggregateInputType = {
 export type ViewingRequestCountAggregateInputType = {
   id?: true
   tenantId?: true
+  roomId?: true
   propertyId?: true
   requestedAt?: true
   message?: true
@@ -168,6 +174,7 @@ export type ViewingRequestGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type ViewingRequestGroupByOutputType = {
   id: string
   tenantId: string
+  roomId: string | null
   propertyId: string
   requestedAt: Date
   message: string | null
@@ -200,6 +207,7 @@ export type ViewingRequestWhereInput = {
   NOT?: Prisma.ViewingRequestWhereInput | Prisma.ViewingRequestWhereInput[]
   id?: Prisma.StringFilter<"ViewingRequest"> | string
   tenantId?: Prisma.StringFilter<"ViewingRequest"> | string
+  roomId?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringFilter<"ViewingRequest"> | string
   requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
@@ -208,11 +216,13 @@ export type ViewingRequestWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  room?: Prisma.XOR<Prisma.RoomNullableScalarRelationFilter, Prisma.RoomWhereInput> | null
 }
 
 export type ViewingRequestOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrderInput | Prisma.SortOrder
   propertyId?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -221,6 +231,7 @@ export type ViewingRequestOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   tenant?: Prisma.UserOrderByWithRelationInput
   property?: Prisma.PropertyOrderByWithRelationInput
+  room?: Prisma.RoomOrderByWithRelationInput
 }
 
 export type ViewingRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -229,6 +240,7 @@ export type ViewingRequestWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ViewingRequestWhereInput[]
   NOT?: Prisma.ViewingRequestWhereInput | Prisma.ViewingRequestWhereInput[]
   tenantId?: Prisma.StringFilter<"ViewingRequest"> | string
+  roomId?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringFilter<"ViewingRequest"> | string
   requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
@@ -237,11 +249,13 @@ export type ViewingRequestWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  room?: Prisma.XOR<Prisma.RoomNullableScalarRelationFilter, Prisma.RoomWhereInput> | null
 }, "id">
 
 export type ViewingRequestOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrderInput | Prisma.SortOrder
   propertyId?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -259,6 +273,7 @@ export type ViewingRequestScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ViewingRequestScalarWhereWithAggregatesInput | Prisma.ViewingRequestScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ViewingRequest"> | string
   tenantId?: Prisma.StringWithAggregatesFilter<"ViewingRequest"> | string
+  roomId?: Prisma.StringNullableWithAggregatesFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringWithAggregatesFilter<"ViewingRequest"> | string
   requestedAt?: Prisma.DateTimeWithAggregatesFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableWithAggregatesFilter<"ViewingRequest"> | string | null
@@ -276,11 +291,13 @@ export type ViewingRequestCreateInput = {
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutViewingRequestsInput
   property: Prisma.PropertyCreateNestedOneWithoutViewingRequestsInput
+  room?: Prisma.RoomCreateNestedOneWithoutViewingRequestsInput
 }
 
 export type ViewingRequestUncheckedCreateInput = {
   id?: string
   tenantId: string
+  roomId?: string | null
   propertyId: string
   requestedAt: Date | string
   message?: string | null
@@ -298,11 +315,13 @@ export type ViewingRequestUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutViewingRequestsNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutViewingRequestsNestedInput
+  room?: Prisma.RoomUpdateOneWithoutViewingRequestsNestedInput
 }
 
 export type ViewingRequestUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -314,6 +333,7 @@ export type ViewingRequestUncheckedUpdateInput = {
 export type ViewingRequestCreateManyInput = {
   id?: string
   tenantId: string
+  roomId?: string | null
   propertyId: string
   requestedAt: Date | string
   message?: string | null
@@ -334,6 +354,7 @@ export type ViewingRequestUpdateManyMutationInput = {
 export type ViewingRequestUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -355,6 +376,7 @@ export type ViewingRequestOrderByRelationAggregateInput = {
 export type ViewingRequestCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrder
@@ -366,6 +388,7 @@ export type ViewingRequestCountOrderByAggregateInput = {
 export type ViewingRequestMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrder
@@ -377,6 +400,7 @@ export type ViewingRequestMaxOrderByAggregateInput = {
 export type ViewingRequestMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrder
@@ -424,6 +448,48 @@ export type ViewingRequestUncheckedUpdateManyWithoutPropertyNestedInput = {
   connect?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
   update?: Prisma.ViewingRequestUpdateWithWhereUniqueWithoutPropertyInput | Prisma.ViewingRequestUpdateWithWhereUniqueWithoutPropertyInput[]
   updateMany?: Prisma.ViewingRequestUpdateManyWithWhereWithoutPropertyInput | Prisma.ViewingRequestUpdateManyWithWhereWithoutPropertyInput[]
+  deleteMany?: Prisma.ViewingRequestScalarWhereInput | Prisma.ViewingRequestScalarWhereInput[]
+}
+
+export type ViewingRequestCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.ViewingRequestCreateWithoutRoomInput, Prisma.ViewingRequestUncheckedCreateWithoutRoomInput> | Prisma.ViewingRequestCreateWithoutRoomInput[] | Prisma.ViewingRequestUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.ViewingRequestCreateOrConnectWithoutRoomInput | Prisma.ViewingRequestCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.ViewingRequestCreateManyRoomInputEnvelope
+  connect?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+}
+
+export type ViewingRequestUncheckedCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.ViewingRequestCreateWithoutRoomInput, Prisma.ViewingRequestUncheckedCreateWithoutRoomInput> | Prisma.ViewingRequestCreateWithoutRoomInput[] | Prisma.ViewingRequestUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.ViewingRequestCreateOrConnectWithoutRoomInput | Prisma.ViewingRequestCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.ViewingRequestCreateManyRoomInputEnvelope
+  connect?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+}
+
+export type ViewingRequestUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.ViewingRequestCreateWithoutRoomInput, Prisma.ViewingRequestUncheckedCreateWithoutRoomInput> | Prisma.ViewingRequestCreateWithoutRoomInput[] | Prisma.ViewingRequestUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.ViewingRequestCreateOrConnectWithoutRoomInput | Prisma.ViewingRequestCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.ViewingRequestUpsertWithWhereUniqueWithoutRoomInput | Prisma.ViewingRequestUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.ViewingRequestCreateManyRoomInputEnvelope
+  set?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  disconnect?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  delete?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  connect?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  update?: Prisma.ViewingRequestUpdateWithWhereUniqueWithoutRoomInput | Prisma.ViewingRequestUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.ViewingRequestUpdateManyWithWhereWithoutRoomInput | Prisma.ViewingRequestUpdateManyWithWhereWithoutRoomInput[]
+  deleteMany?: Prisma.ViewingRequestScalarWhereInput | Prisma.ViewingRequestScalarWhereInput[]
+}
+
+export type ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.ViewingRequestCreateWithoutRoomInput, Prisma.ViewingRequestUncheckedCreateWithoutRoomInput> | Prisma.ViewingRequestCreateWithoutRoomInput[] | Prisma.ViewingRequestUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.ViewingRequestCreateOrConnectWithoutRoomInput | Prisma.ViewingRequestCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.ViewingRequestUpsertWithWhereUniqueWithoutRoomInput | Prisma.ViewingRequestUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.ViewingRequestCreateManyRoomInputEnvelope
+  set?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  disconnect?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  delete?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  connect?: Prisma.ViewingRequestWhereUniqueInput | Prisma.ViewingRequestWhereUniqueInput[]
+  update?: Prisma.ViewingRequestUpdateWithWhereUniqueWithoutRoomInput | Prisma.ViewingRequestUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.ViewingRequestUpdateManyWithWhereWithoutRoomInput | Prisma.ViewingRequestUpdateManyWithWhereWithoutRoomInput[]
   deleteMany?: Prisma.ViewingRequestScalarWhereInput | Prisma.ViewingRequestScalarWhereInput[]
 }
 
@@ -481,11 +547,13 @@ export type ViewingRequestCreateWithoutPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutViewingRequestsInput
+  room?: Prisma.RoomCreateNestedOneWithoutViewingRequestsInput
 }
 
 export type ViewingRequestUncheckedCreateWithoutPropertyInput = {
   id?: string
   tenantId: string
+  roomId?: string | null
   requestedAt: Date | string
   message?: string | null
   status?: $Enums.ViewingStatus
@@ -525,12 +593,61 @@ export type ViewingRequestScalarWhereInput = {
   NOT?: Prisma.ViewingRequestScalarWhereInput | Prisma.ViewingRequestScalarWhereInput[]
   id?: Prisma.StringFilter<"ViewingRequest"> | string
   tenantId?: Prisma.StringFilter<"ViewingRequest"> | string
+  roomId?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringFilter<"ViewingRequest"> | string
   requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
   status?: Prisma.EnumViewingStatusFilter<"ViewingRequest"> | $Enums.ViewingStatus
   createdAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
+}
+
+export type ViewingRequestCreateWithoutRoomInput = {
+  id?: string
+  requestedAt: Date | string
+  message?: string | null
+  status?: $Enums.ViewingStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.UserCreateNestedOneWithoutViewingRequestsInput
+  property: Prisma.PropertyCreateNestedOneWithoutViewingRequestsInput
+}
+
+export type ViewingRequestUncheckedCreateWithoutRoomInput = {
+  id?: string
+  tenantId: string
+  propertyId: string
+  requestedAt: Date | string
+  message?: string | null
+  status?: $Enums.ViewingStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ViewingRequestCreateOrConnectWithoutRoomInput = {
+  where: Prisma.ViewingRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.ViewingRequestCreateWithoutRoomInput, Prisma.ViewingRequestUncheckedCreateWithoutRoomInput>
+}
+
+export type ViewingRequestCreateManyRoomInputEnvelope = {
+  data: Prisma.ViewingRequestCreateManyRoomInput | Prisma.ViewingRequestCreateManyRoomInput[]
+  skipDuplicates?: boolean
+}
+
+export type ViewingRequestUpsertWithWhereUniqueWithoutRoomInput = {
+  where: Prisma.ViewingRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.ViewingRequestUpdateWithoutRoomInput, Prisma.ViewingRequestUncheckedUpdateWithoutRoomInput>
+  create: Prisma.XOR<Prisma.ViewingRequestCreateWithoutRoomInput, Prisma.ViewingRequestUncheckedCreateWithoutRoomInput>
+}
+
+export type ViewingRequestUpdateWithWhereUniqueWithoutRoomInput = {
+  where: Prisma.ViewingRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.ViewingRequestUpdateWithoutRoomInput, Prisma.ViewingRequestUncheckedUpdateWithoutRoomInput>
+}
+
+export type ViewingRequestUpdateManyWithWhereWithoutRoomInput = {
+  where: Prisma.ViewingRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.ViewingRequestUpdateManyMutationInput, Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomInput>
 }
 
 export type ViewingRequestCreateWithoutTenantInput = {
@@ -541,10 +658,12 @@ export type ViewingRequestCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutViewingRequestsInput
+  room?: Prisma.RoomCreateNestedOneWithoutViewingRequestsInput
 }
 
 export type ViewingRequestUncheckedCreateWithoutTenantInput = {
   id?: string
+  roomId?: string | null
   propertyId: string
   requestedAt: Date | string
   message?: string | null
@@ -582,6 +701,7 @@ export type ViewingRequestUpdateManyWithWhereWithoutTenantInput = {
 export type ViewingRequestCreateManyPropertyInput = {
   id?: string
   tenantId: string
+  roomId?: string | null
   requestedAt: Date | string
   message?: string | null
   status?: $Enums.ViewingStatus
@@ -597,11 +717,13 @@ export type ViewingRequestUpdateWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutViewingRequestsNestedInput
+  room?: Prisma.RoomUpdateOneWithoutViewingRequestsNestedInput
 }
 
 export type ViewingRequestUncheckedUpdateWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
@@ -612,6 +734,51 @@ export type ViewingRequestUncheckedUpdateWithoutPropertyInput = {
 export type ViewingRequestUncheckedUpdateManyWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ViewingRequestCreateManyRoomInput = {
+  id?: string
+  tenantId: string
+  propertyId: string
+  requestedAt: Date | string
+  message?: string | null
+  status?: $Enums.ViewingStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ViewingRequestUpdateWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.UserUpdateOneRequiredWithoutViewingRequestsNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutViewingRequestsNestedInput
+}
+
+export type ViewingRequestUncheckedUpdateWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ViewingRequestUncheckedUpdateManyWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
@@ -621,6 +788,7 @@ export type ViewingRequestUncheckedUpdateManyWithoutPropertyInput = {
 
 export type ViewingRequestCreateManyTenantInput = {
   id?: string
+  roomId?: string | null
   propertyId: string
   requestedAt: Date | string
   message?: string | null
@@ -637,10 +805,12 @@ export type ViewingRequestUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutViewingRequestsNestedInput
+  room?: Prisma.RoomUpdateOneWithoutViewingRequestsNestedInput
 }
 
 export type ViewingRequestUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -651,6 +821,7 @@ export type ViewingRequestUncheckedUpdateWithoutTenantInput = {
 
 export type ViewingRequestUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -664,6 +835,7 @@ export type ViewingRequestUncheckedUpdateManyWithoutTenantInput = {
 export type ViewingRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   propertyId?: boolean
   requestedAt?: boolean
   message?: boolean
@@ -672,11 +844,13 @@ export type ViewingRequestSelect<ExtArgs extends runtime.Types.Extensions.Intern
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.ViewingRequest$roomArgs<ExtArgs>
 }, ExtArgs["result"]["viewingRequest"]>
 
 export type ViewingRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   propertyId?: boolean
   requestedAt?: boolean
   message?: boolean
@@ -685,11 +859,13 @@ export type ViewingRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.ViewingRequest$roomArgs<ExtArgs>
 }, ExtArgs["result"]["viewingRequest"]>
 
 export type ViewingRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   propertyId?: boolean
   requestedAt?: boolean
   message?: boolean
@@ -698,11 +874,13 @@ export type ViewingRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.ViewingRequest$roomArgs<ExtArgs>
 }, ExtArgs["result"]["viewingRequest"]>
 
 export type ViewingRequestSelectScalar = {
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   propertyId?: boolean
   requestedAt?: boolean
   message?: boolean
@@ -711,18 +889,21 @@ export type ViewingRequestSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ViewingRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "propertyId" | "requestedAt" | "message" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["viewingRequest"]>
+export type ViewingRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "propertyId" | "requestedAt" | "message" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["viewingRequest"]>
 export type ViewingRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.ViewingRequest$roomArgs<ExtArgs>
 }
 export type ViewingRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.ViewingRequest$roomArgs<ExtArgs>
 }
 export type ViewingRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.ViewingRequest$roomArgs<ExtArgs>
 }
 
 export type $ViewingRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -730,10 +911,12 @@ export type $ViewingRequestPayload<ExtArgs extends runtime.Types.Extensions.Inte
   objects: {
     tenant: Prisma.$UserPayload<ExtArgs>
     property: Prisma.$PropertyPayload<ExtArgs>
+    room: Prisma.$RoomPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     tenantId: string
+    roomId: string | null
     propertyId: string
     requestedAt: Date
     message: string | null
@@ -1136,6 +1319,7 @@ export interface Prisma__ViewingRequestClient<T, Null = never, ExtArgs extends r
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  room<T extends Prisma.ViewingRequest$roomArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ViewingRequest$roomArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1167,6 +1351,7 @@ export interface Prisma__ViewingRequestClient<T, Null = never, ExtArgs extends r
 export interface ViewingRequestFieldRefs {
   readonly id: Prisma.FieldRef<"ViewingRequest", 'String'>
   readonly tenantId: Prisma.FieldRef<"ViewingRequest", 'String'>
+  readonly roomId: Prisma.FieldRef<"ViewingRequest", 'String'>
   readonly propertyId: Prisma.FieldRef<"ViewingRequest", 'String'>
   readonly requestedAt: Prisma.FieldRef<"ViewingRequest", 'DateTime'>
   readonly message: Prisma.FieldRef<"ViewingRequest", 'String'>
@@ -1571,6 +1756,25 @@ export type ViewingRequestDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many ViewingRequests to delete.
    */
   limit?: number
+}
+
+/**
+ * ViewingRequest.room
+ */
+export type ViewingRequest$roomArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Room
+   */
+  select?: Prisma.RoomSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Room
+   */
+  omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
+  where?: Prisma.RoomWhereInput
 }
 
 /**

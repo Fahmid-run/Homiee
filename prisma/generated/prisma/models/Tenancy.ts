@@ -27,6 +27,7 @@ export type AggregateTenancy = {
 export type TenancyMinAggregateOutputType = {
   id: string | null
   tenantId: string | null
+  roomId: string | null
   applicationId: string | null
   startDate: Date | null
   endDate: Date | null
@@ -40,6 +41,7 @@ export type TenancyMinAggregateOutputType = {
 export type TenancyMaxAggregateOutputType = {
   id: string | null
   tenantId: string | null
+  roomId: string | null
   applicationId: string | null
   startDate: Date | null
   endDate: Date | null
@@ -53,6 +55,7 @@ export type TenancyMaxAggregateOutputType = {
 export type TenancyCountAggregateOutputType = {
   id: number
   tenantId: number
+  roomId: number
   applicationId: number
   startDate: number
   endDate: number
@@ -68,6 +71,7 @@ export type TenancyCountAggregateOutputType = {
 export type TenancyMinAggregateInputType = {
   id?: true
   tenantId?: true
+  roomId?: true
   applicationId?: true
   startDate?: true
   endDate?: true
@@ -81,6 +85,7 @@ export type TenancyMinAggregateInputType = {
 export type TenancyMaxAggregateInputType = {
   id?: true
   tenantId?: true
+  roomId?: true
   applicationId?: true
   startDate?: true
   endDate?: true
@@ -94,6 +99,7 @@ export type TenancyMaxAggregateInputType = {
 export type TenancyCountAggregateInputType = {
   id?: true
   tenantId?: true
+  roomId?: true
   applicationId?: true
   startDate?: true
   endDate?: true
@@ -180,6 +186,7 @@ export type TenancyGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type TenancyGroupByOutputType = {
   id: string
   tenantId: string
+  roomId: string
   applicationId: string | null
   startDate: Date
   endDate: Date | null
@@ -214,6 +221,7 @@ export type TenancyWhereInput = {
   NOT?: Prisma.TenancyWhereInput | Prisma.TenancyWhereInput[]
   id?: Prisma.StringFilter<"Tenancy"> | string
   tenantId?: Prisma.StringFilter<"Tenancy"> | string
+  roomId?: Prisma.StringFilter<"Tenancy"> | string
   applicationId?: Prisma.StringNullableFilter<"Tenancy"> | string | null
   startDate?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"Tenancy"> | Date | string | null
@@ -224,6 +232,7 @@ export type TenancyWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   application?: Prisma.XOR<Prisma.ApplicationNullableScalarRelationFilter, Prisma.ApplicationWhereInput> | null
+  room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   documents?: Prisma.RentalDocumentsListRelationFilter
   rentalPayments?: Prisma.RentalPaymentListRelationFilter
   billShares?: Prisma.UtilityBillShareListRelationFilter
@@ -232,6 +241,7 @@ export type TenancyWhereInput = {
 export type TenancyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   applicationId?: Prisma.SortOrderInput | Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -242,6 +252,7 @@ export type TenancyOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   tenant?: Prisma.UserOrderByWithRelationInput
   application?: Prisma.ApplicationOrderByWithRelationInput
+  room?: Prisma.RoomOrderByWithRelationInput
   documents?: Prisma.RentalDocumentsOrderByRelationAggregateInput
   rentalPayments?: Prisma.RentalPaymentOrderByRelationAggregateInput
   billShares?: Prisma.UtilityBillShareOrderByRelationAggregateInput
@@ -254,6 +265,7 @@ export type TenancyWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TenancyWhereInput[]
   NOT?: Prisma.TenancyWhereInput | Prisma.TenancyWhereInput[]
   tenantId?: Prisma.StringFilter<"Tenancy"> | string
+  roomId?: Prisma.StringFilter<"Tenancy"> | string
   startDate?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"Tenancy"> | Date | string | null
   monthlyRent?: Prisma.StringFilter<"Tenancy"> | string
@@ -263,6 +275,7 @@ export type TenancyWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   application?: Prisma.XOR<Prisma.ApplicationNullableScalarRelationFilter, Prisma.ApplicationWhereInput> | null
+  room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   documents?: Prisma.RentalDocumentsListRelationFilter
   rentalPayments?: Prisma.RentalPaymentListRelationFilter
   billShares?: Prisma.UtilityBillShareListRelationFilter
@@ -271,6 +284,7 @@ export type TenancyWhereUniqueInput = Prisma.AtLeast<{
 export type TenancyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   applicationId?: Prisma.SortOrderInput | Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -290,6 +304,7 @@ export type TenancyScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TenancyScalarWhereWithAggregatesInput | Prisma.TenancyScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Tenancy"> | string
   tenantId?: Prisma.StringWithAggregatesFilter<"Tenancy"> | string
+  roomId?: Prisma.StringWithAggregatesFilter<"Tenancy"> | string
   applicationId?: Prisma.StringNullableWithAggregatesFilter<"Tenancy"> | string | null
   startDate?: Prisma.DateTimeWithAggregatesFilter<"Tenancy"> | Date | string
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Tenancy"> | Date | string | null
@@ -311,6 +326,7 @@ export type TenancyCreateInput = {
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutTenanciesInput
   application?: Prisma.ApplicationCreateNestedOneWithoutTenancyInput
+  room: Prisma.RoomCreateNestedOneWithoutTenancyInput
   documents?: Prisma.RentalDocumentsCreateNestedManyWithoutTenancyInput
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutPropertyInput
   billShares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenancyInput
@@ -319,6 +335,7 @@ export type TenancyCreateInput = {
 export type TenancyUncheckedCreateInput = {
   id?: string
   tenantId: string
+  roomId: string
   applicationId?: string | null
   startDate: Date | string
   endDate?: Date | string | null
@@ -343,6 +360,7 @@ export type TenancyUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutTenanciesNestedInput
   application?: Prisma.ApplicationUpdateOneWithoutTenancyNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutTenancyNestedInput
   documents?: Prisma.RentalDocumentsUpdateManyWithoutTenancyNestedInput
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutPropertyNestedInput
   billShares?: Prisma.UtilityBillShareUpdateManyWithoutTenancyNestedInput
@@ -351,6 +369,7 @@ export type TenancyUpdateInput = {
 export type TenancyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -367,6 +386,7 @@ export type TenancyUncheckedUpdateInput = {
 export type TenancyCreateManyInput = {
   id?: string
   tenantId: string
+  roomId: string
   applicationId?: string | null
   startDate: Date | string
   endDate?: Date | string | null
@@ -391,6 +411,7 @@ export type TenancyUpdateManyMutationInput = {
 export type TenancyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -411,9 +432,20 @@ export type TenancyScalarRelationFilter = {
   isNot?: Prisma.TenancyWhereInput
 }
 
+export type TenancyListRelationFilter = {
+  every?: Prisma.TenancyWhereInput
+  some?: Prisma.TenancyWhereInput
+  none?: Prisma.TenancyWhereInput
+}
+
+export type TenancyOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type TenancyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   applicationId?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
@@ -427,6 +459,7 @@ export type TenancyCountOrderByAggregateInput = {
 export type TenancyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   applicationId?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
@@ -440,6 +473,7 @@ export type TenancyMaxOrderByAggregateInput = {
 export type TenancyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   applicationId?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
@@ -448,16 +482,6 @@ export type TenancyMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type TenancyListRelationFilter = {
-  every?: Prisma.TenancyWhereInput
-  some?: Prisma.TenancyWhereInput
-  none?: Prisma.TenancyWhereInput
-}
-
-export type TenancyOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type TenancyCreateNestedOneWithoutApplicationInput = {
@@ -518,6 +542,48 @@ export type TenancyUpdateOneRequiredWithoutDocumentsNestedInput = {
   upsert?: Prisma.TenancyUpsertWithoutDocumentsInput
   connect?: Prisma.TenancyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenancyUpdateToOneWithWhereWithoutDocumentsInput, Prisma.TenancyUpdateWithoutDocumentsInput>, Prisma.TenancyUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type TenancyCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.TenancyCreateWithoutRoomInput, Prisma.TenancyUncheckedCreateWithoutRoomInput> | Prisma.TenancyCreateWithoutRoomInput[] | Prisma.TenancyUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.TenancyCreateOrConnectWithoutRoomInput | Prisma.TenancyCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.TenancyCreateManyRoomInputEnvelope
+  connect?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+}
+
+export type TenancyUncheckedCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.TenancyCreateWithoutRoomInput, Prisma.TenancyUncheckedCreateWithoutRoomInput> | Prisma.TenancyCreateWithoutRoomInput[] | Prisma.TenancyUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.TenancyCreateOrConnectWithoutRoomInput | Prisma.TenancyCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.TenancyCreateManyRoomInputEnvelope
+  connect?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+}
+
+export type TenancyUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.TenancyCreateWithoutRoomInput, Prisma.TenancyUncheckedCreateWithoutRoomInput> | Prisma.TenancyCreateWithoutRoomInput[] | Prisma.TenancyUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.TenancyCreateOrConnectWithoutRoomInput | Prisma.TenancyCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.TenancyUpsertWithWhereUniqueWithoutRoomInput | Prisma.TenancyUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.TenancyCreateManyRoomInputEnvelope
+  set?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  disconnect?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  delete?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  connect?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  update?: Prisma.TenancyUpdateWithWhereUniqueWithoutRoomInput | Prisma.TenancyUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.TenancyUpdateManyWithWhereWithoutRoomInput | Prisma.TenancyUpdateManyWithWhereWithoutRoomInput[]
+  deleteMany?: Prisma.TenancyScalarWhereInput | Prisma.TenancyScalarWhereInput[]
+}
+
+export type TenancyUncheckedUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.TenancyCreateWithoutRoomInput, Prisma.TenancyUncheckedCreateWithoutRoomInput> | Prisma.TenancyCreateWithoutRoomInput[] | Prisma.TenancyUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.TenancyCreateOrConnectWithoutRoomInput | Prisma.TenancyCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.TenancyUpsertWithWhereUniqueWithoutRoomInput | Prisma.TenancyUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.TenancyCreateManyRoomInputEnvelope
+  set?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  disconnect?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  delete?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  connect?: Prisma.TenancyWhereUniqueInput | Prisma.TenancyWhereUniqueInput[]
+  update?: Prisma.TenancyUpdateWithWhereUniqueWithoutRoomInput | Prisma.TenancyUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.TenancyUpdateManyWithWhereWithoutRoomInput | Prisma.TenancyUpdateManyWithWhereWithoutRoomInput[]
+  deleteMany?: Prisma.TenancyScalarWhereInput | Prisma.TenancyScalarWhereInput[]
 }
 
 export type EnumTenancyStatusFieldUpdateOperationsInput = {
@@ -592,6 +658,7 @@ export type TenancyCreateWithoutApplicationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutTenanciesInput
+  room: Prisma.RoomCreateNestedOneWithoutTenancyInput
   documents?: Prisma.RentalDocumentsCreateNestedManyWithoutTenancyInput
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutPropertyInput
   billShares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenancyInput
@@ -600,6 +667,7 @@ export type TenancyCreateWithoutApplicationInput = {
 export type TenancyUncheckedCreateWithoutApplicationInput = {
   id?: string
   tenantId: string
+  roomId: string
   startDate: Date | string
   endDate?: Date | string | null
   monthlyRent: string
@@ -638,6 +706,7 @@ export type TenancyUpdateWithoutApplicationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutTenanciesNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutTenancyNestedInput
   documents?: Prisma.RentalDocumentsUpdateManyWithoutTenancyNestedInput
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutPropertyNestedInput
   billShares?: Prisma.UtilityBillShareUpdateManyWithoutTenancyNestedInput
@@ -646,6 +715,7 @@ export type TenancyUpdateWithoutApplicationInput = {
 export type TenancyUncheckedUpdateWithoutApplicationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   monthlyRent?: Prisma.StringFieldUpdateOperationsInput | string
@@ -669,6 +739,7 @@ export type TenancyCreateWithoutRentalPaymentsInput = {
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutTenanciesInput
   application?: Prisma.ApplicationCreateNestedOneWithoutTenancyInput
+  room: Prisma.RoomCreateNestedOneWithoutTenancyInput
   documents?: Prisma.RentalDocumentsCreateNestedManyWithoutTenancyInput
   billShares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenancyInput
 }
@@ -676,6 +747,7 @@ export type TenancyCreateWithoutRentalPaymentsInput = {
 export type TenancyUncheckedCreateWithoutRentalPaymentsInput = {
   id?: string
   tenantId: string
+  roomId: string
   applicationId?: string | null
   startDate: Date | string
   endDate?: Date | string | null
@@ -715,6 +787,7 @@ export type TenancyUpdateWithoutRentalPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutTenanciesNestedInput
   application?: Prisma.ApplicationUpdateOneWithoutTenancyNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutTenancyNestedInput
   documents?: Prisma.RentalDocumentsUpdateManyWithoutTenancyNestedInput
   billShares?: Prisma.UtilityBillShareUpdateManyWithoutTenancyNestedInput
 }
@@ -722,6 +795,7 @@ export type TenancyUpdateWithoutRentalPaymentsInput = {
 export type TenancyUncheckedUpdateWithoutRentalPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -745,6 +819,7 @@ export type TenancyCreateWithoutDocumentsInput = {
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutTenanciesInput
   application?: Prisma.ApplicationCreateNestedOneWithoutTenancyInput
+  room: Prisma.RoomCreateNestedOneWithoutTenancyInput
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutPropertyInput
   billShares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenancyInput
 }
@@ -752,6 +827,7 @@ export type TenancyCreateWithoutDocumentsInput = {
 export type TenancyUncheckedCreateWithoutDocumentsInput = {
   id?: string
   tenantId: string
+  roomId: string
   applicationId?: string | null
   startDate: Date | string
   endDate?: Date | string | null
@@ -791,6 +867,7 @@ export type TenancyUpdateWithoutDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutTenanciesNestedInput
   application?: Prisma.ApplicationUpdateOneWithoutTenancyNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutTenancyNestedInput
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutPropertyNestedInput
   billShares?: Prisma.UtilityBillShareUpdateManyWithoutTenancyNestedInput
 }
@@ -798,6 +875,7 @@ export type TenancyUpdateWithoutDocumentsInput = {
 export type TenancyUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -810,6 +888,81 @@ export type TenancyUncheckedUpdateWithoutDocumentsInput = {
   billShares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenancyNestedInput
 }
 
+export type TenancyCreateWithoutRoomInput = {
+  id?: string
+  startDate: Date | string
+  endDate?: Date | string | null
+  monthlyRent: string
+  securityDeposit: string
+  status?: $Enums.TenancyStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.UserCreateNestedOneWithoutTenanciesInput
+  application?: Prisma.ApplicationCreateNestedOneWithoutTenancyInput
+  documents?: Prisma.RentalDocumentsCreateNestedManyWithoutTenancyInput
+  rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutPropertyInput
+  billShares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenancyInput
+}
+
+export type TenancyUncheckedCreateWithoutRoomInput = {
+  id?: string
+  tenantId: string
+  applicationId?: string | null
+  startDate: Date | string
+  endDate?: Date | string | null
+  monthlyRent: string
+  securityDeposit: string
+  status?: $Enums.TenancyStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutTenancyInput
+  rentalPayments?: Prisma.RentalPaymentUncheckedCreateNestedManyWithoutPropertyInput
+  billShares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenancyInput
+}
+
+export type TenancyCreateOrConnectWithoutRoomInput = {
+  where: Prisma.TenancyWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenancyCreateWithoutRoomInput, Prisma.TenancyUncheckedCreateWithoutRoomInput>
+}
+
+export type TenancyCreateManyRoomInputEnvelope = {
+  data: Prisma.TenancyCreateManyRoomInput | Prisma.TenancyCreateManyRoomInput[]
+  skipDuplicates?: boolean
+}
+
+export type TenancyUpsertWithWhereUniqueWithoutRoomInput = {
+  where: Prisma.TenancyWhereUniqueInput
+  update: Prisma.XOR<Prisma.TenancyUpdateWithoutRoomInput, Prisma.TenancyUncheckedUpdateWithoutRoomInput>
+  create: Prisma.XOR<Prisma.TenancyCreateWithoutRoomInput, Prisma.TenancyUncheckedCreateWithoutRoomInput>
+}
+
+export type TenancyUpdateWithWhereUniqueWithoutRoomInput = {
+  where: Prisma.TenancyWhereUniqueInput
+  data: Prisma.XOR<Prisma.TenancyUpdateWithoutRoomInput, Prisma.TenancyUncheckedUpdateWithoutRoomInput>
+}
+
+export type TenancyUpdateManyWithWhereWithoutRoomInput = {
+  where: Prisma.TenancyScalarWhereInput
+  data: Prisma.XOR<Prisma.TenancyUpdateManyMutationInput, Prisma.TenancyUncheckedUpdateManyWithoutRoomInput>
+}
+
+export type TenancyScalarWhereInput = {
+  AND?: Prisma.TenancyScalarWhereInput | Prisma.TenancyScalarWhereInput[]
+  OR?: Prisma.TenancyScalarWhereInput[]
+  NOT?: Prisma.TenancyScalarWhereInput | Prisma.TenancyScalarWhereInput[]
+  id?: Prisma.StringFilter<"Tenancy"> | string
+  tenantId?: Prisma.StringFilter<"Tenancy"> | string
+  roomId?: Prisma.StringFilter<"Tenancy"> | string
+  applicationId?: Prisma.StringNullableFilter<"Tenancy"> | string | null
+  startDate?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"Tenancy"> | Date | string | null
+  monthlyRent?: Prisma.StringFilter<"Tenancy"> | string
+  securityDeposit?: Prisma.StringFilter<"Tenancy"> | string
+  status?: Prisma.EnumTenancyStatusFilter<"Tenancy"> | $Enums.TenancyStatus
+  createdAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
+}
+
 export type TenancyCreateWithoutTenantInput = {
   id?: string
   startDate: Date | string
@@ -820,6 +973,7 @@ export type TenancyCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   application?: Prisma.ApplicationCreateNestedOneWithoutTenancyInput
+  room: Prisma.RoomCreateNestedOneWithoutTenancyInput
   documents?: Prisma.RentalDocumentsCreateNestedManyWithoutTenancyInput
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutPropertyInput
   billShares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenancyInput
@@ -827,6 +981,7 @@ export type TenancyCreateWithoutTenantInput = {
 
 export type TenancyUncheckedCreateWithoutTenantInput = {
   id?: string
+  roomId: string
   applicationId?: string | null
   startDate: Date | string
   endDate?: Date | string | null
@@ -866,22 +1021,6 @@ export type TenancyUpdateManyWithWhereWithoutTenantInput = {
   data: Prisma.XOR<Prisma.TenancyUpdateManyMutationInput, Prisma.TenancyUncheckedUpdateManyWithoutTenantInput>
 }
 
-export type TenancyScalarWhereInput = {
-  AND?: Prisma.TenancyScalarWhereInput | Prisma.TenancyScalarWhereInput[]
-  OR?: Prisma.TenancyScalarWhereInput[]
-  NOT?: Prisma.TenancyScalarWhereInput | Prisma.TenancyScalarWhereInput[]
-  id?: Prisma.StringFilter<"Tenancy"> | string
-  tenantId?: Prisma.StringFilter<"Tenancy"> | string
-  applicationId?: Prisma.StringNullableFilter<"Tenancy"> | string | null
-  startDate?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
-  endDate?: Prisma.DateTimeNullableFilter<"Tenancy"> | Date | string | null
-  monthlyRent?: Prisma.StringFilter<"Tenancy"> | string
-  securityDeposit?: Prisma.StringFilter<"Tenancy"> | string
-  status?: Prisma.EnumTenancyStatusFilter<"Tenancy"> | $Enums.TenancyStatus
-  createdAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
-}
-
 export type TenancyCreateWithoutBillSharesInput = {
   id?: string
   startDate: Date | string
@@ -893,6 +1032,7 @@ export type TenancyCreateWithoutBillSharesInput = {
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutTenanciesInput
   application?: Prisma.ApplicationCreateNestedOneWithoutTenancyInput
+  room: Prisma.RoomCreateNestedOneWithoutTenancyInput
   documents?: Prisma.RentalDocumentsCreateNestedManyWithoutTenancyInput
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutPropertyInput
 }
@@ -900,6 +1040,7 @@ export type TenancyCreateWithoutBillSharesInput = {
 export type TenancyUncheckedCreateWithoutBillSharesInput = {
   id?: string
   tenantId: string
+  roomId: string
   applicationId?: string | null
   startDate: Date | string
   endDate?: Date | string | null
@@ -939,6 +1080,7 @@ export type TenancyUpdateWithoutBillSharesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutTenanciesNestedInput
   application?: Prisma.ApplicationUpdateOneWithoutTenancyNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutTenancyNestedInput
   documents?: Prisma.RentalDocumentsUpdateManyWithoutTenancyNestedInput
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutPropertyNestedInput
 }
@@ -946,6 +1088,7 @@ export type TenancyUpdateWithoutBillSharesInput = {
 export type TenancyUncheckedUpdateWithoutBillSharesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -958,8 +1101,67 @@ export type TenancyUncheckedUpdateWithoutBillSharesInput = {
   rentalPayments?: Prisma.RentalPaymentUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
+export type TenancyCreateManyRoomInput = {
+  id?: string
+  tenantId: string
+  applicationId?: string | null
+  startDate: Date | string
+  endDate?: Date | string | null
+  monthlyRent: string
+  securityDeposit: string
+  status?: $Enums.TenancyStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TenancyUpdateWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  monthlyRent?: Prisma.StringFieldUpdateOperationsInput | string
+  securityDeposit?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTenancyStatusFieldUpdateOperationsInput | $Enums.TenancyStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.UserUpdateOneRequiredWithoutTenanciesNestedInput
+  application?: Prisma.ApplicationUpdateOneWithoutTenancyNestedInput
+  documents?: Prisma.RentalDocumentsUpdateManyWithoutTenancyNestedInput
+  rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutPropertyNestedInput
+  billShares?: Prisma.UtilityBillShareUpdateManyWithoutTenancyNestedInput
+}
+
+export type TenancyUncheckedUpdateWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  monthlyRent?: Prisma.StringFieldUpdateOperationsInput | string
+  securityDeposit?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTenancyStatusFieldUpdateOperationsInput | $Enums.TenancyStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutTenancyNestedInput
+  rentalPayments?: Prisma.RentalPaymentUncheckedUpdateManyWithoutPropertyNestedInput
+  billShares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenancyNestedInput
+}
+
+export type TenancyUncheckedUpdateManyWithoutRoomInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  monthlyRent?: Prisma.StringFieldUpdateOperationsInput | string
+  securityDeposit?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTenancyStatusFieldUpdateOperationsInput | $Enums.TenancyStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type TenancyCreateManyTenantInput = {
   id?: string
+  roomId: string
   applicationId?: string | null
   startDate: Date | string
   endDate?: Date | string | null
@@ -980,6 +1182,7 @@ export type TenancyUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   application?: Prisma.ApplicationUpdateOneWithoutTenancyNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutTenancyNestedInput
   documents?: Prisma.RentalDocumentsUpdateManyWithoutTenancyNestedInput
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutPropertyNestedInput
   billShares?: Prisma.UtilityBillShareUpdateManyWithoutTenancyNestedInput
@@ -987,6 +1190,7 @@ export type TenancyUpdateWithoutTenantInput = {
 
 export type TenancyUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1002,6 +1206,7 @@ export type TenancyUncheckedUpdateWithoutTenantInput = {
 
 export type TenancyUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   applicationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1064,6 +1269,7 @@ export type TenancyCountOutputTypeCountBillSharesArgs<ExtArgs extends runtime.Ty
 export type TenancySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   applicationId?: boolean
   startDate?: boolean
   endDate?: boolean
@@ -1074,6 +1280,7 @@ export type TenancySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   application?: boolean | Prisma.Tenancy$applicationArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.Tenancy$documentsArgs<ExtArgs>
   rentalPayments?: boolean | Prisma.Tenancy$rentalPaymentsArgs<ExtArgs>
   billShares?: boolean | Prisma.Tenancy$billSharesArgs<ExtArgs>
@@ -1083,6 +1290,7 @@ export type TenancySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type TenancySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   applicationId?: boolean
   startDate?: boolean
   endDate?: boolean
@@ -1093,11 +1301,13 @@ export type TenancySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   application?: boolean | Prisma.Tenancy$applicationArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenancy"]>
 
 export type TenancySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   applicationId?: boolean
   startDate?: boolean
   endDate?: boolean
@@ -1108,11 +1318,13 @@ export type TenancySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   application?: boolean | Prisma.Tenancy$applicationArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenancy"]>
 
 export type TenancySelectScalar = {
   id?: boolean
   tenantId?: boolean
+  roomId?: boolean
   applicationId?: boolean
   startDate?: boolean
   endDate?: boolean
@@ -1123,10 +1335,11 @@ export type TenancySelectScalar = {
   updatedAt?: boolean
 }
 
-export type TenancyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "applicationId" | "startDate" | "endDate" | "monthlyRent" | "securityDeposit" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["tenancy"]>
+export type TenancyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "applicationId" | "startDate" | "endDate" | "monthlyRent" | "securityDeposit" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["tenancy"]>
 export type TenancyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   application?: boolean | Prisma.Tenancy$applicationArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.Tenancy$documentsArgs<ExtArgs>
   rentalPayments?: boolean | Prisma.Tenancy$rentalPaymentsArgs<ExtArgs>
   billShares?: boolean | Prisma.Tenancy$billSharesArgs<ExtArgs>
@@ -1135,10 +1348,12 @@ export type TenancyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type TenancyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   application?: boolean | Prisma.Tenancy$applicationArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
 export type TenancyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   application?: boolean | Prisma.Tenancy$applicationArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
 
 export type $TenancyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1146,6 +1361,7 @@ export type $TenancyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     tenant: Prisma.$UserPayload<ExtArgs>
     application: Prisma.$ApplicationPayload<ExtArgs> | null
+    room: Prisma.$RoomPayload<ExtArgs>
     documents: Prisma.$RentalDocumentsPayload<ExtArgs>[]
     rentalPayments: Prisma.$RentalPaymentPayload<ExtArgs>[]
     billShares: Prisma.$UtilityBillSharePayload<ExtArgs>[]
@@ -1153,6 +1369,7 @@ export type $TenancyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     tenantId: string
+    roomId: string
     applicationId: string | null
     startDate: Date
     endDate: Date | null
@@ -1557,6 +1774,7 @@ export interface Prisma__TenancyClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   application<T extends Prisma.Tenancy$applicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenancy$applicationArgs<ExtArgs>>): Prisma.Prisma__ApplicationClient<runtime.Types.Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   documents<T extends Prisma.Tenancy$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenancy$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rentalPayments<T extends Prisma.Tenancy$rentalPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenancy$rentalPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   billShares<T extends Prisma.Tenancy$billSharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenancy$billSharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityBillSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1591,6 +1809,7 @@ export interface Prisma__TenancyClient<T, Null = never, ExtArgs extends runtime.
 export interface TenancyFieldRefs {
   readonly id: Prisma.FieldRef<"Tenancy", 'String'>
   readonly tenantId: Prisma.FieldRef<"Tenancy", 'String'>
+  readonly roomId: Prisma.FieldRef<"Tenancy", 'String'>
   readonly applicationId: Prisma.FieldRef<"Tenancy", 'String'>
   readonly startDate: Prisma.FieldRef<"Tenancy", 'DateTime'>
   readonly endDate: Prisma.FieldRef<"Tenancy", 'DateTime'>

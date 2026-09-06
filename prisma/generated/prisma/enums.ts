@@ -79,15 +79,13 @@ export const RoomStatus = {
 export type RoomStatus = (typeof RoomStatus)[keyof typeof RoomStatus]
 
 
-export const RoomAvailability = {
-  AVAILABLE: 'AVAILABLE',
-  PARTIALLY_OCCUPIED: 'PARTIALLY_OCCUPIED',
-  FULL: 'FULL',
-  MAINTENANCE: 'MAINTENANCE',
-  INACTIVE: 'INACTIVE'
+export const RoomType = {
+  SINGLE: 'SINGLE',
+  SHARED: 'SHARED',
+  MASTER: 'MASTER'
 } as const
 
-export type RoomAvailability = (typeof RoomAvailability)[keyof typeof RoomAvailability]
+export type RoomType = (typeof RoomType)[keyof typeof RoomType]
 
 
 export const RentalDocumentsType = {

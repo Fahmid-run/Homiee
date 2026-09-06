@@ -274,21 +274,38 @@ export type EnumRentalDocumentsTypeWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumRentalDocumentsTypeFilter<$PrismaModel>
 }
 
-export type EnumRoomAvailabilityFilter<$PrismaModel = never> = {
-  equals?: $Enums.RoomAvailability | Prisma.EnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  in?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  notIn?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumRoomAvailabilityFilter<$PrismaModel> | $Enums.RoomAvailability
+export type EnumRoomTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel> | $Enums.RoomType
 }
 
-export type EnumRoomAvailabilityWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.RoomAvailability | Prisma.EnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  in?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  notIn?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumRoomAvailabilityWithAggregatesFilter<$PrismaModel> | $Enums.RoomAvailability
+export type EnumRoomStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomStatus | Prisma.EnumRoomStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomStatusFilter<$PrismaModel> | $Enums.RoomStatus
+}
+
+export type EnumRoomTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel> | $Enums.RoomType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumRoomAvailabilityFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumRoomAvailabilityFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
+}
+
+export type EnumRoomStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomStatus | Prisma.EnumRoomStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomStatusWithAggregatesFilter<$PrismaModel> | $Enums.RoomStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRoomStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRoomStatusFilter<$PrismaModel>
 }
 
 export type EnumTenancyStatusFilter<$PrismaModel = never> = {
@@ -743,21 +760,38 @@ export type NestedEnumRentalDocumentsTypeWithAggregatesFilter<$PrismaModel = nev
   _max?: Prisma.NestedEnumRentalDocumentsTypeFilter<$PrismaModel>
 }
 
-export type NestedEnumRoomAvailabilityFilter<$PrismaModel = never> = {
-  equals?: $Enums.RoomAvailability | Prisma.EnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  in?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  notIn?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumRoomAvailabilityFilter<$PrismaModel> | $Enums.RoomAvailability
+export type NestedEnumRoomTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel> | $Enums.RoomType
 }
 
-export type NestedEnumRoomAvailabilityWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.RoomAvailability | Prisma.EnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  in?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  notIn?: $Enums.RoomAvailability[] | Prisma.ListEnumRoomAvailabilityFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumRoomAvailabilityWithAggregatesFilter<$PrismaModel> | $Enums.RoomAvailability
+export type NestedEnumRoomStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomStatus | Prisma.EnumRoomStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomStatusFilter<$PrismaModel> | $Enums.RoomStatus
+}
+
+export type NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomType | Prisma.EnumRoomTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomType[] | Prisma.ListEnumRoomTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomTypeWithAggregatesFilter<$PrismaModel> | $Enums.RoomType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumRoomAvailabilityFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumRoomAvailabilityFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRoomTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumRoomStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RoomStatus | Prisma.EnumRoomStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RoomStatus[] | Prisma.ListEnumRoomStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRoomStatusWithAggregatesFilter<$PrismaModel> | $Enums.RoomStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRoomStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRoomStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumTenancyStatusFilter<$PrismaModel = never> = {

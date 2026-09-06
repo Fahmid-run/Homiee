@@ -34,7 +34,7 @@ const getPropertiesById = async (id: string) => {
 };
 
 const getPropertiesByOwnerId = async (ownerId: string) => {
-  const res = await prisma.property.findUnique({
+  const res = await prisma.property.findMany({
     where: {
       ownerId,
     },
