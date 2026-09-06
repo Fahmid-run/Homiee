@@ -2,7 +2,9 @@ model Application {
   id String @id @default(uuid())
 
   tenantId String
-  message  String?
+  roomId   String
+
+  message String?
 
   status     ApplicationStatus @default(PENDING)
   reviewedBy String?
@@ -13,6 +15,7 @@ model Application {
   tenancy   Tenancy?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  room      Room     @relation(fields: [roomId], references: [id])
 
   @@index([tenantId])
   @@index([status])

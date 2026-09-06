@@ -2,6 +2,7 @@ model Tenancy {
   id String @id @default(uuid())
 
   tenantId      String
+  roomId        String
   applicationId String? @unique
 
   startDate   DateTime
@@ -15,6 +16,7 @@ model Tenancy {
   tenant User @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   application Application? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+  room        Room         @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
   documents      RentalDocuments[]
   rentalPayments RentalPayment[]

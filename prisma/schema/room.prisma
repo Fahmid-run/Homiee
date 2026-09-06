@@ -1,13 +1,19 @@
 model Room {
-  id               String  @id @default(uuid())
+  id String @id @default(uuid())
 
-  rent String
-  capacity String
-  availability RoomAvailability @default(AVAILABLE)
-  available_beds String
+  roomNumber  String
+  propertyId  String
+  roomType    RoomType
+  monthlyRent Int
+  capacity    Int
 
+  roomstatus RoomStatus @default(AVAILABLE)
+  property   Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
+  applications    Application[]
+  viewingRequests ViewingRequest[]
+  tenancy         Tenancy[]
 
+  @@unique([roomNumber])
   @@map("room")
-
 }

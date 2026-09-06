@@ -6,7 +6,7 @@ model Property {
   description String?
   city        String
 
-  // rooms          Room[]
+  rooms          Room[]
   totalrooms     Int
   propertyStatus PropertyStatus @default(DRAFT)
 

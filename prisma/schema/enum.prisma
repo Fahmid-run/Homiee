@@ -53,12 +53,10 @@ enum RoomStatus {
     INACTIVE
 }
 
-enum RoomAvailability {
-    AVAILABLE
-    PARTIALLY_OCCUPIED
-    FULL
-    MAINTENANCE
-    INACTIVE
+enum RoomType {
+    SINGLE
+    SHARED
+    MASTER
 }
 
 //Rental
