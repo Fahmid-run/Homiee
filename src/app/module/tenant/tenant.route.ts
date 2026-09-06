@@ -8,6 +8,11 @@ import { tenantController } from "./tenant.controller";
 const router = Router();
 
 router.post("/:roomId", auth(Role.TENANT), tenantController.createViewReq);
+router.post(
+  "/application/:roomId",
+  auth(Role.TENANT),
+  tenantController.createApplication,
+);
 
 // router.get("/", roomController.getAllRooms);
 

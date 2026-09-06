@@ -20,6 +20,26 @@ const createViewReq = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createApplication = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+  const tenantId = req.user?.userId as string;
+  const roomId = req.params?.roomId as string;
+
+  const result = await tenantServices.createApplication(
+    roomId,
+    tenantId,
+    payload,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Application Submitted  successfully",
+    data: result,
+  });
+});
+
 export const tenantController = {
   createViewReq,
+  createApplication,
 };

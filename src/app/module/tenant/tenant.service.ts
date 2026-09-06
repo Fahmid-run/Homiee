@@ -21,6 +21,21 @@ const createViewReq = async (roomId: string, tenantId: string, payload) => {
   return res;
 };
 
+const createApplication = async (roomId: string, tenantId: string, payload) => {
+  const { message } = payload;
+  await checkExists(prisma.room, roomId, "Room Does not exists");
+
+  const res = await prisma.application.create({
+    data: {
+      message,
+      tenantId,
+      roomId,
+    },
+  });
+
+  return res;
+};
+
 const deleteRoom = async (id: string) => {
   const res = await prisma.room.delete({
     where: {
@@ -33,6 +48,6 @@ const deleteRoom = async (id: string) => {
 
 export const tenantServices = {
   createViewReq,
-
+  createApplication,
   deleteRoom,
 };
