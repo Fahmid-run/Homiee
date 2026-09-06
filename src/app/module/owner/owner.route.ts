@@ -8,9 +8,15 @@ import { ownerController } from "./owner.controller";
 const router = Router();
 
 router.patch(
-  "/:applicationId",
+  "/application/:applicationId",
   auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
   ownerController.updateApplicationStatus,
+);
+
+router.patch(
+  "/view-req/:id",
+  auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
+  ownerController.updateViewReqStatus,
 );
 
 // router.get("/", roomController.getAllRooms);

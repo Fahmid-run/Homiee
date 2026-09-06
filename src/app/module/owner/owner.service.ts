@@ -47,31 +47,45 @@ const updateApplicationStatus = async (
   return res;
 };
 
-// const createApplication = async (roomId: string, tenantId: string, payload) => {
-//   const { message } = payload;
-//   await checkExists(prisma.room, roomId, "Room Does not exists");
+const updateViewReqStatus = async (ownerId: string, id: string, payload) => {
+  const { status } = payload;
 
-//   const res = await prisma.application.create({
-//     data: {
-//       message,
-//       tenantId,
-//       roomId,
-//     },
-//   });
+  const viewReqData = await prisma.viewingRequest.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      room: true,
+    },
+  });
 
-//   return res;
-// };
+  if (!viewReqData) {
+    throw new AppError("Request Does not exists", httpStatus.NOT_FOUND);
+  }
 
-// const deleteRoom = async (id: string) => {
-//   const res = await prisma.room.delete({
-//     where: {
-//       id,
-//     },
-//   });
+  const propertyData = await prisma.property.findUnique({
+    where: {
+      id: viewReqData.propertyId,
+    },
+  });
 
-//   return res;
-// };
+  if (ownerId !== propertyData?.ownerId) {
+    throw new AppError("Forbidden", httpStatus.FORBIDDEN);
+  }
+
+  const res = await prisma.viewingRequest.update({
+    where: {
+      id,
+    },
+    data: {
+      status,
+    },
+  });
+
+  return res;
+};
 
 export const ownerServices = {
+  updateViewReqStatus,
   updateApplicationStatus,
 };

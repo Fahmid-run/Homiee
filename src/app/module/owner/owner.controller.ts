@@ -29,6 +29,23 @@ const updateApplicationStatus = catchAsync(
   },
 );
 
+const updateViewReqStatus = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+  const ownerId = req.user?.authorId as string;
+
+  const id = req.params?.id as string;
+
+  const result = await ownerServices.updateViewReqStatus(ownerId, id, payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "View Status updated  successfully",
+    data: result,
+  });
+});
+
 export const ownerController = {
   updateApplicationStatus,
+  updateViewReqStatus,
 };
