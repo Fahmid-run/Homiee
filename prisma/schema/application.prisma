@@ -8,7 +8,7 @@ model Application {
 
   status     ApplicationStatus @default(PENDING)
   reviewedBy String?
-  reviewedAt DateTime?
+  reviewedAt DateTime?         @updatedAt
   tenant     User              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   reviewer  User?    @relation("ApplicationReviewer", fields: [reviewedBy], references: [id], onDelete: Cascade)

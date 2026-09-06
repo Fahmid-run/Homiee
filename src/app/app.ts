@@ -11,6 +11,7 @@ import { AuthRoutes } from "./module/auth/auth.route.js";
 import { ProperyRoutes } from "./module/property/property.route.js";
 import { RoomRoutes } from "./module/rooms/rooms.route.js";
 import { TenantRoutes } from "./module/tenant/tenant.route.js";
+import { OwnerRoutes } from "./module/owner/owner.route.js";
 
 const app: Application = express();
 
@@ -37,6 +38,7 @@ app.use("/api/v1/property", ProperyRoutes);
 
 app.use("/api/v1/room", RoomRoutes);
 app.use("/api/v1/tenant", TenantRoutes);
+app.use("/api/v1/owner", OwnerRoutes);
 
 // 404 Not found
 

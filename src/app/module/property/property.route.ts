@@ -15,7 +15,7 @@ router.post(
 router.get("/", properyController.getAllProperty);
 router.get("/:id", properyController.getPropertiesById);
 router.get(
-  "/me",
+  "/owner/me",
   auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
   properyController.getPropertiesByOwnerId,
 );
