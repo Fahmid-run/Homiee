@@ -256,10 +256,10 @@ export const ViewingRequestScalarFieldEnum = {
   tenantId: 'tenantId',
   roomId: 'roomId',
   propertyId: 'propertyId',
-  requestedAt: 'requestedAt',
   message: 'message',
+  requestedDate: 'requestedDate',
   status: 'status',
-  createdAt: 'createdAt',
+  requestedAt: 'requestedAt',
   updatedAt: 'updatedAt'
 } as const
 

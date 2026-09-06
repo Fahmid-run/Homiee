@@ -1,10 +1,11 @@
 model ViewingRequest {
-  id          String   @id @default(uuid())
-  tenantId    String
-  roomId      String?
-  propertyId  String
-  requestedAt DateTime
-  message     String?
+  id         String  @id @default(uuid())
+  tenantId   String
+  roomId     String?
+  propertyId String
+
+  message       String?
+  requestedDate DateTime
 
   status ViewingStatus @default(PENDING)
 
@@ -12,9 +13,9 @@ model ViewingRequest {
 
   property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  room      Room?    @relation(fields: [roomId], references: [id], onDelete: SetNull)
+  requestedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  room        Room?    @relation(fields: [roomId], references: [id], onDelete: SetNull)
 
   @@map("viewingRequest")
 }

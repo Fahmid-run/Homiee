@@ -29,10 +29,10 @@ export type ViewingRequestMinAggregateOutputType = {
   tenantId: string | null
   roomId: string | null
   propertyId: string | null
-  requestedAt: Date | null
   message: string | null
+  requestedDate: Date | null
   status: $Enums.ViewingStatus | null
-  createdAt: Date | null
+  requestedAt: Date | null
   updatedAt: Date | null
 }
 
@@ -41,10 +41,10 @@ export type ViewingRequestMaxAggregateOutputType = {
   tenantId: string | null
   roomId: string | null
   propertyId: string | null
-  requestedAt: Date | null
   message: string | null
+  requestedDate: Date | null
   status: $Enums.ViewingStatus | null
-  createdAt: Date | null
+  requestedAt: Date | null
   updatedAt: Date | null
 }
 
@@ -53,10 +53,10 @@ export type ViewingRequestCountAggregateOutputType = {
   tenantId: number
   roomId: number
   propertyId: number
-  requestedAt: number
   message: number
+  requestedDate: number
   status: number
-  createdAt: number
+  requestedAt: number
   updatedAt: number
   _all: number
 }
@@ -67,10 +67,10 @@ export type ViewingRequestMinAggregateInputType = {
   tenantId?: true
   roomId?: true
   propertyId?: true
-  requestedAt?: true
   message?: true
+  requestedDate?: true
   status?: true
-  createdAt?: true
+  requestedAt?: true
   updatedAt?: true
 }
 
@@ -79,10 +79,10 @@ export type ViewingRequestMaxAggregateInputType = {
   tenantId?: true
   roomId?: true
   propertyId?: true
-  requestedAt?: true
   message?: true
+  requestedDate?: true
   status?: true
-  createdAt?: true
+  requestedAt?: true
   updatedAt?: true
 }
 
@@ -91,10 +91,10 @@ export type ViewingRequestCountAggregateInputType = {
   tenantId?: true
   roomId?: true
   propertyId?: true
-  requestedAt?: true
   message?: true
+  requestedDate?: true
   status?: true
-  createdAt?: true
+  requestedAt?: true
   updatedAt?: true
   _all?: true
 }
@@ -176,10 +176,10 @@ export type ViewingRequestGroupByOutputType = {
   tenantId: string
   roomId: string | null
   propertyId: string
-  requestedAt: Date
   message: string | null
+  requestedDate: Date
   status: $Enums.ViewingStatus
-  createdAt: Date
+  requestedAt: Date
   updatedAt: Date
   _count: ViewingRequestCountAggregateOutputType | null
   _min: ViewingRequestMinAggregateOutputType | null
@@ -209,10 +209,10 @@ export type ViewingRequestWhereInput = {
   tenantId?: Prisma.StringFilter<"ViewingRequest"> | string
   roomId?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringFilter<"ViewingRequest"> | string
-  requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
+  requestedDate?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   status?: Prisma.EnumViewingStatusFilter<"ViewingRequest"> | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
+  requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
@@ -224,10 +224,10 @@ export type ViewingRequestOrderByWithRelationInput = {
   tenantId?: Prisma.SortOrder
   roomId?: Prisma.SortOrderInput | Prisma.SortOrder
   propertyId?: Prisma.SortOrder
-  requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenant?: Prisma.UserOrderByWithRelationInput
   property?: Prisma.PropertyOrderByWithRelationInput
@@ -242,10 +242,10 @@ export type ViewingRequestWhereUniqueInput = Prisma.AtLeast<{
   tenantId?: Prisma.StringFilter<"ViewingRequest"> | string
   roomId?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringFilter<"ViewingRequest"> | string
-  requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
+  requestedDate?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   status?: Prisma.EnumViewingStatusFilter<"ViewingRequest"> | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
+  requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
@@ -257,10 +257,10 @@ export type ViewingRequestOrderByWithAggregationInput = {
   tenantId?: Prisma.SortOrder
   roomId?: Prisma.SortOrderInput | Prisma.SortOrder
   propertyId?: Prisma.SortOrder
-  requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ViewingRequestCountOrderByAggregateInput
   _max?: Prisma.ViewingRequestMaxOrderByAggregateInput
@@ -275,19 +275,19 @@ export type ViewingRequestScalarWhereWithAggregatesInput = {
   tenantId?: Prisma.StringWithAggregatesFilter<"ViewingRequest"> | string
   roomId?: Prisma.StringNullableWithAggregatesFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringWithAggregatesFilter<"ViewingRequest"> | string
-  requestedAt?: Prisma.DateTimeWithAggregatesFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableWithAggregatesFilter<"ViewingRequest"> | string | null
+  requestedDate?: Prisma.DateTimeWithAggregatesFilter<"ViewingRequest"> | Date | string
   status?: Prisma.EnumViewingStatusWithAggregatesFilter<"ViewingRequest"> | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ViewingRequest"> | Date | string
+  requestedAt?: Prisma.DateTimeWithAggregatesFilter<"ViewingRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ViewingRequest"> | Date | string
 }
 
 export type ViewingRequestCreateInput = {
   id?: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutViewingRequestsInput
   property: Prisma.PropertyCreateNestedOneWithoutViewingRequestsInput
@@ -299,19 +299,19 @@ export type ViewingRequestUncheckedCreateInput = {
   tenantId: string
   roomId?: string | null
   propertyId: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type ViewingRequestUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutViewingRequestsNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutViewingRequestsNestedInput
@@ -323,10 +323,10 @@ export type ViewingRequestUncheckedUpdateInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -335,19 +335,19 @@ export type ViewingRequestCreateManyInput = {
   tenantId: string
   roomId?: string | null
   propertyId: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type ViewingRequestUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -356,10 +356,10 @@ export type ViewingRequestUncheckedUpdateManyInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -378,10 +378,10 @@ export type ViewingRequestCountOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
-  requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  requestedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -390,10 +390,10 @@ export type ViewingRequestMaxOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
-  requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  requestedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -402,10 +402,10 @@ export type ViewingRequestMinOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
-  requestedAt?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  requestedDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -541,10 +541,10 @@ export type EnumViewingStatusFieldUpdateOperationsInput = {
 
 export type ViewingRequestCreateWithoutPropertyInput = {
   id?: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutViewingRequestsInput
   room?: Prisma.RoomCreateNestedOneWithoutViewingRequestsInput
@@ -554,10 +554,10 @@ export type ViewingRequestUncheckedCreateWithoutPropertyInput = {
   id?: string
   tenantId: string
   roomId?: string | null
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -595,19 +595,19 @@ export type ViewingRequestScalarWhereInput = {
   tenantId?: Prisma.StringFilter<"ViewingRequest"> | string
   roomId?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
   propertyId?: Prisma.StringFilter<"ViewingRequest"> | string
-  requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   message?: Prisma.StringNullableFilter<"ViewingRequest"> | string | null
+  requestedDate?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   status?: Prisma.EnumViewingStatusFilter<"ViewingRequest"> | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
+  requestedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ViewingRequest"> | Date | string
 }
 
 export type ViewingRequestCreateWithoutRoomInput = {
   id?: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutViewingRequestsInput
   property: Prisma.PropertyCreateNestedOneWithoutViewingRequestsInput
@@ -617,10 +617,10 @@ export type ViewingRequestUncheckedCreateWithoutRoomInput = {
   id?: string
   tenantId: string
   propertyId: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -652,10 +652,10 @@ export type ViewingRequestUpdateManyWithWhereWithoutRoomInput = {
 
 export type ViewingRequestCreateWithoutTenantInput = {
   id?: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutViewingRequestsInput
   room?: Prisma.RoomCreateNestedOneWithoutViewingRequestsInput
@@ -665,10 +665,10 @@ export type ViewingRequestUncheckedCreateWithoutTenantInput = {
   id?: string
   roomId?: string | null
   propertyId: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -702,19 +702,19 @@ export type ViewingRequestCreateManyPropertyInput = {
   id?: string
   tenantId: string
   roomId?: string | null
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type ViewingRequestUpdateWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutViewingRequestsNestedInput
   room?: Prisma.RoomUpdateOneWithoutViewingRequestsNestedInput
@@ -724,10 +724,10 @@ export type ViewingRequestUncheckedUpdateWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -735,10 +735,10 @@ export type ViewingRequestUncheckedUpdateManyWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -746,19 +746,19 @@ export type ViewingRequestCreateManyRoomInput = {
   id?: string
   tenantId: string
   propertyId: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type ViewingRequestUpdateWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutViewingRequestsNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutViewingRequestsNestedInput
@@ -768,10 +768,10 @@ export type ViewingRequestUncheckedUpdateWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -779,10 +779,10 @@ export type ViewingRequestUncheckedUpdateManyWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -790,19 +790,19 @@ export type ViewingRequestCreateManyTenantInput = {
   id?: string
   roomId?: string | null
   propertyId: string
-  requestedAt: Date | string
   message?: string | null
+  requestedDate: Date | string
   status?: $Enums.ViewingStatus
-  createdAt?: Date | string
+  requestedAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type ViewingRequestUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutViewingRequestsNestedInput
   room?: Prisma.RoomUpdateOneWithoutViewingRequestsNestedInput
@@ -812,10 +812,10 @@ export type ViewingRequestUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -823,10 +823,10 @@ export type ViewingRequestUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumViewingStatusFieldUpdateOperationsInput | $Enums.ViewingStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -837,10 +837,10 @@ export type ViewingRequestSelect<ExtArgs extends runtime.Types.Extensions.Intern
   tenantId?: boolean
   roomId?: boolean
   propertyId?: boolean
-  requestedAt?: boolean
   message?: boolean
+  requestedDate?: boolean
   status?: boolean
-  createdAt?: boolean
+  requestedAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -852,10 +852,10 @@ export type ViewingRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   tenantId?: boolean
   roomId?: boolean
   propertyId?: boolean
-  requestedAt?: boolean
   message?: boolean
+  requestedDate?: boolean
   status?: boolean
-  createdAt?: boolean
+  requestedAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -867,10 +867,10 @@ export type ViewingRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   tenantId?: boolean
   roomId?: boolean
   propertyId?: boolean
-  requestedAt?: boolean
   message?: boolean
+  requestedDate?: boolean
   status?: boolean
-  createdAt?: boolean
+  requestedAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -882,14 +882,14 @@ export type ViewingRequestSelectScalar = {
   tenantId?: boolean
   roomId?: boolean
   propertyId?: boolean
-  requestedAt?: boolean
   message?: boolean
+  requestedDate?: boolean
   status?: boolean
-  createdAt?: boolean
+  requestedAt?: boolean
   updatedAt?: boolean
 }
 
-export type ViewingRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "propertyId" | "requestedAt" | "message" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["viewingRequest"]>
+export type ViewingRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "propertyId" | "message" | "requestedDate" | "status" | "requestedAt" | "updatedAt", ExtArgs["result"]["viewingRequest"]>
 export type ViewingRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -918,10 +918,10 @@ export type $ViewingRequestPayload<ExtArgs extends runtime.Types.Extensions.Inte
     tenantId: string
     roomId: string | null
     propertyId: string
-    requestedAt: Date
     message: string | null
+    requestedDate: Date
     status: $Enums.ViewingStatus
-    createdAt: Date
+    requestedAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["viewingRequest"]>
   composites: {}
@@ -1353,10 +1353,10 @@ export interface ViewingRequestFieldRefs {
   readonly tenantId: Prisma.FieldRef<"ViewingRequest", 'String'>
   readonly roomId: Prisma.FieldRef<"ViewingRequest", 'String'>
   readonly propertyId: Prisma.FieldRef<"ViewingRequest", 'String'>
-  readonly requestedAt: Prisma.FieldRef<"ViewingRequest", 'DateTime'>
   readonly message: Prisma.FieldRef<"ViewingRequest", 'String'>
+  readonly requestedDate: Prisma.FieldRef<"ViewingRequest", 'DateTime'>
   readonly status: Prisma.FieldRef<"ViewingRequest", 'ViewingStatus'>
-  readonly createdAt: Prisma.FieldRef<"ViewingRequest", 'DateTime'>
+  readonly requestedAt: Prisma.FieldRef<"ViewingRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ViewingRequest", 'DateTime'>
 }
     

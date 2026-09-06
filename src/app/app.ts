@@ -10,6 +10,7 @@ import { configs } from "./config/index.js";
 import { AuthRoutes } from "./module/auth/auth.route.js";
 import { ProperyRoutes } from "./module/property/property.route.js";
 import { RoomRoutes } from "./module/rooms/rooms.route.js";
+import { TenantRoutes } from "./module/tenant/tenant.route.js";
 
 const app: Application = express();
 
@@ -35,6 +36,7 @@ app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/property", ProperyRoutes);
 
 app.use("/api/v1/room", RoomRoutes);
+app.use("/api/v1/tenant", TenantRoutes);
 
 // 404 Not found
 

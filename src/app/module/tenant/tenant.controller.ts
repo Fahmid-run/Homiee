@@ -1,0 +1,25 @@
+import { Request, Response } from "express";
+import { catchAsync } from "../../utils/catchAsync";
+import { sendResponse } from "../../utils/sendResponse";
+
+import httpStatus from "http-status";
+import { tenantServices } from "./tenant.service";
+
+const createViewReq = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+  const tenantId = req.user?.userId as string;
+  const roomId = req.params?.roomId as string;
+
+  const result = await tenantServices.createViewReq(roomId, tenantId, payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "View Request  successfully",
+    data: result,
+  });
+});
+
+export const tenantController = {
+  createViewReq,
+};
