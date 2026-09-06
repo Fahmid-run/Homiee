@@ -55,6 +55,7 @@ const registerUser = async (payload: IRegisterPatientPayload) => {
     name: user.name,
     email: user.email,
     role: user.role,
+    authorId: user.tenantProfile?.id || user.propertyOwner?.id,
   };
 
   const accessToken = jwtUtils.createToken(
@@ -82,6 +83,10 @@ const loginUser = async (payload: ILoginUserPayload) => {
 
   const user = await prisma.user.findUnique({
     where: { email },
+    include: {
+      tenantProfile: true,
+      propertyOwner: true,
+    },
   });
 
   if (!user) {
@@ -107,7 +112,7 @@ const loginUser = async (payload: ILoginUserPayload) => {
     name: user.name,
     email: user.email,
     role: user.role,
-    // authorId: user.tenantProfile?.id || user.propertyOwner?.id,
+    authorId: user.tenantProfile?.id || user.propertyOwner?.id,
   };
 
   const accessToken = jwtUtils.createToken(

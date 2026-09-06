@@ -17,4 +17,5 @@ export interface IRequestUser {
   email: string;
   name: string;
   role: Role;
+  authorId: string;
 }

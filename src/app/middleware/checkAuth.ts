@@ -15,6 +15,8 @@ declare global {
         name: string;
         userId: string;
         role: Role;
+
+        authorId: string;
       };
     }
   }
@@ -45,7 +47,8 @@ export const auth = (...requiredRoles: Role[]) => {
       throw new Error(verifiedToken.error);
     }
 
-    const { email, name, userId, role } = verifiedToken.data as JwtPayload;
+    const { email, name, userId, role, authorId } =
+      verifiedToken.data as JwtPayload;
 
     if (requiredRoles.length && !requiredRoles.includes(role)) {
       throw new Error(
@@ -75,6 +78,7 @@ export const auth = (...requiredRoles: Role[]) => {
       name,
       userId,
       role,
+      authorId,
     };
 
     next();

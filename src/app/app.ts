@@ -8,6 +8,7 @@ import AppError from "./utils/appError.js";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import { configs } from "./config/index.js";
 import { AuthRoutes } from "./module/auth/auth.route.js";
+import { ProperyRoutes } from "./module/property/property.route.js";
 
 const app: Application = express();
 
@@ -29,6 +30,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", AuthRoutes);
+
+app.use("/api/v1/property", ProperyRoutes);
 
 // 404 Not found
 
