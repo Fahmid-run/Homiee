@@ -1,0 +1,27 @@
+model Tenancy {
+  id String @id @default(uuid())
+
+  tenantId      String
+  applicationId String? @unique
+
+  startDate   DateTime
+  endDate     DateTime?
+  monthlyRent String
+
+  securityDeposit String
+
+  status TenancyStatus @default(ACTIVE)
+
+  tenant User @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+
+  documents      RentalDocuments[]
+  rentalPayments RentalPayment[]
+  billShares     UtilityBillShare[]
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([tenantId])
+  @@map("tenancy")
+}

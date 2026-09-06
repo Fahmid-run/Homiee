@@ -1,24 +1,32 @@
-model User{
-  id String @id @default(uuid())
-  name String 
-  email String  
-  password String
-  emailVerified Boolean @default(false)
+model User {
+  id               String   @id @default(uuid())
+  name             String
+  email            String
+  password         String?
+  isEmailVerified  Boolean? @default(false)
+  isGoogleVerified Boolean? @default(false)
+  googleId         String?
+  gender           Gender   @default(MALE)
 
-  role Role @default(PATIENT)
-  status UserStatus @default(ACTIVE)
-  needPasswordChange Boolean @default(false)
-  isDeleted Boolean @default(false)
-  
+  role      Role       @default(TENANT)
+  status    UserStatus @default(ACTIVE)
+  isDeleted Boolean    @default(false)
+
+  propertyOwner       PropertyOwner?
+  tenantProfile       TenantProfile?
+  applications        Application[]
+  viewingRequests     ViewingRequest[]
+  tenancies           Tenancy[]
+  rentalPayments      RentalPayment[]
+  billshares          UtilityBillShare[]
+  uploadedDocuments   RentalDocuments[]
+  reviewedApplicaions Application[]      @relation("ApplicationReviewer")
+
   deletedAt DateTime?
-
-  patient Patient?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-
-
-@@unique([email])
+  @@unique([email])
   @@map("users")
 }

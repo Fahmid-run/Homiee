@@ -1,0 +1,27 @@
+model UtilityBill {
+  id               String   @id @default(uuid())
+  propertyId  String
+  type UtilityType 
+  description String?
+
+  billPeriodStart DateTime
+  billPeriodEnd DateTime
+  totalAmount Int
+  dueDate DateTime
+  status BillStatus @default(OPEN)
+
+
+
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  shares UtilityBillShare[]
+
+  
+
+
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("utilitybill")
+}

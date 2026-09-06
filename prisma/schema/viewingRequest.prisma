@@ -1,0 +1,18 @@
+model ViewingRequest {
+  id          String   @id @default(uuid())
+  tenantId    String
+  propertyId  String
+  requestedAt DateTime
+  message     String?
+
+  status ViewingStatus @default(PENDING)
+
+  tenant User @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("viewingRequest")
+}

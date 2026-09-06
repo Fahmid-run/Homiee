@@ -1,0 +1,13 @@
+model PropertyOwner {
+  id     String  @id @default(uuid())
+  userId String  @unique
+  bio    String?
+
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ownedProperties Property[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("propertyOwner")
+}

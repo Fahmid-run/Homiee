@@ -1,19 +1,125 @@
 enum Role {
-    PATIENT
-    DOCTOR
+    PROPERTY_OWNER
+    TENANT
+    PROPERTY_MANAGER
     ADMIN
-    SUPER_ADMIN
 }
-
-enum UserStatus {
-    ACTIVE
-    BLOCKED
-    DELETED
-}
-
 
 enum Gender {
     MALE
     FEMALE
 }
 
+//USER 
+enum UserStatus {
+    ACTIVE
+    BLOCKED
+    DELETED
+}
+
+//Viewing Data Enum
+enum ViewingStatus {
+    PENDING
+    CONFIRMED
+    REJECTED
+    CANCELLED
+    COMPLETED
+}
+
+// Property
+enum PropertyStatus {
+    DRAFT
+    PUBLISHED
+    UNPUBLISHED
+    ARCHIVED
+}
+
+//Application Status 
+
+enum ApplicationStatus {
+    PENDING
+    UNDER_REVIEW
+    APPROVED
+    REJECTED
+    WITHDRAWN
+}
+
+//Room
+enum RoomStatus {
+    AVAILABLE
+    PARTIALLY_OCCUPIED
+    FULL
+    MAINTENANCE
+    INACTIVE
+}
+
+enum RoomAvailability {
+    AVAILABLE
+    PARTIALLY_OCCUPIED
+    FULL
+    MAINTENANCE
+    INACTIVE
+}
+
+//Rental
+enum RentalDocumentsType {
+    LEASE
+    IDENTITY
+    AGGREEMENT
+    OTHER
+}
+
+enum TenancyStatus {
+    ACTIVE
+    ENDED
+    TERMINATED
+}
+
+enum RentalApplicationStatus {
+    PENDING
+    UNDER_REVIEWD
+    APPROVED
+    COMPLETED
+    WITHDRAWN
+}
+
+enum RentalDocumentStatus {
+    PENDING
+    PAID
+    OVERDUE
+    FAILED
+}
+
+//Payment Status
+
+enum PaymentStatus {
+    PENDING
+    PAID
+    FAILED
+    CANCELLED
+    REFUNDED
+}
+
+enum PaymentMethod {
+    STRIPE
+}
+
+//Utility
+
+enum UtilityType {
+    ELECTRICITY
+    WATER
+    GAS
+    INTERNET
+    CLEANING
+    OTHER
+}
+
+//Bill 
+enum BillStatus {
+    OPEN
+    PARTIALLY_PAID
+    PAID
+    OVERDUE
+    CANCELLED
+}

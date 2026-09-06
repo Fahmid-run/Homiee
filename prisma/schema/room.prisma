@@ -1,0 +1,13 @@
+model Room {
+  id               String  @id @default(uuid())
+
+  rent String
+  capacity String
+  availability RoomAvailability @default(AVAILABLE)
+  available_beds String
+
+
+
+  @@map("room")
+
+}

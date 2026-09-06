@@ -1,0 +1,23 @@
+model Property {
+  id String @id @default(uuid())
+
+  name        String  @unique
+  address     String  @unique
+  description String?
+  city        String
+
+  // rooms          Room[]
+  totalrooms     Int
+  propertyStatus PropertyStatus @default(DRAFT)
+
+  images  String?
+  ownerId String        @unique
+  owner   PropertyOwner @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  viewingRequests ViewingRequest[]
+  utilityBills    UtilityBill[]
+
+  @@map("property")
+}
