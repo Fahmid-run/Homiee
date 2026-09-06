@@ -7,6 +7,7 @@ import httpstatus from "http-status";
 import AppError from "./utils/appError.js";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import { configs } from "./config/index.js";
+import { AuthRoutes } from "./module/auth/auth.route.js";
 
 const app: Application = express();
 
@@ -26,6 +27,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.end("root page");
 });
+
+app.use("/api/v1/auth", AuthRoutes);
 
 // 404 Not found
 

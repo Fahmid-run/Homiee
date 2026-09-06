@@ -9,11 +9,14 @@ import {
   IRegisterPatientPayload,
   IRequestUser,
 } from "./auth.interface";
-import path from "node:path";
-import { Role, UserStatus } from "../../../enums";
 
-const registerPatient = async (payload: IRegisterPatientPayload) => {
-  const { name, password } = payload;
+import AppError from "../../utils/appError";
+
+import httpstatus from "http-status";
+import { UserStatus } from "../../../../prisma/generated/prisma/enums";
+
+const registerUser = async (payload: IRegisterPatientPayload) => {
+  const { name, password, role = "TENANT" } = payload;
   const email = payload.email.trim().toLowerCase();
 
   const isUserExists = await prisma.user.findUnique({
@@ -21,28 +24,32 @@ const registerPatient = async (payload: IRegisterPatientPayload) => {
   });
 
   if (isUserExists) {
-    throw new Error("User with this email already exists");
+    throw new AppError(
+      "User with this email already exists",
+      httpstatus.NOT_FOUND,
+    );
   }
 
   const hashedPassword = await bcrypt.hash(password, 8);
 
-  const createdUser = await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       name,
       email,
       password: hashedPassword,
-      role: Role.PATIENT,
+      role,
       status: UserStatus.ACTIVE,
-      emailVerified: false,
-      patient: {
-        create: { name, email },
-      },
+      isEmailVerified: false,
+      tenantProfile: role === "TENANT" ? { create: {} } : undefined,
+      propertyOwner: role === "PROPERTY_OWNER" ? { create: {} } : undefined,
     },
     omit: { password: true },
-    include: { patient: true },
+    include: {
+      tenantProfile: true,
+      propertyOwner: true,
+    },
   });
 
-  const { patient, ...user } = createdUser;
   const jwtPayload = {
     userId: user.id,
     name: user.name,
@@ -64,7 +71,6 @@ const registerPatient = async (payload: IRegisterPatientPayload) => {
 
   return {
     user,
-    patient,
     accessToken,
     refreshToken,
   };
@@ -79,18 +85,18 @@ const loginUser = async (payload: ILoginUserPayload) => {
   });
 
   if (!user) {
-    throw new Error("User not found");
+    throw new AppError("User not found", httpstatus.NOT_FOUND);
   }
 
   if (user.status === UserStatus.BLOCKED) {
-    throw new Error("User is blocked");
+    throw new AppError("User is blocked", httpstatus.FORBIDDEN);
   }
 
   if (user.isDeleted || user.status === UserStatus.DELETED) {
-    throw new Error("User is deleted");
+    throw new AppError("User is deleted", httpstatus.NOT_FOUND);
   }
 
-  const isPasswordMatched = await bcrypt.compare(password, user.password);
+  const isPasswordMatched = await bcrypt.compare(password, user.password!);
 
   if (!isPasswordMatched) {
     throw new Error("Invalid credentials");
@@ -101,6 +107,7 @@ const loginUser = async (payload: ILoginUserPayload) => {
     name: user.name,
     email: user.email,
     role: user.role,
+    // authorId: user.tenantProfile?.id || user.propertyOwner?.id,
   };
 
   const accessToken = jwtUtils.createToken(
@@ -127,7 +134,8 @@ const getMe = async (user: IRequestUser) => {
       id: user.userId,
     },
     include: {
-      patient: true,
+      tenantProfile: true,
+      propertyOwner: true,
     },
     omit: {
       password: true,
@@ -461,7 +469,7 @@ const refreshToken = async (token: string) => {
 // };
 
 export const AuthService = {
-  registerPatient,
+  registerUser,
   loginUser,
   getMe,
   refreshToken,

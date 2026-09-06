@@ -51,8 +51,18 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Patient: 'Patient',
-  User: 'User'
+  TenantProfile: 'TenantProfile',
+  Application: 'Application',
+  Property: 'Property',
+  PropertyOwner: 'PropertyOwner',
+  RentalPayment: 'RentalPayment',
+  RentalDocuments: 'RentalDocuments',
+  Room: 'Room',
+  Tenancy: 'Tenancy',
+  User: 'User',
+  UtilityBill: 'UtilityBill',
+  UtilityBillShare: 'UtilityBillShare',
+  ViewingRequest: 'ViewingRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -71,20 +81,115 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const PatientScalarFieldEnum = {
+export const TenantProfileScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  contactNumber: 'contactNumber',
-  address: 'address',
-  isDeleted: 'isDeleted',
-  deleteedAt: 'deleteedAt',
+  userId: 'userId',
+  bio: 'bio',
+  occupation: 'occupation',
+  dateOfBirth: 'dateOfBirth',
+  budgetMin: 'budgetMin',
+  budgetMax: 'budgetMax',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
 } as const
 
-export type PatientScalarFieldEnum = (typeof PatientScalarFieldEnum)[keyof typeof PatientScalarFieldEnum]
+export type TenantProfileScalarFieldEnum = (typeof TenantProfileScalarFieldEnum)[keyof typeof TenantProfileScalarFieldEnum]
+
+
+export const ApplicationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  message: 'message',
+  status: 'status',
+  reviewedBy: 'reviewedBy',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
+
+
+export const PropertyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  description: 'description',
+  city: 'city',
+  totalrooms: 'totalrooms',
+  propertyStatus: 'propertyStatus',
+  images: 'images',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
+
+
+export const PropertyOwnerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bio: 'bio',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyOwnerScalarFieldEnum = (typeof PropertyOwnerScalarFieldEnum)[keyof typeof PropertyOwnerScalarFieldEnum]
+
+
+export const RentalPaymentScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  tenancyID: 'tenancyID',
+  amount: 'amount',
+  dueDate: 'dueDate',
+  paidAt: 'paidAt',
+  status: 'status',
+  paymentMethod: 'paymentMethod',
+  transactionId: 'transactionId'
+} as const
+
+export type RentalPaymentScalarFieldEnum = (typeof RentalPaymentScalarFieldEnum)[keyof typeof RentalPaymentScalarFieldEnum]
+
+
+export const RentalDocumentsScalarFieldEnum = {
+  id: 'id',
+  tenancyId: 'tenancyId',
+  uploadedBy: 'uploadedBy',
+  type: 'type',
+  fileUrl: 'fileUrl',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalDocumentsScalarFieldEnum = (typeof RentalDocumentsScalarFieldEnum)[keyof typeof RentalDocumentsScalarFieldEnum]
+
+
+export const RoomScalarFieldEnum = {
+  id: 'id',
+  rent: 'rent',
+  capacity: 'capacity',
+  availability: 'availability',
+  available_beds: 'available_beds'
+} as const
+
+export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const TenancyScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  applicationId: 'applicationId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  monthlyRent: 'monthlyRent',
+  securityDeposit: 'securityDeposit',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TenancyScalarFieldEnum = (typeof TenancyScalarFieldEnum)[keyof typeof TenancyScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -92,10 +197,12 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
-  emailVerified: 'emailVerified',
+  isEmailVerified: 'isEmailVerified',
+  isGoogleVerified: 'isGoogleVerified',
+  googleId: 'googleId',
+  gender: 'gender',
   role: 'role',
   status: 'status',
-  needPasswordChange: 'needPasswordChange',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
@@ -103,6 +210,55 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UtilityBillScalarFieldEnum = {
+  id: 'id',
+  propertyId: 'propertyId',
+  type: 'type',
+  description: 'description',
+  billPeriodStart: 'billPeriodStart',
+  billPeriodEnd: 'billPeriodEnd',
+  totalAmount: 'totalAmount',
+  dueDate: 'dueDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UtilityBillScalarFieldEnum = (typeof UtilityBillScalarFieldEnum)[keyof typeof UtilityBillScalarFieldEnum]
+
+
+export const UtilityBillShareScalarFieldEnum = {
+  id: 'id',
+  billid: 'billid',
+  tenantId: 'tenantId',
+  tenancyId: 'tenancyId',
+  amount: 'amount',
+  status: 'status',
+  paidAt: 'paidAt',
+  pauymentMethod: 'pauymentMethod',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentId: 'stripePaymentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UtilityBillShareScalarFieldEnum = (typeof UtilityBillShareScalarFieldEnum)[keyof typeof UtilityBillShareScalarFieldEnum]
+
+
+export const ViewingRequestScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  propertyId: 'propertyId',
+  requestedAt: 'requestedAt',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ViewingRequestScalarFieldEnum = (typeof ViewingRequestScalarFieldEnum)[keyof typeof ViewingRequestScalarFieldEnum]
 
 
 export const SortOrder = {

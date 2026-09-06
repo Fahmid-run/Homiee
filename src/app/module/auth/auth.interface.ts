@@ -9,6 +9,7 @@ export interface IRegisterPatientPayload {
   name: string;
   email: string;
   password: string;
+  role: Role;
 }
 
 export interface IRequestUser {

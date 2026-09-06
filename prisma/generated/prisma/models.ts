@@ -8,6 +8,16 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Patient'
+export type * from './models/TenantProfile'
+export type * from './models/Application'
+export type * from './models/Property'
+export type * from './models/PropertyOwner'
+export type * from './models/RentalPayment'
+export type * from './models/RentalDocuments'
+export type * from './models/Room'
+export type * from './models/Tenancy'
 export type * from './models/User'
+export type * from './models/UtilityBill'
+export type * from './models/UtilityBillShare'
+export type * from './models/ViewingRequest'
 export type * from './commonInputTypes'

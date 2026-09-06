@@ -10,13 +10,21 @@
 */
 
 export const Role = {
-  PATIENT: 'PATIENT',
-  DOCTOR: 'DOCTOR',
-  ADMIN: 'ADMIN',
-  SUPER_ADMIN: 'SUPER_ADMIN'
+  PROPERTY_OWNER: 'PROPERTY_OWNER',
+  TENANT: 'TENANT',
+  PROPERTY_MANAGER: 'PROPERTY_MANAGER',
+  ADMIN: 'ADMIN'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
 
 
 export const UserStatus = {
@@ -28,9 +36,136 @@ export const UserStatus = {
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
 
-export const Gender = {
-  MALE: 'MALE',
-  FEMALE: 'FEMALE'
+export const ViewingStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
 } as const
 
-export type Gender = (typeof Gender)[keyof typeof Gender]
+export type ViewingStatus = (typeof ViewingStatus)[keyof typeof ViewingStatus]
+
+
+export const PropertyStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  UNPUBLISHED: 'UNPUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type PropertyStatus = (typeof PropertyStatus)[keyof typeof PropertyStatus]
+
+
+export const ApplicationStatus = {
+  PENDING: 'PENDING',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  WITHDRAWN: 'WITHDRAWN'
+} as const
+
+export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus]
+
+
+export const RoomStatus = {
+  AVAILABLE: 'AVAILABLE',
+  PARTIALLY_OCCUPIED: 'PARTIALLY_OCCUPIED',
+  FULL: 'FULL',
+  MAINTENANCE: 'MAINTENANCE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type RoomStatus = (typeof RoomStatus)[keyof typeof RoomStatus]
+
+
+export const RoomAvailability = {
+  AVAILABLE: 'AVAILABLE',
+  PARTIALLY_OCCUPIED: 'PARTIALLY_OCCUPIED',
+  FULL: 'FULL',
+  MAINTENANCE: 'MAINTENANCE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type RoomAvailability = (typeof RoomAvailability)[keyof typeof RoomAvailability]
+
+
+export const RentalDocumentsType = {
+  LEASE: 'LEASE',
+  IDENTITY: 'IDENTITY',
+  AGGREEMENT: 'AGGREEMENT',
+  OTHER: 'OTHER'
+} as const
+
+export type RentalDocumentsType = (typeof RentalDocumentsType)[keyof typeof RentalDocumentsType]
+
+
+export const TenancyStatus = {
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  TERMINATED: 'TERMINATED'
+} as const
+
+export type TenancyStatus = (typeof TenancyStatus)[keyof typeof TenancyStatus]
+
+
+export const RentalApplicationStatus = {
+  PENDING: 'PENDING',
+  UNDER_REVIEWD: 'UNDER_REVIEWD',
+  APPROVED: 'APPROVED',
+  COMPLETED: 'COMPLETED',
+  WITHDRAWN: 'WITHDRAWN'
+} as const
+
+export type RentalApplicationStatus = (typeof RentalApplicationStatus)[keyof typeof RentalApplicationStatus]
+
+
+export const RentalDocumentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  FAILED: 'FAILED'
+} as const
+
+export type RentalDocumentStatus = (typeof RentalDocumentStatus)[keyof typeof RentalDocumentStatus]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const PaymentMethod = {
+  STRIPE: 'STRIPE'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const UtilityType = {
+  ELECTRICITY: 'ELECTRICITY',
+  WATER: 'WATER',
+  GAS: 'GAS',
+  INTERNET: 'INTERNET',
+  CLEANING: 'CLEANING',
+  OTHER: 'OTHER'
+} as const
+
+export type UtilityType = (typeof UtilityType)[keyof typeof UtilityType]
+
+
+export const BillStatus = {
+  OPEN: 'OPEN',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type BillStatus = (typeof BillStatus)[keyof typeof BillStatus]
