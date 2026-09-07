@@ -121,3 +121,15 @@ enum BillStatus {
     OVERDUE
     CANCELLED
 }
+
+
+enum MatchStatus {
+    PENDING
+    ACCEPTED
+    REJECTED
+}
+
+enum SleepSchedule {
+    LATE
+    EARLY
+}

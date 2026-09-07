@@ -22,6 +22,10 @@ model User {
   uploadedDocuments   RentalDocuments[]
   reviewedApplicaions Application[]      @relation("ApplicationReviewer")
 
+  roomMateMatchAsA RoomMateMatch[] @relation("MatchTenantA")
+  roomMateMatchAsB RoomMateMatch[] @relation("MatchTenantB")
+  
+
   deletedAt DateTime?
 
   createdAt DateTime @default(now())

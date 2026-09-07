@@ -1,0 +1,20 @@
+model RoomMateMatch {
+  id String @id @default(uuid())
+
+  tenantAId String
+  tenantBId String
+
+  score  Float
+  status MatchStatus @default(PENDING)
+
+  tenantA User @relation("MatchTenantA", fields: [tenantAId], references: [id], onDelete: Cascade)
+  tenantB User @relation("MatchTenantB", fields: [tenantBId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantAId, tenantBId])
+  @@index([tenantAId])
+  @@index([tenantBId])
+  @@map("roomMateMatch")
+}

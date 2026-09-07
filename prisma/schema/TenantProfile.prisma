@@ -9,8 +9,11 @@ model TenantProfile {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  roomMatePreference RoomMatePreference?
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  roomMatePreferenceId String?
 
   @@map("tenantProfile")
 }
