@@ -45,7 +45,27 @@ const updateViewReqStatus = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const uploadDocuments = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+  const userId = req.user?.userId as string;
+
+  const tenancyId = req.params?.tenancyId as string;
+
+  const result = await ownerServices.uploadDocuments(
+    userId,
+    tenancyId,
+    payload,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Documents Uploaded  successfully",
+    data: result,
+  });
+});
 export const ownerController = {
   updateApplicationStatus,
   updateViewReqStatus,
+  uploadDocuments,
 };

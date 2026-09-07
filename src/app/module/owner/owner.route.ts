@@ -19,6 +19,10 @@ router.patch(
   ownerController.updateViewReqStatus,
 );
 
-// router.get("/", roomController.getAllRooms);
+router.post(
+  "/documents/:tenancyId",
+  auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
+  ownerController.uploadDocuments,
+);
 
 export const OwnerRoutes = router;

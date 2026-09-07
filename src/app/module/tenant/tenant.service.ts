@@ -37,33 +37,6 @@ const createApplication = async (roomId: string, tenantId: string, payload) => {
   return res;
 };
 
-const createTenancy = async (
-  applicationId: string,
-  roomId: string,
-  tenantId: string,
-  payload,
-) => {
-  const { startDate, endDate, securityDeposit } = payload;
-  await checkExists(
-    prisma.application,
-    applicationId,
-    "Application Does not exists",
-  );
-
-  const res = await prisma.tenancy.create({
-    data: {
-      startDate,
-      endDate,
-      securityDeposit,
-      tenantId,
-      applicationId,
-      roomId,
-    },
-  });
-
-  return res;
-};
-
 export const tenantServices = {
   createViewReq,
   createApplication,

@@ -165,7 +165,24 @@ const updateViewReqStatus = async (ownerId: string, id: string, payload) => {
   return res;
 };
 
+const uploadDocuments = async (userId: string, tenancyId: string, payload) => {
+  const { type, fileUrl } = payload;
+  await checkExists(prisma.tenancy, tenancyId, "Tenancy Does not exist");
+
+  const res = await prisma.rentalDocuments.create({
+    data: {
+      tenancyId,
+      type,
+      fileUrl,
+      uploadedBy: userId,
+    },
+  });
+
+  return res;
+};
+
 export const ownerServices = {
   updateViewReqStatus,
   updateApplicationStatus,
+  uploadDocuments,
 };
