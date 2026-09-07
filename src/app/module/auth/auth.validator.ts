@@ -1,11 +1,11 @@
 import z from "zod";
-
-const PatientRegistrationZodSchema = z.object({
+import { Role } from "../../../../prisma/generated/prisma/enums";
+const RegistrationZodSchema = z.object({
   name: z
     .string("Not A String!!!!!")
     .min(3, "Name must atleast 3 characters long!!!")
     .max(10),
-  email: z.email("Not email!!"),
+  email: z.email("Plz Provide a Valid Email!!"),
   password: z
     .string()
     .min(8, "Password Must Minimum 8 Characters Long.")
@@ -14,10 +14,11 @@ const PatientRegistrationZodSchema = z.object({
 
     .regex(/[0-9]/, "Password must contain atleast 1 Number")
     .regex(/[^A-Za-z0-9]/, "Password must contain atleast 1 Special Character"),
-  patient: z
-    .object({
-      contactNumber: z.string().optional(),
-    })
+  role: z
+    .enum(
+      [Role.PROPERTY_MANAGER, Role.TENANT, Role.PROPERTY_OWNER, Role.TENANT],
+      "Plz Choose a valid role",
+    )
     .optional(),
 });
 
@@ -51,7 +52,7 @@ const ResetPasswordZodSchema = z.object({
 });
 
 export const UserValidation = {
-  PatientRegistrationZodSchema,
+  RegistrationZodSchema,
   LoginZodSchema,
   ForgotPasswordZodSchema,
   ResetPasswordZodSchema,

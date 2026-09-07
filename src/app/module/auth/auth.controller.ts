@@ -7,6 +7,7 @@ import { AuthService } from "./auth.service";
 
 const registerUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
+
   const result = await AuthService.registerUser(payload);
 
   const { accessToken, refreshToken, user } = result;
@@ -38,6 +39,7 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
+
   const result = await AuthService.loginUser(payload);
   const { accessToken, refreshToken } = result;
 

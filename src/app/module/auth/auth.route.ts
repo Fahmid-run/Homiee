@@ -3,11 +3,21 @@ import { Router } from "express";
 import { auth } from "../../middleware/checkAuth";
 import { AuthController } from "./auth.controller";
 import { Role } from "../../../../prisma/generated/prisma/enums";
+import { validationReq } from "../../middleware/validationRequest";
+import { UserValidation } from "./auth.validator";
 
 const router = Router();
 
-router.post("/register", AuthController.registerUser);
-router.post("/login", AuthController.loginUser);
+router.post(
+  "/register",
+  validationReq(UserValidation.RegistrationZodSchema),
+  AuthController.registerUser,
+);
+router.post(
+  "/login",
+  validationReq(UserValidation.LoginZodSchema),
+  AuthController.loginUser,
+);
 router.get(
   "/me",
   auth(Role.ADMIN, Role.TENANT, Role.PROPERTY_OWNER),

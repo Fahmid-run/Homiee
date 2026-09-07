@@ -4,12 +4,15 @@ import { auth } from "../../middleware/checkAuth";
 
 import { Role } from "../../../../prisma/generated/prisma/enums";
 import { roomController } from "./rooms.controller";
+import { validationReq } from "../../middleware/validationRequest";
+import { roomDataValidator } from "./room.validator";
 
 const router = Router();
 
 router.post(
   "/:propertyId",
   auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
+  validationReq(roomDataValidator.RoomZodSchema),
   roomController.createRoom,
 );
 

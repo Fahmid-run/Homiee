@@ -4,6 +4,8 @@ import { auth } from "../../middleware/checkAuth";
 
 import { Role } from "../../../../prisma/generated/prisma/enums";
 import { ownerController } from "./owner.controller";
+import { validationReq } from "../../middleware/validationRequest";
+import { ownerZodValidation } from "./owner.validation";
 
 const router = Router();
 
@@ -22,6 +24,7 @@ router.patch(
 router.post(
   "/documents/:tenancyId",
   auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
+  validationReq(ownerZodValidation.UploadDocsZodSchema),
   ownerController.uploadDocuments,
 );
 
