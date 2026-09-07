@@ -13,6 +13,8 @@ import { RoomRoutes } from "./module/rooms/rooms.route.js";
 import { TenantRoutes } from "./module/tenant/tenant.route.js";
 import { OwnerRoutes } from "./module/owner/owner.route.js";
 import { AdminRoutes } from "./module/admin/admin.route.js";
+import { paymentController } from "./module/payment/payment.controller.js";
+import { paymentRoute } from "./module/payment/payment.route.js";
 
 const app: Application = express();
 
@@ -24,6 +26,14 @@ app.use(
     origin: configs.frontend_url,
     credentials: true,
   }),
+);
+
+app.post(
+  "/api/payments/webhook",
+  express.raw({
+    type: "application/json",
+  }),
+  paymentController.webhook,
 );
 
 app.use(express.json());
@@ -42,6 +52,8 @@ app.use("/api/v1/tenant", TenantRoutes);
 app.use("/api/v1/owner", OwnerRoutes);
 
 app.use("/api/v1/admin", AdminRoutes);
+
+app.use("/api/v1/payments", paymentRoute);
 
 // 404 Not found
 

@@ -73,14 +73,6 @@ enum TenancyStatus {
     TERMINATED
 }
 
-enum RentalApplicationStatus {
-    PENDING
-    UNDER_REVIEWD
-    APPROVED
-    COMPLETED
-    WITHDRAWN
-}
-
 enum RentalDocumentStatus {
     PENDING
     PAID
@@ -121,7 +113,6 @@ enum BillStatus {
     OVERDUE
     CANCELLED
 }
-
 
 enum MatchStatus {
     PENDING
