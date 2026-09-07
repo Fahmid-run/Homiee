@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma";
+import AppError from "../../utils/appError";
 import { checkExists } from "../../utils/checkExist";
 
 const createViewReq = async (roomId: string, tenantId: string, payload) => {
@@ -36,10 +37,27 @@ const createApplication = async (roomId: string, tenantId: string, payload) => {
   return res;
 };
 
-const deleteRoom = async (id: string) => {
-  const res = await prisma.room.delete({
-    where: {
-      id,
+const createTenancy = async (
+  applicationId: string,
+  roomId: string,
+  tenantId: string,
+  payload,
+) => {
+  const { startDate, endDate, securityDeposit } = payload;
+  await checkExists(
+    prisma.application,
+    applicationId,
+    "Application Does not exists",
+  );
+
+  const res = await prisma.tenancy.create({
+    data: {
+      startDate,
+      endDate,
+      securityDeposit,
+      tenantId,
+      applicationId,
+      roomId,
     },
   });
 
@@ -49,5 +67,4 @@ const deleteRoom = async (id: string) => {
 export const tenantServices = {
   createViewReq,
   createApplication,
-  deleteRoom,
 };

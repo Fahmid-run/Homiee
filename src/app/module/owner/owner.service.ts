@@ -1,7 +1,8 @@
+import { ApplicationStatus } from "../../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import AppError from "../../utils/appError";
 import { checkExists } from "../../utils/checkExist";
-import httpStatus from "http-status";
+import httpstatus from "http-status";
 
 const updateApplicationStatus = async (
   userid: string,
@@ -21,7 +22,7 @@ const updateApplicationStatus = async (
   });
 
   if (!applicationData) {
-    throw new AppError("Application Does not exists", httpStatus.NOT_FOUND);
+    throw new AppError("Application Does not exists", httpstatus.NOT_FOUND);
   }
 
   const propertyData = await prisma.property.findUnique({
@@ -31,20 +32,99 @@ const updateApplicationStatus = async (
   });
 
   if (ownerId !== propertyData?.ownerId) {
-    throw new AppError("Forbidden", httpStatus.FORBIDDEN);
+    throw new AppError("Forbidden", httpstatus.FORBIDDEN);
   }
 
-  const res = await prisma.application.update({
-    where: {
-      id: applicationId,
-    },
-    data: {
-      status,
-      reviewedBy: userid,
-    },
-  });
+  if (
+    applicationData.status !== "APPROVED" ||
+    applicationData.status !== "REJECTED" ||
+    applicationData.status !== "WITHDRAWN"
+  ) {
+    const transaction = await prisma.$transaction(async (tx) => {
+      const room = await tx.room.findUnique({
+        where: {
+          id: applicationData.roomId,
+        },
+      });
 
-  return res;
+      console.log(room);
+      const occupied = await tx.tenancy.count({
+        where: {
+          status: "ACTIVE",
+        },
+      });
+
+      if (occupied >= room?.capacity!) {
+        throw new AppError("No seat left for this room", httpstatus.NOT_FOUND);
+      }
+
+      const tenancyStartDate = new Date();
+
+      const tenancy = await prisma.tenancy.create({
+        data: {
+          startDate: tenancyStartDate,
+          securityDeposit: "0",
+          tenantId: applicationData.tenantId,
+          applicationId,
+          monthlyRent: room?.monthlyRent!,
+          roomId: applicationData.roomId,
+        },
+      });
+
+      console.log(tenancy);
+
+      const res = await prisma.application.update({
+        where: {
+          id: applicationId,
+        },
+        data: {
+          status: "APPROVED",
+          reviewedBy: userid,
+        },
+        include: {
+          tenancy: true,
+        },
+      });
+
+      if (occupied + 1 == room?.capacity) {
+        await tx.room.update({
+          where: {
+            id: applicationData.roomId,
+          },
+          data: {
+            roomstatus: "FULL",
+          },
+        });
+      } else {
+        await tx.room.update({
+          where: {
+            id: applicationData.roomId,
+          },
+          data: {
+            roomstatus: "PARTIALLY_OCCUPIED",
+          },
+        });
+      }
+
+      return res;
+    });
+
+    console.log(transaction);
+
+    return transaction;
+  } else {
+    const res = await prisma.application.update({
+      where: {
+        id: applicationId,
+      },
+      data: {
+        status,
+        reviewedBy: userid,
+      },
+    });
+
+    return res;
+  }
 };
 
 const updateViewReqStatus = async (ownerId: string, id: string, payload) => {
@@ -60,7 +140,7 @@ const updateViewReqStatus = async (ownerId: string, id: string, payload) => {
   });
 
   if (!viewReqData) {
-    throw new AppError("Request Does not exists", httpStatus.NOT_FOUND);
+    throw new AppError("Request Does not exists", httpstatus.NOT_FOUND);
   }
 
   const propertyData = await prisma.property.findUnique({
@@ -70,7 +150,7 @@ const updateViewReqStatus = async (ownerId: string, id: string, payload) => {
   });
 
   if (ownerId !== propertyData?.ownerId) {
-    throw new AppError("Forbidden", httpStatus.FORBIDDEN);
+    throw new AppError("Forbidden", httpstatus.FORBIDDEN);
   }
 
   const res = await prisma.viewingRequest.update({

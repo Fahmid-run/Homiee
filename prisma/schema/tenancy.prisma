@@ -7,7 +7,7 @@ model Tenancy {
 
   startDate   DateTime
   endDate     DateTime?
-  monthlyRent String
+  monthlyRent Int
 
   securityDeposit String
 
