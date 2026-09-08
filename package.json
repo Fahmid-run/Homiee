@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx --watch src/app/server.ts",
-    "build": "prisma generate && tsup src/server.ts --format esm --clean",
+    "build": "prisma generate && tsup src/app/server.ts --format esm --clean",
     "start": "node dist/server.js"
   },
   "dependencies": {
