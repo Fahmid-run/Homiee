@@ -48,7 +48,36 @@ const createApplication = async (roomId: string, tenantId: string, payload) => {
   return res;
 };
 
+const createRoomMatePreference = async (
+  tenantId: string,
+
+  payload,
+) => {
+  const { minAge, maxAge, smokingAllowed, sleepSchedule, preferredMoveInDate } =
+    payload;
+
+  const data = await checkExists(
+    prisma.tenantProfile,
+    tenantId,
+    "user does not exist",
+  );
+
+  const res = await prisma.roomMatePreference.create({
+    data: {
+      minAge,
+      maxAge,
+      smokingAllowed,
+      sleepSchedule,
+      preferredMoveInDate,
+      tenantId,
+    },
+  });
+
+  return res;
+};
+
 export const tenantServices = {
   createViewReq,
+  createRoomMatePreference,
   createApplication,
 };

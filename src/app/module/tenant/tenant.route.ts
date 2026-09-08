@@ -22,6 +22,12 @@ router.post(
   tenantController.createApplication,
 );
 
+router.post(
+  "/roommate/preference/",
+  auth(Role.TENANT),
+  tenantController.createRoomMatePreference,
+);
+
 // router.get("/", roomController.getAllRooms);
 
 export const TenantRoutes = router;

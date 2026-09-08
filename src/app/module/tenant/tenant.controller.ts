@@ -39,7 +39,27 @@ const createApplication = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createRoomMatePreference = catchAsync(
+  async (req: Request, res: Response) => {
+    const payload = req.body;
+    const tenantId = req.user?.userId as string;
+
+    const result = await tenantServices.createRoomMatePreference(
+      tenantId,
+      payload,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Roommate Preference Created  successfully",
+      data: result,
+    });
+  },
+);
+
 export const tenantController = {
   createViewReq,
   createApplication,
+  createRoomMatePreference,
 };

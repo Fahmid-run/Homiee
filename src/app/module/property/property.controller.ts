@@ -50,8 +50,7 @@ const getPropertiesByOwnerId = catchAsync(
 
     console.log(ownerId);
 
-    const result = await propertyServices.getPropertiesById(ownerId);
-    console.log(result);
+    const result = await propertyServices.getPropertiesByOwnerId(ownerId);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
