@@ -6,11 +6,11 @@ import { paymentController } from "./payment.controller";
 const router = Router();
 
 router.post(
-  "/checkout-session/:tenancyID",
+  "/rent/checkout-session/:tenancyID",
   auth(Role.TENANT),
   paymentController.createCheckoutSession,
 );
 
-router.post("/webhook", paymentController.webhook);
+router.post("/rent/webhook", paymentController.webhook);
 
 export const paymentRoute = router;

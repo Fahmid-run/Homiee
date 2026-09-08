@@ -15,4 +15,9 @@ export const configs = {
   jwt_access_expires_in: process.env.JWT_ACCESS_EXPIRES_IN!,
   jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN!,
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  bkash_username: process.env.BKASH_USERNAME,
+  bkash_password: process.env.BKASH_PASSWORD,
+  bkash_baseUrl: process.env.BKASH_BASE_URL,
+  bkash_app_secret: process.env.BKASH_APP_SECRET,
+  bkash_app_key: process.env.BKASH_APP_KEY,
 };

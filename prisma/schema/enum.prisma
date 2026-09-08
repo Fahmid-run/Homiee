@@ -88,6 +88,7 @@ enum PaymentStatus {
     FAILED
     CANCELLED
     REFUNDED
+    EXPIRED
 }
 
 enum PaymentMethod {
@@ -106,6 +107,16 @@ enum UtilityType {
 }
 
 //Bill 
+
+enum BillShareStatus {
+    PENDING
+    PAID
+    FAILED
+    CANCELLED
+    REFUNDED
+    EXPIRED
+}
+
 enum BillStatus {
     OPEN
     PARTIALLY_PAID

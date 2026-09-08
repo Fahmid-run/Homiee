@@ -1,0 +1,24 @@
+model BillPayment {
+  id          String        @id @default(uuid())
+  billShareId String
+  provider    PaymentMethod
+  status      PaymentStatus @default(PENDING)
+
+  currency  String @default("BDT")
+  reference String @unique
+
+  stripeSessionId    String? @unique
+  stripePaymentId    String? @unique
+  bkashTransactionId String? @unique
+  bkashPaymentId     String? @unique
+
+  gatewayReference String?
+  paidAt           DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  billShare UtilityBillShare @relation(fields: [billShareId], references: [id], onDelete: Cascade)
+
+  @@map("billPayment")
+}

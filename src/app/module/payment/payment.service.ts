@@ -9,6 +9,7 @@ import AppError from "../../utils/appError";
 import { checkExists } from "../../utils/checkExist";
 import httpstatus from "http-status";
 
+//STRIPE PAYMENT INTEGRATION
 const createCheckoutSession = async (tenancyID: string) => {
   const tenancyExists = await checkExists(
     prisma.tenancy,
@@ -65,18 +66,6 @@ const createCheckoutSession = async (tenancyID: string) => {
   };
 };
 
-// const getSinglePayment = async (rentalOrderId: string) => {
-//   return prisma.payment.findUniqueOrThrow({
-//     where: {
-//       rentalOrderId,
-//     },
-
-//     include: {
-//       rentalOrder: true,
-//     },
-//   });
-// };
-
 const handleCheckoutSuccess = async (session: Stripe.Checkout.Session) => {
   const tenancyID = session.metadata?.tenancyID;
 
@@ -128,6 +117,20 @@ const handleCheckoutSuccess = async (session: Stripe.Checkout.Session) => {
 
   return result;
 };
+
+//BKASH PAYMENT INTEGRATION
+
+// const getSinglePayment = async (rentalOrderId: string) => {
+//   return prisma.payment.findUniqueOrThrow({
+//     where: {
+//       rentalOrderId,
+//     },
+
+//     include: {
+//       rentalOrder: true,
+//     },
+//   });
+// };
 
 // const getAllPayments = async () => {
 //   return prisma.payment.findMany();
