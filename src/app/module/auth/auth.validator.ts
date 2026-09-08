@@ -1,10 +1,7 @@
 import z from "zod";
 import { Role } from "../../../../prisma/generated/prisma/enums";
 const RegistrationZodSchema = z.object({
-  name: z
-    .string("Not A String!!!!!")
-    .min(3, "Name must atleast 3 characters long!!!")
-    .max(10),
+  name: z.string().min(3, "Name must at least 3 characters long!!!"),
   email: z.email("Plz Provide a Valid Email!!"),
   password: z
     .string()

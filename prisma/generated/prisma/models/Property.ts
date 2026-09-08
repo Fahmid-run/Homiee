@@ -267,7 +267,6 @@ export type PropertyWhereInput = {
   rooms?: Prisma.RoomListRelationFilter
   owner?: Prisma.XOR<Prisma.PropertyOwnerScalarRelationFilter, Prisma.PropertyOwnerWhereInput>
   viewingRequests?: Prisma.ViewingRequestListRelationFilter
-  utilityBills?: Prisma.UtilityBillListRelationFilter
 }
 
 export type PropertyOrderByWithRelationInput = {
@@ -285,7 +284,6 @@ export type PropertyOrderByWithRelationInput = {
   rooms?: Prisma.RoomOrderByRelationAggregateInput
   owner?: Prisma.PropertyOwnerOrderByWithRelationInput
   viewingRequests?: Prisma.ViewingRequestOrderByRelationAggregateInput
-  utilityBills?: Prisma.UtilityBillOrderByRelationAggregateInput
 }
 
 export type PropertyWhereUniqueInput = Prisma.AtLeast<{
@@ -306,7 +304,6 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   rooms?: Prisma.RoomListRelationFilter
   owner?: Prisma.XOR<Prisma.PropertyOwnerScalarRelationFilter, Prisma.PropertyOwnerWhereInput>
   viewingRequests?: Prisma.ViewingRequestListRelationFilter
-  utilityBills?: Prisma.UtilityBillListRelationFilter
 }, "id" | "name" | "address" | "ownerId">
 
 export type PropertyOrderByWithAggregationInput = {
@@ -359,7 +356,6 @@ export type PropertyCreateInput = {
   rooms?: Prisma.RoomCreateNestedManyWithoutPropertyInput
   owner: Prisma.PropertyOwnerCreateNestedOneWithoutOwnedPropertiesInput
   viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutPropertyInput
-  utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateInput = {
@@ -376,7 +372,6 @@ export type PropertyUncheckedCreateInput = {
   updatedAt?: Date | string
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutPropertyInput
   viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutPropertyInput
-  utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUpdateInput = {
@@ -393,7 +388,6 @@ export type PropertyUpdateInput = {
   rooms?: Prisma.RoomUpdateManyWithoutPropertyNestedInput
   owner?: Prisma.PropertyOwnerUpdateOneRequiredWithoutOwnedPropertiesNestedInput
   viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutPropertyNestedInput
-  utilityBills?: Prisma.UtilityBillUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateInput = {
@@ -410,7 +404,6 @@ export type PropertyUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutPropertyNestedInput
   viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutPropertyNestedInput
-  utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyInput = {
@@ -587,20 +580,6 @@ export type PropertyUpdateOneRequiredWithoutRoomsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutRoomsInput, Prisma.PropertyUpdateWithoutRoomsInput>, Prisma.PropertyUncheckedUpdateWithoutRoomsInput>
 }
 
-export type PropertyCreateNestedOneWithoutUtilityBillsInput = {
-  create?: Prisma.XOR<Prisma.PropertyCreateWithoutUtilityBillsInput, Prisma.PropertyUncheckedCreateWithoutUtilityBillsInput>
-  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutUtilityBillsInput
-  connect?: Prisma.PropertyWhereUniqueInput
-}
-
-export type PropertyUpdateOneRequiredWithoutUtilityBillsNestedInput = {
-  create?: Prisma.XOR<Prisma.PropertyCreateWithoutUtilityBillsInput, Prisma.PropertyUncheckedCreateWithoutUtilityBillsInput>
-  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutUtilityBillsInput
-  upsert?: Prisma.PropertyUpsertWithoutUtilityBillsInput
-  connect?: Prisma.PropertyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutUtilityBillsInput, Prisma.PropertyUpdateWithoutUtilityBillsInput>, Prisma.PropertyUncheckedUpdateWithoutUtilityBillsInput>
-}
-
 export type PropertyCreateNestedOneWithoutViewingRequestsInput = {
   create?: Prisma.XOR<Prisma.PropertyCreateWithoutViewingRequestsInput, Prisma.PropertyUncheckedCreateWithoutViewingRequestsInput>
   connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutViewingRequestsInput
@@ -628,7 +607,6 @@ export type PropertyCreateWithoutOwnerInput = {
   updatedAt?: Date | string
   rooms?: Prisma.RoomCreateNestedManyWithoutPropertyInput
   viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutPropertyInput
-  utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutOwnerInput = {
@@ -644,7 +622,6 @@ export type PropertyUncheckedCreateWithoutOwnerInput = {
   updatedAt?: Date | string
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutPropertyInput
   viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutPropertyInput
-  utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutOwnerInput = {
@@ -703,7 +680,6 @@ export type PropertyCreateWithoutRoomsInput = {
   updatedAt?: Date | string
   owner: Prisma.PropertyOwnerCreateNestedOneWithoutOwnedPropertiesInput
   viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutPropertyInput
-  utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutRoomsInput = {
@@ -719,7 +695,6 @@ export type PropertyUncheckedCreateWithoutRoomsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutPropertyInput
-  utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutRoomsInput = {
@@ -751,7 +726,6 @@ export type PropertyUpdateWithoutRoomsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.PropertyOwnerUpdateOneRequiredWithoutOwnedPropertiesNestedInput
   viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutPropertyNestedInput
-  utilityBills?: Prisma.UtilityBillUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutRoomsInput = {
@@ -766,87 +740,6 @@ export type PropertyUncheckedUpdateWithoutRoomsInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutPropertyNestedInput
-  utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutPropertyNestedInput
-}
-
-export type PropertyCreateWithoutUtilityBillsInput = {
-  id?: string
-  name: string
-  address: string
-  description?: string | null
-  city: string
-  totalrooms: number
-  propertyStatus?: $Enums.PropertyStatus
-  images?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  rooms?: Prisma.RoomCreateNestedManyWithoutPropertyInput
-  owner: Prisma.PropertyOwnerCreateNestedOneWithoutOwnedPropertiesInput
-  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutPropertyInput
-}
-
-export type PropertyUncheckedCreateWithoutUtilityBillsInput = {
-  id?: string
-  name: string
-  address: string
-  description?: string | null
-  city: string
-  totalrooms: number
-  propertyStatus?: $Enums.PropertyStatus
-  images?: string | null
-  ownerId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutPropertyInput
-  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutPropertyInput
-}
-
-export type PropertyCreateOrConnectWithoutUtilityBillsInput = {
-  where: Prisma.PropertyWhereUniqueInput
-  create: Prisma.XOR<Prisma.PropertyCreateWithoutUtilityBillsInput, Prisma.PropertyUncheckedCreateWithoutUtilityBillsInput>
-}
-
-export type PropertyUpsertWithoutUtilityBillsInput = {
-  update: Prisma.XOR<Prisma.PropertyUpdateWithoutUtilityBillsInput, Prisma.PropertyUncheckedUpdateWithoutUtilityBillsInput>
-  create: Prisma.XOR<Prisma.PropertyCreateWithoutUtilityBillsInput, Prisma.PropertyUncheckedCreateWithoutUtilityBillsInput>
-  where?: Prisma.PropertyWhereInput
-}
-
-export type PropertyUpdateToOneWithWhereWithoutUtilityBillsInput = {
-  where?: Prisma.PropertyWhereInput
-  data: Prisma.XOR<Prisma.PropertyUpdateWithoutUtilityBillsInput, Prisma.PropertyUncheckedUpdateWithoutUtilityBillsInput>
-}
-
-export type PropertyUpdateWithoutUtilityBillsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  totalrooms?: Prisma.IntFieldUpdateOperationsInput | number
-  propertyStatus?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
-  images?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  rooms?: Prisma.RoomUpdateManyWithoutPropertyNestedInput
-  owner?: Prisma.PropertyOwnerUpdateOneRequiredWithoutOwnedPropertiesNestedInput
-  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutPropertyNestedInput
-}
-
-export type PropertyUncheckedUpdateWithoutUtilityBillsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  totalrooms?: Prisma.IntFieldUpdateOperationsInput | number
-  propertyStatus?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
-  images?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  rooms?: Prisma.RoomUncheckedUpdateManyWithoutPropertyNestedInput
   viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
@@ -863,7 +756,6 @@ export type PropertyCreateWithoutViewingRequestsInput = {
   updatedAt?: Date | string
   rooms?: Prisma.RoomCreateNestedManyWithoutPropertyInput
   owner: Prisma.PropertyOwnerCreateNestedOneWithoutOwnedPropertiesInput
-  utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutViewingRequestsInput = {
@@ -879,7 +771,6 @@ export type PropertyUncheckedCreateWithoutViewingRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutPropertyInput
-  utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutViewingRequestsInput = {
@@ -911,7 +802,6 @@ export type PropertyUpdateWithoutViewingRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rooms?: Prisma.RoomUpdateManyWithoutPropertyNestedInput
   owner?: Prisma.PropertyOwnerUpdateOneRequiredWithoutOwnedPropertiesNestedInput
-  utilityBills?: Prisma.UtilityBillUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutViewingRequestsInput = {
@@ -927,7 +817,6 @@ export type PropertyUncheckedUpdateWithoutViewingRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutPropertyNestedInput
-  utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyOwnerInput = {
@@ -956,7 +845,6 @@ export type PropertyUpdateWithoutOwnerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rooms?: Prisma.RoomUpdateManyWithoutPropertyNestedInput
   viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutPropertyNestedInput
-  utilityBills?: Prisma.UtilityBillUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutOwnerInput = {
@@ -972,7 +860,6 @@ export type PropertyUncheckedUpdateWithoutOwnerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutPropertyNestedInput
   viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutPropertyNestedInput
-  utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateManyWithoutOwnerInput = {
@@ -996,13 +883,11 @@ export type PropertyUncheckedUpdateManyWithoutOwnerInput = {
 export type PropertyCountOutputType = {
   rooms: number
   viewingRequests: number
-  utilityBills: number
 }
 
 export type PropertyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   rooms?: boolean | PropertyCountOutputTypeCountRoomsArgs
   viewingRequests?: boolean | PropertyCountOutputTypeCountViewingRequestsArgs
-  utilityBills?: boolean | PropertyCountOutputTypeCountUtilityBillsArgs
 }
 
 /**
@@ -1029,13 +914,6 @@ export type PropertyCountOutputTypeCountViewingRequestsArgs<ExtArgs extends runt
   where?: Prisma.ViewingRequestWhereInput
 }
 
-/**
- * PropertyCountOutputType without action
- */
-export type PropertyCountOutputTypeCountUtilityBillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UtilityBillWhereInput
-}
-
 
 export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1052,7 +930,6 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   rooms?: boolean | Prisma.Property$roomsArgs<ExtArgs>
   owner?: boolean | Prisma.PropertyOwnerDefaultArgs<ExtArgs>
   viewingRequests?: boolean | Prisma.Property$viewingRequestsArgs<ExtArgs>
-  utilityBills?: boolean | Prisma.Property$utilityBillsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["property"]>
 
@@ -1105,7 +982,6 @@ export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   rooms?: boolean | Prisma.Property$roomsArgs<ExtArgs>
   owner?: boolean | Prisma.PropertyOwnerDefaultArgs<ExtArgs>
   viewingRequests?: boolean | Prisma.Property$viewingRequestsArgs<ExtArgs>
-  utilityBills?: boolean | Prisma.Property$utilityBillsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PropertyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1121,7 +997,6 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     rooms: Prisma.$RoomPayload<ExtArgs>[]
     owner: Prisma.$PropertyOwnerPayload<ExtArgs>
     viewingRequests: Prisma.$ViewingRequestPayload<ExtArgs>[]
-    utilityBills: Prisma.$UtilityBillPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1532,7 +1407,6 @@ export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends runtime
   rooms<T extends Prisma.Property$roomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   owner<T extends Prisma.PropertyOwnerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyOwnerDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyOwnerClient<runtime.Types.Result.GetResult<Prisma.$PropertyOwnerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   viewingRequests<T extends Prisma.Property$viewingRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$viewingRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViewingRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  utilityBills<T extends Prisma.Property$utilityBillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$utilityBillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityBillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2019,30 +1893,6 @@ export type Property$viewingRequestsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.ViewingRequestScalarFieldEnum | Prisma.ViewingRequestScalarFieldEnum[]
-}
-
-/**
- * Property.utilityBills
- */
-export type Property$utilityBillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UtilityBill
-   */
-  select?: Prisma.UtilityBillSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UtilityBill
-   */
-  omit?: Prisma.UtilityBillOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UtilityBillInclude<ExtArgs> | null
-  where?: Prisma.UtilityBillWhereInput
-  orderBy?: Prisma.UtilityBillOrderByWithRelationInput | Prisma.UtilityBillOrderByWithRelationInput[]
-  cursor?: Prisma.UtilityBillWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UtilityBillScalarFieldEnum | Prisma.UtilityBillScalarFieldEnum[]
 }
 
 /**

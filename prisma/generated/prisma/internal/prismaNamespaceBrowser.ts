@@ -53,11 +53,14 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   TenantProfile: 'TenantProfile',
   Application: 'Application',
+  BillPayment: 'BillPayment',
   Property: 'Property',
   PropertyOwner: 'PropertyOwner',
   RentalPayment: 'RentalPayment',
   RentalDocuments: 'RentalDocuments',
   Room: 'Room',
+  RoomMateMatch: 'RoomMateMatch',
+  RoomMatePreference: 'RoomMatePreference',
   Tenancy: 'Tenancy',
   User: 'User',
   UtilityBill: 'UtilityBill',
@@ -90,7 +93,8 @@ export const TenantProfileScalarFieldEnum = {
   budgetMin: 'budgetMin',
   budgetMax: 'budgetMax',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  roomMatePreferenceId: 'roomMatePreferenceId'
 } as const
 
 export type TenantProfileScalarFieldEnum = (typeof TenantProfileScalarFieldEnum)[keyof typeof TenantProfileScalarFieldEnum]
@@ -109,6 +113,26 @@ export const ApplicationScalarFieldEnum = {
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
+
+
+export const BillPaymentScalarFieldEnum = {
+  id: 'id',
+  billShareId: 'billShareId',
+  provider: 'provider',
+  status: 'status',
+  currency: 'currency',
+  reference: 'reference',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentId: 'stripePaymentId',
+  bkashTransactionId: 'bkashTransactionId',
+  bkashPaymentId: 'bkashPaymentId',
+  gatewayReference: 'gatewayReference',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BillPaymentScalarFieldEnum = (typeof BillPaymentScalarFieldEnum)[keyof typeof BillPaymentScalarFieldEnum]
 
 
 export const PropertyScalarFieldEnum = {
@@ -146,6 +170,7 @@ export const RentalPaymentScalarFieldEnum = {
   amount: 'amount',
   dueDate: 'dueDate',
   paidAt: 'paidAt',
+  currency: 'currency',
   status: 'status',
   paymentMethod: 'paymentMethod',
   transactionId: 'transactionId'
@@ -177,6 +202,36 @@ export const RoomScalarFieldEnum = {
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const RoomMateMatchScalarFieldEnum = {
+  id: 'id',
+  tenantAId: 'tenantAId',
+  tenantBId: 'tenantBId',
+  score: 'score',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomMateMatchScalarFieldEnum = (typeof RoomMateMatchScalarFieldEnum)[keyof typeof RoomMateMatchScalarFieldEnum]
+
+
+export const RoomMatePreferenceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  preferredGender: 'preferredGender',
+  minAge: 'minAge',
+  maxAge: 'maxAge',
+  smokingAllowed: 'smokingAllowed',
+  sleepSchedule: 'sleepSchedule',
+  preferredMoveInDate: 'preferredMoveInDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomMatePreferenceScalarFieldEnum = (typeof RoomMatePreferenceScalarFieldEnum)[keyof typeof RoomMatePreferenceScalarFieldEnum]
 
 
 export const TenancyScalarFieldEnum = {
@@ -218,7 +273,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const UtilityBillScalarFieldEnum = {
   id: 'id',
-  propertyId: 'propertyId',
+  roomId: 'roomId',
   type: 'type',
   description: 'description',
   billPeriodStart: 'billPeriodStart',
@@ -241,9 +296,7 @@ export const UtilityBillShareScalarFieldEnum = {
   amount: 'amount',
   status: 'status',
   paidAt: 'paidAt',
-  pauymentMethod: 'pauymentMethod',
-  stripeSessionId: 'stripeSessionId',
-  stripePaymentId: 'stripePaymentId',
+  dueDate: 'dueDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

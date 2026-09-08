@@ -12,6 +12,7 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
 
   const { accessToken, refreshToken, user } = result;
 
+  console.log(payload);
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
     secure: false,

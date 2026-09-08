@@ -64,8 +64,40 @@ const uploadDocuments = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+const createBill = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  const roomId = req.params?.roomId as string;
+  const ownerId = req.user?.authorId as string;
+
+  const result = await ownerServices.createBill(ownerId, roomId, payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Bill Created successfully",
+    data: result,
+  });
+});
+
+const getMyPropertyBills = catchAsync(async (req: Request, res: Response) => {
+  const ownerId = req.user?.authorId as string;
+
+  const result = await ownerServices.getMyPropertyBills(ownerId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Bill retrieved successfully",
+    data: result,
+  });
+});
+
 export const ownerController = {
   updateApplicationStatus,
   updateViewReqStatus,
   uploadDocuments,
+  createBill,
+  getMyPropertyBills,
 };

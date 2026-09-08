@@ -7,8 +7,9 @@ model Room {
   monthlyRent Int
   capacity    Int
 
-  roomstatus RoomStatus @default(AVAILABLE)
-  property   Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  roomstatus   RoomStatus    @default(AVAILABLE)
+  property     Property      @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  utilityBills UtilityBill[]
 
   applications    Application[]
   viewingRequests ViewingRequest[]

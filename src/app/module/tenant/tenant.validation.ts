@@ -13,13 +13,10 @@ const ViewReqZodSchema = z.object({
 });
 
 const ApplcationZodSchema = z.object({
-  messsage: z
+  message: z
     .string("Provide a String!")
     .min(10, "Provide Minimum 10 Character")
-    .max(30, "Max ^ characters"),
-
-  roomId: z.string("Plz provide valid id"),
-  tenantId: z.string("Plz provide valid id"),
+    .max(100, "Max 100  characters"),
 });
 
 export const tenantDataValidator = {

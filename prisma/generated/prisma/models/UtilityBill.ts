@@ -36,7 +36,7 @@ export type UtilityBillSumAggregateOutputType = {
 
 export type UtilityBillMinAggregateOutputType = {
   id: string | null
-  propertyId: string | null
+  roomId: string | null
   type: $Enums.UtilityType | null
   description: string | null
   billPeriodStart: Date | null
@@ -50,7 +50,7 @@ export type UtilityBillMinAggregateOutputType = {
 
 export type UtilityBillMaxAggregateOutputType = {
   id: string | null
-  propertyId: string | null
+  roomId: string | null
   type: $Enums.UtilityType | null
   description: string | null
   billPeriodStart: Date | null
@@ -64,7 +64,7 @@ export type UtilityBillMaxAggregateOutputType = {
 
 export type UtilityBillCountAggregateOutputType = {
   id: number
-  propertyId: number
+  roomId: number
   type: number
   description: number
   billPeriodStart: number
@@ -88,7 +88,7 @@ export type UtilityBillSumAggregateInputType = {
 
 export type UtilityBillMinAggregateInputType = {
   id?: true
-  propertyId?: true
+  roomId?: true
   type?: true
   description?: true
   billPeriodStart?: true
@@ -102,7 +102,7 @@ export type UtilityBillMinAggregateInputType = {
 
 export type UtilityBillMaxAggregateInputType = {
   id?: true
-  propertyId?: true
+  roomId?: true
   type?: true
   description?: true
   billPeriodStart?: true
@@ -116,7 +116,7 @@ export type UtilityBillMaxAggregateInputType = {
 
 export type UtilityBillCountAggregateInputType = {
   id?: true
-  propertyId?: true
+  roomId?: true
   type?: true
   description?: true
   billPeriodStart?: true
@@ -217,7 +217,7 @@ export type UtilityBillGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type UtilityBillGroupByOutputType = {
   id: string
-  propertyId: string
+  roomId: string
   type: $Enums.UtilityType
   description: string | null
   billPeriodStart: Date
@@ -254,7 +254,7 @@ export type UtilityBillWhereInput = {
   OR?: Prisma.UtilityBillWhereInput[]
   NOT?: Prisma.UtilityBillWhereInput | Prisma.UtilityBillWhereInput[]
   id?: Prisma.StringFilter<"UtilityBill"> | string
-  propertyId?: Prisma.StringFilter<"UtilityBill"> | string
+  roomId?: Prisma.StringFilter<"UtilityBill"> | string
   type?: Prisma.EnumUtilityTypeFilter<"UtilityBill"> | $Enums.UtilityType
   description?: Prisma.StringNullableFilter<"UtilityBill"> | string | null
   billPeriodStart?: Prisma.DateTimeFilter<"UtilityBill"> | Date | string
@@ -264,13 +264,13 @@ export type UtilityBillWhereInput = {
   status?: Prisma.EnumBillStatusFilter<"UtilityBill"> | $Enums.BillStatus
   createdAt?: Prisma.DateTimeFilter<"UtilityBill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBill"> | Date | string
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   shares?: Prisma.UtilityBillShareListRelationFilter
 }
 
 export type UtilityBillOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   billPeriodStart?: Prisma.SortOrder
@@ -280,7 +280,7 @@ export type UtilityBillOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  property?: Prisma.PropertyOrderByWithRelationInput
+  room?: Prisma.RoomOrderByWithRelationInput
   shares?: Prisma.UtilityBillShareOrderByRelationAggregateInput
 }
 
@@ -289,7 +289,7 @@ export type UtilityBillWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UtilityBillWhereInput | Prisma.UtilityBillWhereInput[]
   OR?: Prisma.UtilityBillWhereInput[]
   NOT?: Prisma.UtilityBillWhereInput | Prisma.UtilityBillWhereInput[]
-  propertyId?: Prisma.StringFilter<"UtilityBill"> | string
+  roomId?: Prisma.StringFilter<"UtilityBill"> | string
   type?: Prisma.EnumUtilityTypeFilter<"UtilityBill"> | $Enums.UtilityType
   description?: Prisma.StringNullableFilter<"UtilityBill"> | string | null
   billPeriodStart?: Prisma.DateTimeFilter<"UtilityBill"> | Date | string
@@ -299,13 +299,13 @@ export type UtilityBillWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumBillStatusFilter<"UtilityBill"> | $Enums.BillStatus
   createdAt?: Prisma.DateTimeFilter<"UtilityBill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBill"> | Date | string
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   shares?: Prisma.UtilityBillShareListRelationFilter
 }, "id">
 
 export type UtilityBillOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   billPeriodStart?: Prisma.SortOrder
@@ -327,7 +327,7 @@ export type UtilityBillScalarWhereWithAggregatesInput = {
   OR?: Prisma.UtilityBillScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UtilityBillScalarWhereWithAggregatesInput | Prisma.UtilityBillScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"UtilityBill"> | string
-  propertyId?: Prisma.StringWithAggregatesFilter<"UtilityBill"> | string
+  roomId?: Prisma.StringWithAggregatesFilter<"UtilityBill"> | string
   type?: Prisma.EnumUtilityTypeWithAggregatesFilter<"UtilityBill"> | $Enums.UtilityType
   description?: Prisma.StringNullableWithAggregatesFilter<"UtilityBill"> | string | null
   billPeriodStart?: Prisma.DateTimeWithAggregatesFilter<"UtilityBill"> | Date | string
@@ -350,13 +350,13 @@ export type UtilityBillCreateInput = {
   status?: $Enums.BillStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  property: Prisma.PropertyCreateNestedOneWithoutUtilityBillsInput
+  room: Prisma.RoomCreateNestedOneWithoutUtilityBillsInput
   shares?: Prisma.UtilityBillShareCreateNestedManyWithoutBillInput
 }
 
 export type UtilityBillUncheckedCreateInput = {
   id?: string
-  propertyId: string
+  roomId: string
   type: $Enums.UtilityType
   description?: string | null
   billPeriodStart: Date | string
@@ -380,13 +380,13 @@ export type UtilityBillUpdateInput = {
   status?: Prisma.EnumBillStatusFieldUpdateOperationsInput | $Enums.BillStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  property?: Prisma.PropertyUpdateOneRequiredWithoutUtilityBillsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutUtilityBillsNestedInput
   shares?: Prisma.UtilityBillShareUpdateManyWithoutBillNestedInput
 }
 
 export type UtilityBillUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUtilityTypeFieldUpdateOperationsInput | $Enums.UtilityType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   billPeriodStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -401,7 +401,7 @@ export type UtilityBillUncheckedUpdateInput = {
 
 export type UtilityBillCreateManyInput = {
   id?: string
-  propertyId: string
+  roomId: string
   type: $Enums.UtilityType
   description?: string | null
   billPeriodStart: Date | string
@@ -428,7 +428,7 @@ export type UtilityBillUpdateManyMutationInput = {
 
 export type UtilityBillUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUtilityTypeFieldUpdateOperationsInput | $Enums.UtilityType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   billPeriodStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -452,7 +452,7 @@ export type UtilityBillOrderByRelationAggregateInput = {
 
 export type UtilityBillCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   billPeriodStart?: Prisma.SortOrder
@@ -470,7 +470,7 @@ export type UtilityBillAvgOrderByAggregateInput = {
 
 export type UtilityBillMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   billPeriodStart?: Prisma.SortOrder
@@ -484,7 +484,7 @@ export type UtilityBillMaxOrderByAggregateInput = {
 
 export type UtilityBillMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   billPeriodStart?: Prisma.SortOrder
@@ -505,45 +505,45 @@ export type UtilityBillScalarRelationFilter = {
   isNot?: Prisma.UtilityBillWhereInput
 }
 
-export type UtilityBillCreateNestedManyWithoutPropertyInput = {
-  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutPropertyInput, Prisma.UtilityBillUncheckedCreateWithoutPropertyInput> | Prisma.UtilityBillCreateWithoutPropertyInput[] | Prisma.UtilityBillUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutPropertyInput | Prisma.UtilityBillCreateOrConnectWithoutPropertyInput[]
-  createMany?: Prisma.UtilityBillCreateManyPropertyInputEnvelope
+export type UtilityBillCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutRoomInput, Prisma.UtilityBillUncheckedCreateWithoutRoomInput> | Prisma.UtilityBillCreateWithoutRoomInput[] | Prisma.UtilityBillUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutRoomInput | Prisma.UtilityBillCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.UtilityBillCreateManyRoomInputEnvelope
   connect?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
 }
 
-export type UtilityBillUncheckedCreateNestedManyWithoutPropertyInput = {
-  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutPropertyInput, Prisma.UtilityBillUncheckedCreateWithoutPropertyInput> | Prisma.UtilityBillCreateWithoutPropertyInput[] | Prisma.UtilityBillUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutPropertyInput | Prisma.UtilityBillCreateOrConnectWithoutPropertyInput[]
-  createMany?: Prisma.UtilityBillCreateManyPropertyInputEnvelope
+export type UtilityBillUncheckedCreateNestedManyWithoutRoomInput = {
+  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutRoomInput, Prisma.UtilityBillUncheckedCreateWithoutRoomInput> | Prisma.UtilityBillCreateWithoutRoomInput[] | Prisma.UtilityBillUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutRoomInput | Prisma.UtilityBillCreateOrConnectWithoutRoomInput[]
+  createMany?: Prisma.UtilityBillCreateManyRoomInputEnvelope
   connect?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
 }
 
-export type UtilityBillUpdateManyWithoutPropertyNestedInput = {
-  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutPropertyInput, Prisma.UtilityBillUncheckedCreateWithoutPropertyInput> | Prisma.UtilityBillCreateWithoutPropertyInput[] | Prisma.UtilityBillUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutPropertyInput | Prisma.UtilityBillCreateOrConnectWithoutPropertyInput[]
-  upsert?: Prisma.UtilityBillUpsertWithWhereUniqueWithoutPropertyInput | Prisma.UtilityBillUpsertWithWhereUniqueWithoutPropertyInput[]
-  createMany?: Prisma.UtilityBillCreateManyPropertyInputEnvelope
+export type UtilityBillUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutRoomInput, Prisma.UtilityBillUncheckedCreateWithoutRoomInput> | Prisma.UtilityBillCreateWithoutRoomInput[] | Prisma.UtilityBillUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutRoomInput | Prisma.UtilityBillCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.UtilityBillUpsertWithWhereUniqueWithoutRoomInput | Prisma.UtilityBillUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.UtilityBillCreateManyRoomInputEnvelope
   set?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
   disconnect?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
   delete?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
   connect?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
-  update?: Prisma.UtilityBillUpdateWithWhereUniqueWithoutPropertyInput | Prisma.UtilityBillUpdateWithWhereUniqueWithoutPropertyInput[]
-  updateMany?: Prisma.UtilityBillUpdateManyWithWhereWithoutPropertyInput | Prisma.UtilityBillUpdateManyWithWhereWithoutPropertyInput[]
+  update?: Prisma.UtilityBillUpdateWithWhereUniqueWithoutRoomInput | Prisma.UtilityBillUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.UtilityBillUpdateManyWithWhereWithoutRoomInput | Prisma.UtilityBillUpdateManyWithWhereWithoutRoomInput[]
   deleteMany?: Prisma.UtilityBillScalarWhereInput | Prisma.UtilityBillScalarWhereInput[]
 }
 
-export type UtilityBillUncheckedUpdateManyWithoutPropertyNestedInput = {
-  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutPropertyInput, Prisma.UtilityBillUncheckedCreateWithoutPropertyInput> | Prisma.UtilityBillCreateWithoutPropertyInput[] | Prisma.UtilityBillUncheckedCreateWithoutPropertyInput[]
-  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutPropertyInput | Prisma.UtilityBillCreateOrConnectWithoutPropertyInput[]
-  upsert?: Prisma.UtilityBillUpsertWithWhereUniqueWithoutPropertyInput | Prisma.UtilityBillUpsertWithWhereUniqueWithoutPropertyInput[]
-  createMany?: Prisma.UtilityBillCreateManyPropertyInputEnvelope
+export type UtilityBillUncheckedUpdateManyWithoutRoomNestedInput = {
+  create?: Prisma.XOR<Prisma.UtilityBillCreateWithoutRoomInput, Prisma.UtilityBillUncheckedCreateWithoutRoomInput> | Prisma.UtilityBillCreateWithoutRoomInput[] | Prisma.UtilityBillUncheckedCreateWithoutRoomInput[]
+  connectOrCreate?: Prisma.UtilityBillCreateOrConnectWithoutRoomInput | Prisma.UtilityBillCreateOrConnectWithoutRoomInput[]
+  upsert?: Prisma.UtilityBillUpsertWithWhereUniqueWithoutRoomInput | Prisma.UtilityBillUpsertWithWhereUniqueWithoutRoomInput[]
+  createMany?: Prisma.UtilityBillCreateManyRoomInputEnvelope
   set?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
   disconnect?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
   delete?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
   connect?: Prisma.UtilityBillWhereUniqueInput | Prisma.UtilityBillWhereUniqueInput[]
-  update?: Prisma.UtilityBillUpdateWithWhereUniqueWithoutPropertyInput | Prisma.UtilityBillUpdateWithWhereUniqueWithoutPropertyInput[]
-  updateMany?: Prisma.UtilityBillUpdateManyWithWhereWithoutPropertyInput | Prisma.UtilityBillUpdateManyWithWhereWithoutPropertyInput[]
+  update?: Prisma.UtilityBillUpdateWithWhereUniqueWithoutRoomInput | Prisma.UtilityBillUpdateWithWhereUniqueWithoutRoomInput[]
+  updateMany?: Prisma.UtilityBillUpdateManyWithWhereWithoutRoomInput | Prisma.UtilityBillUpdateManyWithWhereWithoutRoomInput[]
   deleteMany?: Prisma.UtilityBillScalarWhereInput | Prisma.UtilityBillScalarWhereInput[]
 }
 
@@ -569,7 +569,7 @@ export type UtilityBillUpdateOneRequiredWithoutSharesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UtilityBillUpdateToOneWithWhereWithoutSharesInput, Prisma.UtilityBillUpdateWithoutSharesInput>, Prisma.UtilityBillUncheckedUpdateWithoutSharesInput>
 }
 
-export type UtilityBillCreateWithoutPropertyInput = {
+export type UtilityBillCreateWithoutRoomInput = {
   id?: string
   type: $Enums.UtilityType
   description?: string | null
@@ -583,7 +583,7 @@ export type UtilityBillCreateWithoutPropertyInput = {
   shares?: Prisma.UtilityBillShareCreateNestedManyWithoutBillInput
 }
 
-export type UtilityBillUncheckedCreateWithoutPropertyInput = {
+export type UtilityBillUncheckedCreateWithoutRoomInput = {
   id?: string
   type: $Enums.UtilityType
   description?: string | null
@@ -597,30 +597,30 @@ export type UtilityBillUncheckedCreateWithoutPropertyInput = {
   shares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutBillInput
 }
 
-export type UtilityBillCreateOrConnectWithoutPropertyInput = {
+export type UtilityBillCreateOrConnectWithoutRoomInput = {
   where: Prisma.UtilityBillWhereUniqueInput
-  create: Prisma.XOR<Prisma.UtilityBillCreateWithoutPropertyInput, Prisma.UtilityBillUncheckedCreateWithoutPropertyInput>
+  create: Prisma.XOR<Prisma.UtilityBillCreateWithoutRoomInput, Prisma.UtilityBillUncheckedCreateWithoutRoomInput>
 }
 
-export type UtilityBillCreateManyPropertyInputEnvelope = {
-  data: Prisma.UtilityBillCreateManyPropertyInput | Prisma.UtilityBillCreateManyPropertyInput[]
+export type UtilityBillCreateManyRoomInputEnvelope = {
+  data: Prisma.UtilityBillCreateManyRoomInput | Prisma.UtilityBillCreateManyRoomInput[]
   skipDuplicates?: boolean
 }
 
-export type UtilityBillUpsertWithWhereUniqueWithoutPropertyInput = {
+export type UtilityBillUpsertWithWhereUniqueWithoutRoomInput = {
   where: Prisma.UtilityBillWhereUniqueInput
-  update: Prisma.XOR<Prisma.UtilityBillUpdateWithoutPropertyInput, Prisma.UtilityBillUncheckedUpdateWithoutPropertyInput>
-  create: Prisma.XOR<Prisma.UtilityBillCreateWithoutPropertyInput, Prisma.UtilityBillUncheckedCreateWithoutPropertyInput>
+  update: Prisma.XOR<Prisma.UtilityBillUpdateWithoutRoomInput, Prisma.UtilityBillUncheckedUpdateWithoutRoomInput>
+  create: Prisma.XOR<Prisma.UtilityBillCreateWithoutRoomInput, Prisma.UtilityBillUncheckedCreateWithoutRoomInput>
 }
 
-export type UtilityBillUpdateWithWhereUniqueWithoutPropertyInput = {
+export type UtilityBillUpdateWithWhereUniqueWithoutRoomInput = {
   where: Prisma.UtilityBillWhereUniqueInput
-  data: Prisma.XOR<Prisma.UtilityBillUpdateWithoutPropertyInput, Prisma.UtilityBillUncheckedUpdateWithoutPropertyInput>
+  data: Prisma.XOR<Prisma.UtilityBillUpdateWithoutRoomInput, Prisma.UtilityBillUncheckedUpdateWithoutRoomInput>
 }
 
-export type UtilityBillUpdateManyWithWhereWithoutPropertyInput = {
+export type UtilityBillUpdateManyWithWhereWithoutRoomInput = {
   where: Prisma.UtilityBillScalarWhereInput
-  data: Prisma.XOR<Prisma.UtilityBillUpdateManyMutationInput, Prisma.UtilityBillUncheckedUpdateManyWithoutPropertyInput>
+  data: Prisma.XOR<Prisma.UtilityBillUpdateManyMutationInput, Prisma.UtilityBillUncheckedUpdateManyWithoutRoomInput>
 }
 
 export type UtilityBillScalarWhereInput = {
@@ -628,7 +628,7 @@ export type UtilityBillScalarWhereInput = {
   OR?: Prisma.UtilityBillScalarWhereInput[]
   NOT?: Prisma.UtilityBillScalarWhereInput | Prisma.UtilityBillScalarWhereInput[]
   id?: Prisma.StringFilter<"UtilityBill"> | string
-  propertyId?: Prisma.StringFilter<"UtilityBill"> | string
+  roomId?: Prisma.StringFilter<"UtilityBill"> | string
   type?: Prisma.EnumUtilityTypeFilter<"UtilityBill"> | $Enums.UtilityType
   description?: Prisma.StringNullableFilter<"UtilityBill"> | string | null
   billPeriodStart?: Prisma.DateTimeFilter<"UtilityBill"> | Date | string
@@ -651,12 +651,12 @@ export type UtilityBillCreateWithoutSharesInput = {
   status?: $Enums.BillStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  property: Prisma.PropertyCreateNestedOneWithoutUtilityBillsInput
+  room: Prisma.RoomCreateNestedOneWithoutUtilityBillsInput
 }
 
 export type UtilityBillUncheckedCreateWithoutSharesInput = {
   id?: string
-  propertyId: string
+  roomId: string
   type: $Enums.UtilityType
   description?: string | null
   billPeriodStart: Date | string
@@ -695,12 +695,12 @@ export type UtilityBillUpdateWithoutSharesInput = {
   status?: Prisma.EnumBillStatusFieldUpdateOperationsInput | $Enums.BillStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  property?: Prisma.PropertyUpdateOneRequiredWithoutUtilityBillsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutUtilityBillsNestedInput
 }
 
 export type UtilityBillUncheckedUpdateWithoutSharesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUtilityTypeFieldUpdateOperationsInput | $Enums.UtilityType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   billPeriodStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -712,7 +712,7 @@ export type UtilityBillUncheckedUpdateWithoutSharesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UtilityBillCreateManyPropertyInput = {
+export type UtilityBillCreateManyRoomInput = {
   id?: string
   type: $Enums.UtilityType
   description?: string | null
@@ -725,7 +725,7 @@ export type UtilityBillCreateManyPropertyInput = {
   updatedAt?: Date | string
 }
 
-export type UtilityBillUpdateWithoutPropertyInput = {
+export type UtilityBillUpdateWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUtilityTypeFieldUpdateOperationsInput | $Enums.UtilityType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -739,7 +739,7 @@ export type UtilityBillUpdateWithoutPropertyInput = {
   shares?: Prisma.UtilityBillShareUpdateManyWithoutBillNestedInput
 }
 
-export type UtilityBillUncheckedUpdateWithoutPropertyInput = {
+export type UtilityBillUncheckedUpdateWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUtilityTypeFieldUpdateOperationsInput | $Enums.UtilityType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -753,7 +753,7 @@ export type UtilityBillUncheckedUpdateWithoutPropertyInput = {
   shares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutBillNestedInput
 }
 
-export type UtilityBillUncheckedUpdateManyWithoutPropertyInput = {
+export type UtilityBillUncheckedUpdateManyWithoutRoomInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUtilityTypeFieldUpdateOperationsInput | $Enums.UtilityType
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -799,7 +799,7 @@ export type UtilityBillCountOutputTypeCountSharesArgs<ExtArgs extends runtime.Ty
 
 export type UtilityBillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  propertyId?: boolean
+  roomId?: boolean
   type?: boolean
   description?: boolean
   billPeriodStart?: boolean
@@ -809,14 +809,14 @@ export type UtilityBillSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   shares?: boolean | Prisma.UtilityBill$sharesArgs<ExtArgs>
   _count?: boolean | Prisma.UtilityBillCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["utilityBill"]>
 
 export type UtilityBillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  propertyId?: boolean
+  roomId?: boolean
   type?: boolean
   description?: boolean
   billPeriodStart?: boolean
@@ -826,12 +826,12 @@ export type UtilityBillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["utilityBill"]>
 
 export type UtilityBillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  propertyId?: boolean
+  roomId?: boolean
   type?: boolean
   description?: boolean
   billPeriodStart?: boolean
@@ -841,12 +841,12 @@ export type UtilityBillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["utilityBill"]>
 
 export type UtilityBillSelectScalar = {
   id?: boolean
-  propertyId?: boolean
+  roomId?: boolean
   type?: boolean
   description?: boolean
   billPeriodStart?: boolean
@@ -858,28 +858,28 @@ export type UtilityBillSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UtilityBillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "type" | "description" | "billPeriodStart" | "billPeriodEnd" | "totalAmount" | "dueDate" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["utilityBill"]>
+export type UtilityBillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "type" | "description" | "billPeriodStart" | "billPeriodEnd" | "totalAmount" | "dueDate" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["utilityBill"]>
 export type UtilityBillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   shares?: boolean | Prisma.UtilityBill$sharesArgs<ExtArgs>
   _count?: boolean | Prisma.UtilityBillCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UtilityBillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
 export type UtilityBillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
 
 export type $UtilityBillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UtilityBill"
   objects: {
-    property: Prisma.$PropertyPayload<ExtArgs>
+    room: Prisma.$RoomPayload<ExtArgs>
     shares: Prisma.$UtilityBillSharePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    propertyId: string
+    roomId: string
     type: $Enums.UtilityType
     description: string | null
     billPeriodStart: Date
@@ -1283,7 +1283,7 @@ readonly fields: UtilityBillFieldRefs;
  */
 export interface Prisma__UtilityBillClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   shares<T extends Prisma.UtilityBill$sharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityBill$sharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityBillSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1315,7 +1315,7 @@ export interface Prisma__UtilityBillClient<T, Null = never, ExtArgs extends runt
  */
 export interface UtilityBillFieldRefs {
   readonly id: Prisma.FieldRef<"UtilityBill", 'String'>
-  readonly propertyId: Prisma.FieldRef<"UtilityBill", 'String'>
+  readonly roomId: Prisma.FieldRef<"UtilityBill", 'String'>
   readonly type: Prisma.FieldRef<"UtilityBill", 'UtilityType'>
   readonly description: Prisma.FieldRef<"UtilityBill", 'String'>
   readonly billPeriodStart: Prisma.FieldRef<"UtilityBill", 'DateTime'>

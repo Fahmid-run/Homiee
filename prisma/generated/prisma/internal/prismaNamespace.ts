@@ -399,11 +399,14 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   TenantProfile: 'TenantProfile',
   Application: 'Application',
+  BillPayment: 'BillPayment',
   Property: 'Property',
   PropertyOwner: 'PropertyOwner',
   RentalPayment: 'RentalPayment',
   RentalDocuments: 'RentalDocuments',
   Room: 'Room',
+  RoomMateMatch: 'RoomMateMatch',
+  RoomMatePreference: 'RoomMatePreference',
   Tenancy: 'Tenancy',
   User: 'User',
   UtilityBill: 'UtilityBill',
@@ -424,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenantProfile" | "application" | "property" | "propertyOwner" | "rentalPayment" | "rentalDocuments" | "room" | "tenancy" | "user" | "utilityBill" | "utilityBillShare" | "viewingRequest"
+    modelProps: "tenantProfile" | "application" | "billPayment" | "property" | "propertyOwner" | "rentalPayment" | "rentalDocuments" | "room" | "roomMateMatch" | "roomMatePreference" | "tenancy" | "user" | "utilityBill" | "utilityBillShare" | "viewingRequest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -573,6 +576,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ApplicationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ApplicationCountAggregateOutputType> | number
+        }
+      }
+    }
+    BillPayment: {
+      payload: Prisma.$BillPaymentPayload<ExtArgs>
+      fields: Prisma.BillPaymentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BillPaymentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BillPaymentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>
+        }
+        findFirst: {
+          args: Prisma.BillPaymentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BillPaymentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>
+        }
+        findMany: {
+          args: Prisma.BillPaymentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>[]
+        }
+        create: {
+          args: Prisma.BillPaymentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>
+        }
+        createMany: {
+          args: Prisma.BillPaymentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BillPaymentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>[]
+        }
+        delete: {
+          args: Prisma.BillPaymentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>
+        }
+        update: {
+          args: Prisma.BillPaymentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>
+        }
+        deleteMany: {
+          args: Prisma.BillPaymentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BillPaymentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BillPaymentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>[]
+        }
+        upsert: {
+          args: Prisma.BillPaymentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillPaymentPayload>
+        }
+        aggregate: {
+          args: Prisma.BillPaymentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBillPayment>
+        }
+        groupBy: {
+          args: Prisma.BillPaymentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BillPaymentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BillPaymentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BillPaymentCountAggregateOutputType> | number
         }
       }
     }
@@ -943,6 +1020,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.RoomCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.RoomCountAggregateOutputType> | number
+        }
+      }
+    }
+    RoomMateMatch: {
+      payload: Prisma.$RoomMateMatchPayload<ExtArgs>
+      fields: Prisma.RoomMateMatchFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RoomMateMatchFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RoomMateMatchFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>
+        }
+        findFirst: {
+          args: Prisma.RoomMateMatchFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RoomMateMatchFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>
+        }
+        findMany: {
+          args: Prisma.RoomMateMatchFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>[]
+        }
+        create: {
+          args: Prisma.RoomMateMatchCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>
+        }
+        createMany: {
+          args: Prisma.RoomMateMatchCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RoomMateMatchCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>[]
+        }
+        delete: {
+          args: Prisma.RoomMateMatchDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>
+        }
+        update: {
+          args: Prisma.RoomMateMatchUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>
+        }
+        deleteMany: {
+          args: Prisma.RoomMateMatchDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RoomMateMatchUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RoomMateMatchUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>[]
+        }
+        upsert: {
+          args: Prisma.RoomMateMatchUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMateMatchPayload>
+        }
+        aggregate: {
+          args: Prisma.RoomMateMatchAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRoomMateMatch>
+        }
+        groupBy: {
+          args: Prisma.RoomMateMatchGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomMateMatchGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RoomMateMatchCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomMateMatchCountAggregateOutputType> | number
+        }
+      }
+    }
+    RoomMatePreference: {
+      payload: Prisma.$RoomMatePreferencePayload<ExtArgs>
+      fields: Prisma.RoomMatePreferenceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RoomMatePreferenceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RoomMatePreferenceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>
+        }
+        findFirst: {
+          args: Prisma.RoomMatePreferenceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RoomMatePreferenceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>
+        }
+        findMany: {
+          args: Prisma.RoomMatePreferenceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>[]
+        }
+        create: {
+          args: Prisma.RoomMatePreferenceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>
+        }
+        createMany: {
+          args: Prisma.RoomMatePreferenceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RoomMatePreferenceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>[]
+        }
+        delete: {
+          args: Prisma.RoomMatePreferenceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>
+        }
+        update: {
+          args: Prisma.RoomMatePreferenceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>
+        }
+        deleteMany: {
+          args: Prisma.RoomMatePreferenceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RoomMatePreferenceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RoomMatePreferenceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>[]
+        }
+        upsert: {
+          args: Prisma.RoomMatePreferenceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RoomMatePreferencePayload>
+        }
+        aggregate: {
+          args: Prisma.RoomMatePreferenceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRoomMatePreference>
+        }
+        groupBy: {
+          args: Prisma.RoomMatePreferenceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomMatePreferenceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RoomMatePreferenceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RoomMatePreferenceCountAggregateOutputType> | number
         }
       }
     }
@@ -1364,7 +1589,8 @@ export const TenantProfileScalarFieldEnum = {
   budgetMin: 'budgetMin',
   budgetMax: 'budgetMax',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  roomMatePreferenceId: 'roomMatePreferenceId'
 } as const
 
 export type TenantProfileScalarFieldEnum = (typeof TenantProfileScalarFieldEnum)[keyof typeof TenantProfileScalarFieldEnum]
@@ -1383,6 +1609,26 @@ export const ApplicationScalarFieldEnum = {
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
+
+
+export const BillPaymentScalarFieldEnum = {
+  id: 'id',
+  billShareId: 'billShareId',
+  provider: 'provider',
+  status: 'status',
+  currency: 'currency',
+  reference: 'reference',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentId: 'stripePaymentId',
+  bkashTransactionId: 'bkashTransactionId',
+  bkashPaymentId: 'bkashPaymentId',
+  gatewayReference: 'gatewayReference',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BillPaymentScalarFieldEnum = (typeof BillPaymentScalarFieldEnum)[keyof typeof BillPaymentScalarFieldEnum]
 
 
 export const PropertyScalarFieldEnum = {
@@ -1420,6 +1666,7 @@ export const RentalPaymentScalarFieldEnum = {
   amount: 'amount',
   dueDate: 'dueDate',
   paidAt: 'paidAt',
+  currency: 'currency',
   status: 'status',
   paymentMethod: 'paymentMethod',
   transactionId: 'transactionId'
@@ -1451,6 +1698,36 @@ export const RoomScalarFieldEnum = {
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const RoomMateMatchScalarFieldEnum = {
+  id: 'id',
+  tenantAId: 'tenantAId',
+  tenantBId: 'tenantBId',
+  score: 'score',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomMateMatchScalarFieldEnum = (typeof RoomMateMatchScalarFieldEnum)[keyof typeof RoomMateMatchScalarFieldEnum]
+
+
+export const RoomMatePreferenceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  preferredGender: 'preferredGender',
+  minAge: 'minAge',
+  maxAge: 'maxAge',
+  smokingAllowed: 'smokingAllowed',
+  sleepSchedule: 'sleepSchedule',
+  preferredMoveInDate: 'preferredMoveInDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomMatePreferenceScalarFieldEnum = (typeof RoomMatePreferenceScalarFieldEnum)[keyof typeof RoomMatePreferenceScalarFieldEnum]
 
 
 export const TenancyScalarFieldEnum = {
@@ -1492,7 +1769,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const UtilityBillScalarFieldEnum = {
   id: 'id',
-  propertyId: 'propertyId',
+  roomId: 'roomId',
   type: 'type',
   description: 'description',
   billPeriodStart: 'billPeriodStart',
@@ -1515,9 +1792,7 @@ export const UtilityBillShareScalarFieldEnum = {
   amount: 'amount',
   status: 'status',
   paidAt: 'paidAt',
-  pauymentMethod: 'pauymentMethod',
-  stripeSessionId: 'stripeSessionId',
-  stripePaymentId: 'stripePaymentId',
+  dueDate: 'dueDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1627,34 +1902,6 @@ export type ListEnumApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
- * Reference to a field of type 'PropertyStatus'
- */
-export type EnumPropertyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatus'>
-    
-
-
-/**
- * Reference to a field of type 'PropertyStatus[]'
- */
-export type ListEnumPropertyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'RentalDocumentStatus'
- */
-export type EnumRentalDocumentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalDocumentStatus'>
-    
-
-
-/**
- * Reference to a field of type 'RentalDocumentStatus[]'
- */
-export type ListEnumRentalDocumentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalDocumentStatus[]'>
-    
-
-
-/**
  * Reference to a field of type 'PaymentMethod'
  */
 export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
@@ -1665,6 +1912,34 @@ export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'PaymentMethod[]'
  */
 export type ListEnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentStatus'
+ */
+export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentStatus[]'
+ */
+export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PropertyStatus'
+ */
+export type EnumPropertyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PropertyStatus[]'
+ */
+export type ListEnumPropertyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatus[]'>
     
 
 
@@ -1711,6 +1986,55 @@ export type ListEnumRoomStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MatchStatus'
+ */
+export type EnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MatchStatus[]'
+ */
+export type ListEnumMatchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'SleepSchedule'
+ */
+export type EnumSleepScheduleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SleepSchedule'>
+    
+
+
+/**
+ * Reference to a field of type 'SleepSchedule[]'
+ */
+export type ListEnumSleepScheduleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SleepSchedule[]'>
+    
+
+
+/**
  * Reference to a field of type 'TenancyStatus'
  */
 export type EnumTenancyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenancyStatus'>
@@ -1721,13 +2045,6 @@ export type EnumTenancyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'TenancyStatus[]'
  */
 export type ListEnumTenancyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenancyStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1802,16 +2119,16 @@ export type ListEnumBillStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
- * Reference to a field of type 'PaymentStatus'
+ * Reference to a field of type 'BillShareStatus'
  */
-export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
+export type EnumBillShareStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillShareStatus'>
     
 
 
 /**
- * Reference to a field of type 'PaymentStatus[]'
+ * Reference to a field of type 'BillShareStatus[]'
  */
-export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus[]'>
+export type ListEnumBillShareStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillShareStatus[]'>
     
 
 
@@ -1826,20 +2143,6 @@ export type EnumViewingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'ViewingStatus[]'
  */
 export type ListEnumViewingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ViewingStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Float[]'
- */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1995,11 +2298,14 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   tenantProfile?: Prisma.TenantProfileOmit
   application?: Prisma.ApplicationOmit
+  billPayment?: Prisma.BillPaymentOmit
   property?: Prisma.PropertyOmit
   propertyOwner?: Prisma.PropertyOwnerOmit
   rentalPayment?: Prisma.RentalPaymentOmit
   rentalDocuments?: Prisma.RentalDocumentsOmit
   room?: Prisma.RoomOmit
+  roomMateMatch?: Prisma.RoomMateMatchOmit
+  roomMatePreference?: Prisma.RoomMatePreferenceOmit
   tenancy?: Prisma.TenancyOmit
   user?: Prisma.UserOmit
   utilityBill?: Prisma.UtilityBillOmit

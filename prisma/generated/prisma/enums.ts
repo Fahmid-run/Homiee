@@ -107,17 +107,6 @@ export const TenancyStatus = {
 export type TenancyStatus = (typeof TenancyStatus)[keyof typeof TenancyStatus]
 
 
-export const RentalApplicationStatus = {
-  PENDING: 'PENDING',
-  UNDER_REVIEWD: 'UNDER_REVIEWD',
-  APPROVED: 'APPROVED',
-  COMPLETED: 'COMPLETED',
-  WITHDRAWN: 'WITHDRAWN'
-} as const
-
-export type RentalApplicationStatus = (typeof RentalApplicationStatus)[keyof typeof RentalApplicationStatus]
-
-
 export const RentalDocumentStatus = {
   PENDING: 'PENDING',
   PAID: 'PAID',
@@ -133,7 +122,8 @@ export const PaymentStatus = {
   PAID: 'PAID',
   FAILED: 'FAILED',
   CANCELLED: 'CANCELLED',
-  REFUNDED: 'REFUNDED'
+  REFUNDED: 'REFUNDED',
+  EXPIRED: 'EXPIRED'
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
@@ -158,6 +148,18 @@ export const UtilityType = {
 export type UtilityType = (typeof UtilityType)[keyof typeof UtilityType]
 
 
+export const BillShareStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type BillShareStatus = (typeof BillShareStatus)[keyof typeof BillShareStatus]
+
+
 export const BillStatus = {
   OPEN: 'OPEN',
   PARTIALLY_PAID: 'PARTIALLY_PAID',
@@ -167,3 +169,20 @@ export const BillStatus = {
 } as const
 
 export type BillStatus = (typeof BillStatus)[keyof typeof BillStatus]
+
+
+export const MatchStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type MatchStatus = (typeof MatchStatus)[keyof typeof MatchStatus]
+
+
+export const SleepSchedule = {
+  LATE: 'LATE',
+  EARLY: 'EARLY'
+} as const
+
+export type SleepSchedule = (typeof SleepSchedule)[keyof typeof SleepSchedule]

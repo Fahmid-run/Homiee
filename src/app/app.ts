@@ -28,13 +28,13 @@ app.use(
   }),
 );
 
-app.post(
-  "/api/payments/webhook",
-  express.raw({
-    type: "application/json",
-  }),
-  paymentController.webhook,
-);
+// app.post(
+//   "/api/payments/webhook",
+//   express.raw({
+//     type: "application/json",
+//   }),
+//   paymentController.webhook,
+// );
 
 app.use(express.json());
 
@@ -47,7 +47,7 @@ app.use("/api/v1/auth", AuthRoutes);
 
 app.use("/api/v1/property", ProperyRoutes);
 
-app.use("/api/v1/room", RoomRoutes);
+app.use("/api/v1/property/room", RoomRoutes);
 app.use("/api/v1/tenant", TenantRoutes);
 app.use("/api/v1/owner", OwnerRoutes);
 

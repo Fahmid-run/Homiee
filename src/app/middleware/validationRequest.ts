@@ -17,7 +17,7 @@ export const validationReq = (schema: z.ZodObject) => {
         );
       }
 
-      req.body = payload.data;
+      req.body = result.data;
 
       next();
     } catch (error) {

@@ -28,4 +28,16 @@ router.post(
   ownerController.uploadDocuments,
 );
 
+router.post(
+  "/bill/create/:roomId",
+  auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
+  ownerController.createBill,
+);
+
+router.get(
+  "/bills/",
+  auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
+  ownerController.getMyPropertyBills,
+);
+
 export const OwnerRoutes = router;

@@ -17,7 +17,6 @@ model Property {
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   viewingRequests ViewingRequest[]
-  utilityBills    UtilityBill[]
 
   @@map("property")
 }

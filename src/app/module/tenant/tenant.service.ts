@@ -1,7 +1,7 @@
 import { prisma } from "../../lib/prisma";
 import AppError from "../../utils/appError";
 import { checkExists } from "../../utils/checkExist";
-
+import httpstatus from "http-status";
 const createViewReq = async (roomId: string, tenantId: string, payload) => {
   const { message, requestedDate } = payload;
 
@@ -25,6 +25,17 @@ const createViewReq = async (roomId: string, tenantId: string, payload) => {
 const createApplication = async (roomId: string, tenantId: string, payload) => {
   const { message } = payload;
   await checkExists(prisma.room, roomId, "Room Does not exists");
+
+  const isTenancyExists = await prisma.tenancy.findFirst({
+    where: {
+      tenantId,
+      roomId,
+    },
+  });
+
+  if (isTenancyExists) {
+    throw new AppError("You Already Applied Earlier!!", httpstatus.NOT_FOUND);
+  }
 
   const res = await prisma.application.create({
     data: {

@@ -52,6 +52,11 @@ export type TenantProfile = Prisma.TenantProfileModel
  */
 export type Application = Prisma.ApplicationModel
 /**
+ * Model BillPayment
+ * 
+ */
+export type BillPayment = Prisma.BillPaymentModel
+/**
  * Model Property
  * 
  */
@@ -76,6 +81,16 @@ export type RentalDocuments = Prisma.RentalDocumentsModel
  * 
  */
 export type Room = Prisma.RoomModel
+/**
+ * Model RoomMateMatch
+ * 
+ */
+export type RoomMateMatch = Prisma.RoomMateMatchModel
+/**
+ * Model RoomMatePreference
+ * 
+ */
+export type RoomMatePreference = Prisma.RoomMatePreferenceModel
 /**
  * Model Tenancy
  * 

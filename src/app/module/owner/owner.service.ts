@@ -47,7 +47,6 @@ const updateApplicationStatus = async (
         },
       });
 
-      console.log(room);
       const occupied = await tx.tenancy.count({
         where: {
           status: "ACTIVE",
@@ -70,8 +69,6 @@ const updateApplicationStatus = async (
           roomId: applicationData.roomId,
         },
       });
-
-      console.log(tenancy);
 
       const res = await prisma.application.update({
         where: {
@@ -108,8 +105,6 @@ const updateApplicationStatus = async (
 
       return res;
     });
-
-    console.log(transaction);
 
     return transaction;
   } else {
@@ -181,8 +176,105 @@ const uploadDocuments = async (userId: string, tenancyId: string, payload) => {
   return res;
 };
 
+const createBill = async (ownerId: string, roomId: string, payload) => {
+  const {
+    type,
+    description,
+    billPeriodStart,
+    billPeriodEnd,
+    totalAmount,
+    dueDate,
+    status,
+  } = payload;
+
+  const room = await prisma.room.findUnique({
+    where: {
+      id: roomId,
+    },
+    include: {
+      property: true,
+    },
+  });
+
+  if (!room) {
+    throw new AppError("Room does not exist", httpstatus.NOT_FOUND);
+  }
+
+  if (ownerId !== room.property.ownerId) {
+    throw new AppError("Forbidden ", httpstatus.FORBIDDEN);
+  }
+  // const isBillExists = await prisma.utilityBill.findUnique({
+  //   where: {
+  //     id:roomId,
+  //     roomId,
+  //   },
+  // });
+  // if (isBillExists) {
+  //   throw new AppError("bill already exists", httpstatus.NOT_FOUND);
+  // }
+
+  const transaction = await prisma.$transaction(async () => {
+    const billCreate = await prisma.utilityBill.create({
+      data: {
+        type,
+        description,
+        billPeriodStart,
+        billPeriodEnd,
+        totalAmount,
+        dueDate,
+        status,
+        roomId,
+      },
+      include: {
+        shares: true,
+      },
+    });
+
+    const findTheRoomMate = await prisma.tenancy.findMany({
+      where: {
+        roomId,
+      },
+    });
+
+    findTheRoomMate.forEach(async (element) => {
+      const shareBill = await prisma.utilityBillShare.create({
+        data: {
+          billid: billCreate.id,
+          tenantId: element.tenantId,
+          tenancyId: element.id,
+          amount: billCreate.totalAmount / findTheRoomMate.length,
+          dueDate: billCreate.dueDate,
+        },
+      });
+    });
+
+    return billCreate;
+  });
+
+  return transaction;
+};
+
+const getMyPropertyBills = async (ownerId: string) => {
+  const res = await prisma.utilityBill.findMany({
+    where: {
+      room: {
+        property: {
+          ownerId,
+        },
+      },
+    },
+    include: {
+      shares: true,
+    },
+  });
+
+  return res;
+};
+
 export const ownerServices = {
   updateViewReqStatus,
   updateApplicationStatus,
   uploadDocuments,
+  createBill,
+  getMyPropertyBills,
 };

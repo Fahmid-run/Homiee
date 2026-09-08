@@ -40,11 +40,9 @@ export type UtilityBillShareMinAggregateOutputType = {
   tenantId: string | null
   tenancyId: string | null
   amount: number | null
-  status: $Enums.PaymentStatus | null
+  status: $Enums.BillShareStatus | null
   paidAt: Date | null
-  pauymentMethod: $Enums.PaymentMethod | null
-  stripeSessionId: string | null
-  stripePaymentId: string | null
+  dueDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -55,11 +53,9 @@ export type UtilityBillShareMaxAggregateOutputType = {
   tenantId: string | null
   tenancyId: string | null
   amount: number | null
-  status: $Enums.PaymentStatus | null
+  status: $Enums.BillShareStatus | null
   paidAt: Date | null
-  pauymentMethod: $Enums.PaymentMethod | null
-  stripeSessionId: string | null
-  stripePaymentId: string | null
+  dueDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -72,9 +68,7 @@ export type UtilityBillShareCountAggregateOutputType = {
   amount: number
   status: number
   paidAt: number
-  pauymentMethod: number
-  stripeSessionId: number
-  stripePaymentId: number
+  dueDate: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -97,9 +91,7 @@ export type UtilityBillShareMinAggregateInputType = {
   amount?: true
   status?: true
   paidAt?: true
-  pauymentMethod?: true
-  stripeSessionId?: true
-  stripePaymentId?: true
+  dueDate?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,9 +104,7 @@ export type UtilityBillShareMaxAggregateInputType = {
   amount?: true
   status?: true
   paidAt?: true
-  pauymentMethod?: true
-  stripeSessionId?: true
-  stripePaymentId?: true
+  dueDate?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -127,9 +117,7 @@ export type UtilityBillShareCountAggregateInputType = {
   amount?: true
   status?: true
   paidAt?: true
-  pauymentMethod?: true
-  stripeSessionId?: true
-  stripePaymentId?: true
+  dueDate?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -227,11 +215,9 @@ export type UtilityBillShareGroupByOutputType = {
   tenantId: string
   tenancyId: string | null
   amount: number
-  status: $Enums.PaymentStatus
+  status: $Enums.BillShareStatus
   paidAt: Date | null
-  pauymentMethod: $Enums.PaymentMethod | null
-  stripeSessionId: string | null
-  stripePaymentId: string | null
+  dueDate: Date
   createdAt: Date
   updatedAt: Date
   _count: UtilityBillShareCountAggregateOutputType | null
@@ -265,16 +251,15 @@ export type UtilityBillShareWhereInput = {
   tenantId?: Prisma.StringFilter<"UtilityBillShare"> | string
   tenancyId?: Prisma.StringNullableFilter<"UtilityBillShare"> | string | null
   amount?: Prisma.IntFilter<"UtilityBillShare"> | number
-  status?: Prisma.EnumPaymentStatusFilter<"UtilityBillShare"> | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFilter<"UtilityBillShare"> | $Enums.BillShareStatus
   paidAt?: Prisma.DateTimeNullableFilter<"UtilityBillShare"> | Date | string | null
-  pauymentMethod?: Prisma.EnumPaymentMethodNullableFilter<"UtilityBillShare"> | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.StringNullableFilter<"UtilityBillShare"> | string | null
-  stripePaymentId?: Prisma.StringNullableFilter<"UtilityBillShare"> | string | null
+  dueDate?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tenancy?: Prisma.XOR<Prisma.TenancyNullableScalarRelationFilter, Prisma.TenancyWhereInput> | null
   bill?: Prisma.XOR<Prisma.UtilityBillScalarRelationFilter, Prisma.UtilityBillWhereInput>
+  billPayments?: Prisma.BillPaymentListRelationFilter
 }
 
 export type UtilityBillShareOrderByWithRelationInput = {
@@ -285,20 +270,17 @@ export type UtilityBillShareOrderByWithRelationInput = {
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  pauymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
-  stripeSessionId?: Prisma.SortOrderInput | Prisma.SortOrder
-  stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   tenant?: Prisma.UserOrderByWithRelationInput
   tenancy?: Prisma.TenancyOrderByWithRelationInput
   bill?: Prisma.UtilityBillOrderByWithRelationInput
+  billPayments?: Prisma.BillPaymentOrderByRelationAggregateInput
 }
 
 export type UtilityBillShareWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  stripeSessionId?: string
-  stripePaymentId?: string
   billid_tenantId?: Prisma.UtilityBillShareBillidTenantIdCompoundUniqueInput
   AND?: Prisma.UtilityBillShareWhereInput | Prisma.UtilityBillShareWhereInput[]
   OR?: Prisma.UtilityBillShareWhereInput[]
@@ -307,15 +289,16 @@ export type UtilityBillShareWhereUniqueInput = Prisma.AtLeast<{
   tenantId?: Prisma.StringFilter<"UtilityBillShare"> | string
   tenancyId?: Prisma.StringNullableFilter<"UtilityBillShare"> | string | null
   amount?: Prisma.IntFilter<"UtilityBillShare"> | number
-  status?: Prisma.EnumPaymentStatusFilter<"UtilityBillShare"> | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFilter<"UtilityBillShare"> | $Enums.BillShareStatus
   paidAt?: Prisma.DateTimeNullableFilter<"UtilityBillShare"> | Date | string | null
-  pauymentMethod?: Prisma.EnumPaymentMethodNullableFilter<"UtilityBillShare"> | $Enums.PaymentMethod | null
+  dueDate?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   tenant?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tenancy?: Prisma.XOR<Prisma.TenancyNullableScalarRelationFilter, Prisma.TenancyWhereInput> | null
   bill?: Prisma.XOR<Prisma.UtilityBillScalarRelationFilter, Prisma.UtilityBillWhereInput>
-}, "id" | "stripeSessionId" | "stripePaymentId" | "billid_tenantId">
+  billPayments?: Prisma.BillPaymentListRelationFilter
+}, "id" | "billid_tenantId">
 
 export type UtilityBillShareOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -325,9 +308,7 @@ export type UtilityBillShareOrderByWithAggregationInput = {
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  pauymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
-  stripeSessionId?: Prisma.SortOrderInput | Prisma.SortOrder
-  stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UtilityBillShareCountOrderByAggregateInput
@@ -346,11 +327,9 @@ export type UtilityBillShareScalarWhereWithAggregatesInput = {
   tenantId?: Prisma.StringWithAggregatesFilter<"UtilityBillShare"> | string
   tenancyId?: Prisma.StringNullableWithAggregatesFilter<"UtilityBillShare"> | string | null
   amount?: Prisma.IntWithAggregatesFilter<"UtilityBillShare"> | number
-  status?: Prisma.EnumPaymentStatusWithAggregatesFilter<"UtilityBillShare"> | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusWithAggregatesFilter<"UtilityBillShare"> | $Enums.BillShareStatus
   paidAt?: Prisma.DateTimeNullableWithAggregatesFilter<"UtilityBillShare"> | Date | string | null
-  pauymentMethod?: Prisma.EnumPaymentMethodNullableWithAggregatesFilter<"UtilityBillShare"> | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.StringNullableWithAggregatesFilter<"UtilityBillShare"> | string | null
-  stripePaymentId?: Prisma.StringNullableWithAggregatesFilter<"UtilityBillShare"> | string | null
+  dueDate?: Prisma.DateTimeWithAggregatesFilter<"UtilityBillShare"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UtilityBillShare"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"UtilityBillShare"> | Date | string
 }
@@ -358,16 +337,15 @@ export type UtilityBillShareScalarWhereWithAggregatesInput = {
 export type UtilityBillShareCreateInput = {
   id?: string
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutBillsharesInput
   tenancy?: Prisma.TenancyCreateNestedOneWithoutBillSharesInput
   bill: Prisma.UtilityBillCreateNestedOneWithoutSharesInput
+  billPayments?: Prisma.BillPaymentCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareUncheckedCreateInput = {
@@ -376,28 +354,26 @@ export type UtilityBillShareUncheckedCreateInput = {
   tenantId: string
   tenancyId?: string | null
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  billPayments?: Prisma.BillPaymentUncheckedCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutBillsharesNestedInput
   tenancy?: Prisma.TenancyUpdateOneWithoutBillSharesNestedInput
   bill?: Prisma.UtilityBillUpdateOneRequiredWithoutSharesNestedInput
+  billPayments?: Prisma.BillPaymentUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareUncheckedUpdateInput = {
@@ -406,13 +382,12 @@ export type UtilityBillShareUncheckedUpdateInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   tenancyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  billPayments?: Prisma.BillPaymentUncheckedUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareCreateManyInput = {
@@ -421,11 +396,9 @@ export type UtilityBillShareCreateManyInput = {
   tenantId: string
   tenancyId?: string | null
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -433,11 +406,9 @@ export type UtilityBillShareCreateManyInput = {
 export type UtilityBillShareUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -448,13 +419,16 @@ export type UtilityBillShareUncheckedUpdateManyInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   tenancyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UtilityBillShareScalarRelationFilter = {
+  is?: Prisma.UtilityBillShareWhereInput
+  isNot?: Prisma.UtilityBillShareWhereInput
 }
 
 export type UtilityBillShareListRelationFilter = {
@@ -480,9 +454,7 @@ export type UtilityBillShareCountOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
-  pauymentMethod?: Prisma.SortOrder
-  stripeSessionId?: Prisma.SortOrder
-  stripePaymentId?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -499,9 +471,7 @@ export type UtilityBillShareMaxOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
-  pauymentMethod?: Prisma.SortOrder
-  stripeSessionId?: Prisma.SortOrder
-  stripePaymentId?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -514,15 +484,27 @@ export type UtilityBillShareMinOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
-  pauymentMethod?: Prisma.SortOrder
-  stripeSessionId?: Prisma.SortOrder
-  stripePaymentId?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type UtilityBillShareSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+}
+
+export type UtilityBillShareCreateNestedOneWithoutBillPaymentsInput = {
+  create?: Prisma.XOR<Prisma.UtilityBillShareCreateWithoutBillPaymentsInput, Prisma.UtilityBillShareUncheckedCreateWithoutBillPaymentsInput>
+  connectOrCreate?: Prisma.UtilityBillShareCreateOrConnectWithoutBillPaymentsInput
+  connect?: Prisma.UtilityBillShareWhereUniqueInput
+}
+
+export type UtilityBillShareUpdateOneRequiredWithoutBillPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UtilityBillShareCreateWithoutBillPaymentsInput, Prisma.UtilityBillShareUncheckedCreateWithoutBillPaymentsInput>
+  connectOrCreate?: Prisma.UtilityBillShareCreateOrConnectWithoutBillPaymentsInput
+  upsert?: Prisma.UtilityBillShareUpsertWithoutBillPaymentsInput
+  connect?: Prisma.UtilityBillShareWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UtilityBillShareUpdateToOneWithWhereWithoutBillPaymentsInput, Prisma.UtilityBillShareUpdateWithoutBillPaymentsInput>, Prisma.UtilityBillShareUncheckedUpdateWithoutBillPaymentsInput>
 }
 
 export type UtilityBillShareCreateNestedManyWithoutTenancyInput = {
@@ -651,26 +633,89 @@ export type UtilityBillShareUncheckedUpdateManyWithoutBillNestedInput = {
   deleteMany?: Prisma.UtilityBillShareScalarWhereInput | Prisma.UtilityBillShareScalarWhereInput[]
 }
 
-export type EnumPaymentStatusFieldUpdateOperationsInput = {
-  set?: $Enums.PaymentStatus
+export type EnumBillShareStatusFieldUpdateOperationsInput = {
+  set?: $Enums.BillShareStatus
 }
 
-export type NullableEnumPaymentMethodFieldUpdateOperationsInput = {
-  set?: $Enums.PaymentMethod | null
+export type UtilityBillShareCreateWithoutBillPaymentsInput = {
+  id?: string
+  amount: number
+  status?: $Enums.BillShareStatus
+  paidAt?: Date | string | null
+  dueDate: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.UserCreateNestedOneWithoutBillsharesInput
+  tenancy?: Prisma.TenancyCreateNestedOneWithoutBillSharesInput
+  bill: Prisma.UtilityBillCreateNestedOneWithoutSharesInput
+}
+
+export type UtilityBillShareUncheckedCreateWithoutBillPaymentsInput = {
+  id?: string
+  billid: string
+  tenantId: string
+  tenancyId?: string | null
+  amount: number
+  status?: $Enums.BillShareStatus
+  paidAt?: Date | string | null
+  dueDate: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UtilityBillShareCreateOrConnectWithoutBillPaymentsInput = {
+  where: Prisma.UtilityBillShareWhereUniqueInput
+  create: Prisma.XOR<Prisma.UtilityBillShareCreateWithoutBillPaymentsInput, Prisma.UtilityBillShareUncheckedCreateWithoutBillPaymentsInput>
+}
+
+export type UtilityBillShareUpsertWithoutBillPaymentsInput = {
+  update: Prisma.XOR<Prisma.UtilityBillShareUpdateWithoutBillPaymentsInput, Prisma.UtilityBillShareUncheckedUpdateWithoutBillPaymentsInput>
+  create: Prisma.XOR<Prisma.UtilityBillShareCreateWithoutBillPaymentsInput, Prisma.UtilityBillShareUncheckedCreateWithoutBillPaymentsInput>
+  where?: Prisma.UtilityBillShareWhereInput
+}
+
+export type UtilityBillShareUpdateToOneWithWhereWithoutBillPaymentsInput = {
+  where?: Prisma.UtilityBillShareWhereInput
+  data: Prisma.XOR<Prisma.UtilityBillShareUpdateWithoutBillPaymentsInput, Prisma.UtilityBillShareUncheckedUpdateWithoutBillPaymentsInput>
+}
+
+export type UtilityBillShareUpdateWithoutBillPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.UserUpdateOneRequiredWithoutBillsharesNestedInput
+  tenancy?: Prisma.TenancyUpdateOneWithoutBillSharesNestedInput
+  bill?: Prisma.UtilityBillUpdateOneRequiredWithoutSharesNestedInput
+}
+
+export type UtilityBillShareUncheckedUpdateWithoutBillPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  billid?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenancyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UtilityBillShareCreateWithoutTenancyInput = {
   id?: string
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutBillsharesInput
   bill: Prisma.UtilityBillCreateNestedOneWithoutSharesInput
+  billPayments?: Prisma.BillPaymentCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareUncheckedCreateWithoutTenancyInput = {
@@ -678,13 +723,12 @@ export type UtilityBillShareUncheckedCreateWithoutTenancyInput = {
   billid: string
   tenantId: string
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  billPayments?: Prisma.BillPaymentUncheckedCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareCreateOrConnectWithoutTenancyInput = {
@@ -722,11 +766,9 @@ export type UtilityBillShareScalarWhereInput = {
   tenantId?: Prisma.StringFilter<"UtilityBillShare"> | string
   tenancyId?: Prisma.StringNullableFilter<"UtilityBillShare"> | string | null
   amount?: Prisma.IntFilter<"UtilityBillShare"> | number
-  status?: Prisma.EnumPaymentStatusFilter<"UtilityBillShare"> | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFilter<"UtilityBillShare"> | $Enums.BillShareStatus
   paidAt?: Prisma.DateTimeNullableFilter<"UtilityBillShare"> | Date | string | null
-  pauymentMethod?: Prisma.EnumPaymentMethodNullableFilter<"UtilityBillShare"> | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.StringNullableFilter<"UtilityBillShare"> | string | null
-  stripePaymentId?: Prisma.StringNullableFilter<"UtilityBillShare"> | string | null
+  dueDate?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"UtilityBillShare"> | Date | string
 }
@@ -734,15 +776,14 @@ export type UtilityBillShareScalarWhereInput = {
 export type UtilityBillShareCreateWithoutTenantInput = {
   id?: string
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   tenancy?: Prisma.TenancyCreateNestedOneWithoutBillSharesInput
   bill: Prisma.UtilityBillCreateNestedOneWithoutSharesInput
+  billPayments?: Prisma.BillPaymentCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareUncheckedCreateWithoutTenantInput = {
@@ -750,13 +791,12 @@ export type UtilityBillShareUncheckedCreateWithoutTenantInput = {
   billid: string
   tenancyId?: string | null
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  billPayments?: Prisma.BillPaymentUncheckedCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareCreateOrConnectWithoutTenantInput = {
@@ -788,15 +828,14 @@ export type UtilityBillShareUpdateManyWithWhereWithoutTenantInput = {
 export type UtilityBillShareCreateWithoutBillInput = {
   id?: string
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.UserCreateNestedOneWithoutBillsharesInput
   tenancy?: Prisma.TenancyCreateNestedOneWithoutBillSharesInput
+  billPayments?: Prisma.BillPaymentCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareUncheckedCreateWithoutBillInput = {
@@ -804,13 +843,12 @@ export type UtilityBillShareUncheckedCreateWithoutBillInput = {
   tenantId: string
   tenancyId?: string | null
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  billPayments?: Prisma.BillPaymentUncheckedCreateNestedManyWithoutBillShareInput
 }
 
 export type UtilityBillShareCreateOrConnectWithoutBillInput = {
@@ -844,11 +882,9 @@ export type UtilityBillShareCreateManyTenancyInput = {
   billid: string
   tenantId: string
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -856,15 +892,14 @@ export type UtilityBillShareCreateManyTenancyInput = {
 export type UtilityBillShareUpdateWithoutTenancyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutBillsharesNestedInput
   bill?: Prisma.UtilityBillUpdateOneRequiredWithoutSharesNestedInput
+  billPayments?: Prisma.BillPaymentUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareUncheckedUpdateWithoutTenancyInput = {
@@ -872,13 +907,12 @@ export type UtilityBillShareUncheckedUpdateWithoutTenancyInput = {
   billid?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  billPayments?: Prisma.BillPaymentUncheckedUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareUncheckedUpdateManyWithoutTenancyInput = {
@@ -886,11 +920,9 @@ export type UtilityBillShareUncheckedUpdateManyWithoutTenancyInput = {
   billid?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -900,11 +932,9 @@ export type UtilityBillShareCreateManyTenantInput = {
   billid: string
   tenancyId?: string | null
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -912,15 +942,14 @@ export type UtilityBillShareCreateManyTenantInput = {
 export type UtilityBillShareUpdateWithoutTenantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenancy?: Prisma.TenancyUpdateOneWithoutBillSharesNestedInput
   bill?: Prisma.UtilityBillUpdateOneRequiredWithoutSharesNestedInput
+  billPayments?: Prisma.BillPaymentUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareUncheckedUpdateWithoutTenantInput = {
@@ -928,13 +957,12 @@ export type UtilityBillShareUncheckedUpdateWithoutTenantInput = {
   billid?: Prisma.StringFieldUpdateOperationsInput | string
   tenancyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  billPayments?: Prisma.BillPaymentUncheckedUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareUncheckedUpdateManyWithoutTenantInput = {
@@ -942,11 +970,9 @@ export type UtilityBillShareUncheckedUpdateManyWithoutTenantInput = {
   billid?: Prisma.StringFieldUpdateOperationsInput | string
   tenancyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -956,11 +982,9 @@ export type UtilityBillShareCreateManyBillInput = {
   tenantId: string
   tenancyId?: string | null
   amount: number
-  status?: $Enums.PaymentStatus
+  status?: $Enums.BillShareStatus
   paidAt?: Date | string | null
-  pauymentMethod?: $Enums.PaymentMethod | null
-  stripeSessionId?: string | null
-  stripePaymentId?: string | null
+  dueDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -968,15 +992,14 @@ export type UtilityBillShareCreateManyBillInput = {
 export type UtilityBillShareUpdateWithoutBillInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.UserUpdateOneRequiredWithoutBillsharesNestedInput
   tenancy?: Prisma.TenancyUpdateOneWithoutBillSharesNestedInput
+  billPayments?: Prisma.BillPaymentUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareUncheckedUpdateWithoutBillInput = {
@@ -984,13 +1007,12 @@ export type UtilityBillShareUncheckedUpdateWithoutBillInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   tenancyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  billPayments?: Prisma.BillPaymentUncheckedUpdateManyWithoutBillShareNestedInput
 }
 
 export type UtilityBillShareUncheckedUpdateManyWithoutBillInput = {
@@ -998,15 +1020,42 @@ export type UtilityBillShareUncheckedUpdateManyWithoutBillInput = {
   tenantId?: Prisma.StringFieldUpdateOperationsInput | string
   tenancyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  status?: Prisma.EnumBillShareStatusFieldUpdateOperationsInput | $Enums.BillShareStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pauymentMethod?: Prisma.NullableEnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod | null
-  stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type UtilityBillShareCountOutputType
+ */
+
+export type UtilityBillShareCountOutputType = {
+  billPayments: number
+}
+
+export type UtilityBillShareCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  billPayments?: boolean | UtilityBillShareCountOutputTypeCountBillPaymentsArgs
+}
+
+/**
+ * UtilityBillShareCountOutputType without action
+ */
+export type UtilityBillShareCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UtilityBillShareCountOutputType
+   */
+  select?: Prisma.UtilityBillShareCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UtilityBillShareCountOutputType without action
+ */
+export type UtilityBillShareCountOutputTypeCountBillPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BillPaymentWhereInput
+}
 
 
 export type UtilityBillShareSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1017,14 +1066,14 @@ export type UtilityBillShareSelect<ExtArgs extends runtime.Types.Extensions.Inte
   amount?: boolean
   status?: boolean
   paidAt?: boolean
-  pauymentMethod?: boolean
-  stripeSessionId?: boolean
-  stripePaymentId?: boolean
+  dueDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tenancy?: boolean | Prisma.UtilityBillShare$tenancyArgs<ExtArgs>
   bill?: boolean | Prisma.UtilityBillDefaultArgs<ExtArgs>
+  billPayments?: boolean | Prisma.UtilityBillShare$billPaymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.UtilityBillShareCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["utilityBillShare"]>
 
 export type UtilityBillShareSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1035,9 +1084,7 @@ export type UtilityBillShareSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   amount?: boolean
   status?: boolean
   paidAt?: boolean
-  pauymentMethod?: boolean
-  stripeSessionId?: boolean
-  stripePaymentId?: boolean
+  dueDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1053,9 +1100,7 @@ export type UtilityBillShareSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   amount?: boolean
   status?: boolean
   paidAt?: boolean
-  pauymentMethod?: boolean
-  stripeSessionId?: boolean
-  stripePaymentId?: boolean
+  dueDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1071,18 +1116,18 @@ export type UtilityBillShareSelectScalar = {
   amount?: boolean
   status?: boolean
   paidAt?: boolean
-  pauymentMethod?: boolean
-  stripeSessionId?: boolean
-  stripePaymentId?: boolean
+  dueDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UtilityBillShareOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "billid" | "tenantId" | "tenancyId" | "amount" | "status" | "paidAt" | "pauymentMethod" | "stripeSessionId" | "stripePaymentId" | "createdAt" | "updatedAt", ExtArgs["result"]["utilityBillShare"]>
+export type UtilityBillShareOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "billid" | "tenantId" | "tenancyId" | "amount" | "status" | "paidAt" | "dueDate" | "createdAt" | "updatedAt", ExtArgs["result"]["utilityBillShare"]>
 export type UtilityBillShareInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tenancy?: boolean | Prisma.UtilityBillShare$tenancyArgs<ExtArgs>
   bill?: boolean | Prisma.UtilityBillDefaultArgs<ExtArgs>
+  billPayments?: boolean | Prisma.UtilityBillShare$billPaymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.UtilityBillShareCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UtilityBillShareIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1101,6 +1146,7 @@ export type $UtilityBillSharePayload<ExtArgs extends runtime.Types.Extensions.In
     tenant: Prisma.$UserPayload<ExtArgs>
     tenancy: Prisma.$TenancyPayload<ExtArgs> | null
     bill: Prisma.$UtilityBillPayload<ExtArgs>
+    billPayments: Prisma.$BillPaymentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1108,11 +1154,9 @@ export type $UtilityBillSharePayload<ExtArgs extends runtime.Types.Extensions.In
     tenantId: string
     tenancyId: string | null
     amount: number
-    status: $Enums.PaymentStatus
+    status: $Enums.BillShareStatus
     paidAt: Date | null
-    pauymentMethod: $Enums.PaymentMethod | null
-    stripeSessionId: string | null
-    stripePaymentId: string | null
+    dueDate: Date
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["utilityBillShare"]>
@@ -1512,6 +1556,7 @@ export interface Prisma__UtilityBillShareClient<T, Null = never, ExtArgs extends
   tenant<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenancy<T extends Prisma.UtilityBillShare$tenancyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityBillShare$tenancyArgs<ExtArgs>>): Prisma.Prisma__TenancyClient<runtime.Types.Result.GetResult<Prisma.$TenancyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   bill<T extends Prisma.UtilityBillDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityBillDefaultArgs<ExtArgs>>): Prisma.Prisma__UtilityBillClient<runtime.Types.Result.GetResult<Prisma.$UtilityBillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  billPayments<T extends Prisma.UtilityBillShare$billPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityBillShare$billPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BillPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1546,11 +1591,9 @@ export interface UtilityBillShareFieldRefs {
   readonly tenantId: Prisma.FieldRef<"UtilityBillShare", 'String'>
   readonly tenancyId: Prisma.FieldRef<"UtilityBillShare", 'String'>
   readonly amount: Prisma.FieldRef<"UtilityBillShare", 'Int'>
-  readonly status: Prisma.FieldRef<"UtilityBillShare", 'PaymentStatus'>
+  readonly status: Prisma.FieldRef<"UtilityBillShare", 'BillShareStatus'>
   readonly paidAt: Prisma.FieldRef<"UtilityBillShare", 'DateTime'>
-  readonly pauymentMethod: Prisma.FieldRef<"UtilityBillShare", 'PaymentMethod'>
-  readonly stripeSessionId: Prisma.FieldRef<"UtilityBillShare", 'String'>
-  readonly stripePaymentId: Prisma.FieldRef<"UtilityBillShare", 'String'>
+  readonly dueDate: Prisma.FieldRef<"UtilityBillShare", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"UtilityBillShare", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UtilityBillShare", 'DateTime'>
 }
@@ -1970,6 +2013,30 @@ export type UtilityBillShare$tenancyArgs<ExtArgs extends runtime.Types.Extension
    */
   include?: Prisma.TenancyInclude<ExtArgs> | null
   where?: Prisma.TenancyWhereInput
+}
+
+/**
+ * UtilityBillShare.billPayments
+ */
+export type UtilityBillShare$billPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BillPayment
+   */
+  select?: Prisma.BillPaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BillPayment
+   */
+  omit?: Prisma.BillPaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BillPaymentInclude<ExtArgs> | null
+  where?: Prisma.BillPaymentWhereInput
+  orderBy?: Prisma.BillPaymentOrderByWithRelationInput | Prisma.BillPaymentOrderByWithRelationInput[]
+  cursor?: Prisma.BillPaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BillPaymentScalarFieldEnum | Prisma.BillPaymentScalarFieldEnum[]
 }
 
 /**

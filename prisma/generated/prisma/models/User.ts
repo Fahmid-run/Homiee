@@ -263,6 +263,8 @@ export type UserWhereInput = {
   billshares?: Prisma.UtilityBillShareListRelationFilter
   uploadedDocuments?: Prisma.RentalDocumentsListRelationFilter
   reviewedApplicaions?: Prisma.ApplicationListRelationFilter
+  roomMateMatchAsA?: Prisma.RoomMateMatchListRelationFilter
+  roomMateMatchAsB?: Prisma.RoomMateMatchListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -289,6 +291,8 @@ export type UserOrderByWithRelationInput = {
   billshares?: Prisma.UtilityBillShareOrderByRelationAggregateInput
   uploadedDocuments?: Prisma.RentalDocumentsOrderByRelationAggregateInput
   reviewedApplicaions?: Prisma.ApplicationOrderByRelationAggregateInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchOrderByRelationAggregateInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -318,6 +322,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   billshares?: Prisma.UtilityBillShareListRelationFilter
   uploadedDocuments?: Prisma.RentalDocumentsListRelationFilter
   reviewedApplicaions?: Prisma.ApplicationListRelationFilter
+  roomMateMatchAsA?: Prisma.RoomMateMatchListRelationFilter
+  roomMateMatchAsB?: Prisma.RoomMateMatchListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -384,6 +390,8 @@ export type UserCreateInput = {
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -410,6 +418,8 @@ export type UserUncheckedCreateInput = {
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUpdateInput = {
@@ -436,6 +446,8 @@ export type UserUpdateInput = {
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -462,6 +474,8 @@ export type UserUncheckedUpdateInput = {
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -662,6 +676,34 @@ export type UserUpdateOneRequiredWithoutUploadedDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUploadedDocumentsInput, Prisma.UserUpdateWithoutUploadedDocumentsInput>, Prisma.UserUncheckedUpdateWithoutUploadedDocumentsInput>
 }
 
+export type UserCreateNestedOneWithoutRoomMateMatchAsAInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsAInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsAInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomMateMatchAsAInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutRoomMateMatchAsBInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsBInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsBInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomMateMatchAsBInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRoomMateMatchAsANestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsAInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsAInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomMateMatchAsAInput
+  upsert?: Prisma.UserUpsertWithoutRoomMateMatchAsAInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRoomMateMatchAsAInput, Prisma.UserUpdateWithoutRoomMateMatchAsAInput>, Prisma.UserUncheckedUpdateWithoutRoomMateMatchAsAInput>
+}
+
+export type UserUpdateOneRequiredWithoutRoomMateMatchAsBNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsBInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsBInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomMateMatchAsBInput
+  upsert?: Prisma.UserUpsertWithoutRoomMateMatchAsBInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRoomMateMatchAsBInput, Prisma.UserUpdateWithoutRoomMateMatchAsBInput>, Prisma.UserUncheckedUpdateWithoutRoomMateMatchAsBInput>
+}
+
 export type UserCreateNestedOneWithoutTenanciesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutTenanciesInput, Prisma.UserUncheckedCreateWithoutTenanciesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutTenanciesInput
@@ -690,10 +732,6 @@ export type EnumRoleFieldUpdateOperationsInput = {
 
 export type EnumUserStatusFieldUpdateOperationsInput = {
   set?: $Enums.UserStatus
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
 }
 
 export type UserCreateNestedOneWithoutBillsharesInput = {
@@ -747,6 +785,8 @@ export type UserCreateWithoutTenantProfileInput = {
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutTenantProfileInput = {
@@ -772,6 +812,8 @@ export type UserUncheckedCreateWithoutTenantProfileInput = {
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutTenantProfileInput = {
@@ -813,6 +855,8 @@ export type UserUpdateWithoutTenantProfileInput = {
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTenantProfileInput = {
@@ -838,6 +882,8 @@ export type UserUncheckedUpdateWithoutTenantProfileInput = {
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserCreateWithoutApplicationsInput = {
@@ -863,6 +909,8 @@ export type UserCreateWithoutApplicationsInput = {
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutApplicationsInput = {
@@ -888,6 +936,8 @@ export type UserUncheckedCreateWithoutApplicationsInput = {
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutApplicationsInput = {
@@ -918,6 +968,8 @@ export type UserCreateWithoutReviewedApplicaionsInput = {
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutTenantInput
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutReviewedApplicaionsInput = {
@@ -943,6 +995,8 @@ export type UserUncheckedCreateWithoutReviewedApplicaionsInput = {
   rentalPayments?: Prisma.RentalPaymentUncheckedCreateNestedManyWithoutTenantInput
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutReviewedApplicaionsInput = {
@@ -984,6 +1038,8 @@ export type UserUpdateWithoutApplicationsInput = {
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApplicationsInput = {
@@ -1009,6 +1065,8 @@ export type UserUncheckedUpdateWithoutApplicationsInput = {
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUpsertWithoutReviewedApplicaionsInput = {
@@ -1045,6 +1103,8 @@ export type UserUpdateWithoutReviewedApplicaionsInput = {
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutTenantNestedInput
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedApplicaionsInput = {
@@ -1070,6 +1130,8 @@ export type UserUncheckedUpdateWithoutReviewedApplicaionsInput = {
   rentalPayments?: Prisma.RentalPaymentUncheckedUpdateManyWithoutTenantNestedInput
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserCreateWithoutPropertyOwnerInput = {
@@ -1095,6 +1157,8 @@ export type UserCreateWithoutPropertyOwnerInput = {
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutPropertyOwnerInput = {
@@ -1120,6 +1184,8 @@ export type UserUncheckedCreateWithoutPropertyOwnerInput = {
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutPropertyOwnerInput = {
@@ -1161,6 +1227,8 @@ export type UserUpdateWithoutPropertyOwnerInput = {
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPropertyOwnerInput = {
@@ -1186,6 +1254,8 @@ export type UserUncheckedUpdateWithoutPropertyOwnerInput = {
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserCreateWithoutRentalPaymentsInput = {
@@ -1211,6 +1281,8 @@ export type UserCreateWithoutRentalPaymentsInput = {
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutRentalPaymentsInput = {
@@ -1236,6 +1308,8 @@ export type UserUncheckedCreateWithoutRentalPaymentsInput = {
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutRentalPaymentsInput = {
@@ -1277,6 +1351,8 @@ export type UserUpdateWithoutRentalPaymentsInput = {
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRentalPaymentsInput = {
@@ -1302,6 +1378,8 @@ export type UserUncheckedUpdateWithoutRentalPaymentsInput = {
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserCreateWithoutUploadedDocumentsInput = {
@@ -1327,6 +1405,8 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutTenantInput
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
@@ -1352,6 +1432,8 @@ export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   rentalPayments?: Prisma.RentalPaymentUncheckedCreateNestedManyWithoutTenantInput
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutUploadedDocumentsInput = {
@@ -1393,6 +1475,8 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutTenantNestedInput
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
@@ -1418,6 +1502,256 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   rentalPayments?: Prisma.RentalPaymentUncheckedUpdateManyWithoutTenantNestedInput
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
+}
+
+export type UserCreateWithoutRoomMateMatchAsAInput = {
+  id?: string
+  name: string
+  email: string
+  password?: string | null
+  isEmailVerified?: boolean | null
+  isGoogleVerified?: boolean | null
+  googleId?: string | null
+  gender?: $Enums.Gender
+  role?: $Enums.Role
+  status?: $Enums.UserStatus
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  propertyOwner?: Prisma.PropertyOwnerCreateNestedOneWithoutUserInput
+  tenantProfile?: Prisma.TenantProfileCreateNestedOneWithoutUserInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  tenancies?: Prisma.TenancyCreateNestedManyWithoutTenantInput
+  rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutTenantInput
+  billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
+  uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
+  reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
+}
+
+export type UserUncheckedCreateWithoutRoomMateMatchAsAInput = {
+  id?: string
+  name: string
+  email: string
+  password?: string | null
+  isEmailVerified?: boolean | null
+  isGoogleVerified?: boolean | null
+  googleId?: string | null
+  gender?: $Enums.Gender
+  role?: $Enums.Role
+  status?: $Enums.UserStatus
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  propertyOwner?: Prisma.PropertyOwnerUncheckedCreateNestedOneWithoutUserInput
+  tenantProfile?: Prisma.TenantProfileUncheckedCreateNestedOneWithoutUserInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  tenancies?: Prisma.TenancyUncheckedCreateNestedManyWithoutTenantInput
+  rentalPayments?: Prisma.RentalPaymentUncheckedCreateNestedManyWithoutTenantInput
+  billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
+  uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
+  reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
+}
+
+export type UserCreateOrConnectWithoutRoomMateMatchAsAInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsAInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsAInput>
+}
+
+export type UserCreateWithoutRoomMateMatchAsBInput = {
+  id?: string
+  name: string
+  email: string
+  password?: string | null
+  isEmailVerified?: boolean | null
+  isGoogleVerified?: boolean | null
+  googleId?: string | null
+  gender?: $Enums.Gender
+  role?: $Enums.Role
+  status?: $Enums.UserStatus
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  propertyOwner?: Prisma.PropertyOwnerCreateNestedOneWithoutUserInput
+  tenantProfile?: Prisma.TenantProfileCreateNestedOneWithoutUserInput
+  applications?: Prisma.ApplicationCreateNestedManyWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestCreateNestedManyWithoutTenantInput
+  tenancies?: Prisma.TenancyCreateNestedManyWithoutTenantInput
+  rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutTenantInput
+  billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
+  uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
+  reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+}
+
+export type UserUncheckedCreateWithoutRoomMateMatchAsBInput = {
+  id?: string
+  name: string
+  email: string
+  password?: string | null
+  isEmailVerified?: boolean | null
+  isGoogleVerified?: boolean | null
+  googleId?: string | null
+  gender?: $Enums.Gender
+  role?: $Enums.Role
+  status?: $Enums.UserStatus
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  propertyOwner?: Prisma.PropertyOwnerUncheckedCreateNestedOneWithoutUserInput
+  tenantProfile?: Prisma.TenantProfileUncheckedCreateNestedOneWithoutUserInput
+  applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutTenantInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutTenantInput
+  tenancies?: Prisma.TenancyUncheckedCreateNestedManyWithoutTenantInput
+  rentalPayments?: Prisma.RentalPaymentUncheckedCreateNestedManyWithoutTenantInput
+  billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
+  uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
+  reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+}
+
+export type UserCreateOrConnectWithoutRoomMateMatchAsBInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsBInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsBInput>
+}
+
+export type UserUpsertWithoutRoomMateMatchAsAInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRoomMateMatchAsAInput, Prisma.UserUncheckedUpdateWithoutRoomMateMatchAsAInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsAInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsAInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRoomMateMatchAsAInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRoomMateMatchAsAInput, Prisma.UserUncheckedUpdateWithoutRoomMateMatchAsAInput>
+}
+
+export type UserUpdateWithoutRoomMateMatchAsAInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isGoogleVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyOwner?: Prisma.PropertyOwnerUpdateOneWithoutUserNestedInput
+  tenantProfile?: Prisma.TenantProfileUpdateOneWithoutUserNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  tenancies?: Prisma.TenancyUpdateManyWithoutTenantNestedInput
+  rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutTenantNestedInput
+  billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
+  uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
+  reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRoomMateMatchAsAInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isGoogleVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyOwner?: Prisma.PropertyOwnerUncheckedUpdateOneWithoutUserNestedInput
+  tenantProfile?: Prisma.TenantProfileUncheckedUpdateOneWithoutUserNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  tenancies?: Prisma.TenancyUncheckedUpdateManyWithoutTenantNestedInput
+  rentalPayments?: Prisma.RentalPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
+  uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
+  reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
+}
+
+export type UserUpsertWithoutRoomMateMatchAsBInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRoomMateMatchAsBInput, Prisma.UserUncheckedUpdateWithoutRoomMateMatchAsBInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomMateMatchAsBInput, Prisma.UserUncheckedCreateWithoutRoomMateMatchAsBInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRoomMateMatchAsBInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRoomMateMatchAsBInput, Prisma.UserUncheckedUpdateWithoutRoomMateMatchAsBInput>
+}
+
+export type UserUpdateWithoutRoomMateMatchAsBInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isGoogleVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyOwner?: Prisma.PropertyOwnerUpdateOneWithoutUserNestedInput
+  tenantProfile?: Prisma.TenantProfileUpdateOneWithoutUserNestedInput
+  applications?: Prisma.ApplicationUpdateManyWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUpdateManyWithoutTenantNestedInput
+  tenancies?: Prisma.TenancyUpdateManyWithoutTenantNestedInput
+  rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutTenantNestedInput
+  billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
+  uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
+  reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+}
+
+export type UserUncheckedUpdateWithoutRoomMateMatchAsBInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  isGoogleVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyOwner?: Prisma.PropertyOwnerUncheckedUpdateOneWithoutUserNestedInput
+  tenantProfile?: Prisma.TenantProfileUncheckedUpdateOneWithoutUserNestedInput
+  applications?: Prisma.ApplicationUncheckedUpdateManyWithoutTenantNestedInput
+  viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutTenantNestedInput
+  tenancies?: Prisma.TenancyUncheckedUpdateManyWithoutTenantNestedInput
+  rentalPayments?: Prisma.RentalPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
+  uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
+  reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
 }
 
 export type UserCreateWithoutTenanciesInput = {
@@ -1443,6 +1777,8 @@ export type UserCreateWithoutTenanciesInput = {
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutTenanciesInput = {
@@ -1468,6 +1804,8 @@ export type UserUncheckedCreateWithoutTenanciesInput = {
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutTenanciesInput = {
@@ -1509,6 +1847,8 @@ export type UserUpdateWithoutTenanciesInput = {
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTenanciesInput = {
@@ -1534,6 +1874,8 @@ export type UserUncheckedUpdateWithoutTenanciesInput = {
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserCreateWithoutBillsharesInput = {
@@ -1559,6 +1901,8 @@ export type UserCreateWithoutBillsharesInput = {
   rentalPayments?: Prisma.RentalPaymentCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutBillsharesInput = {
@@ -1584,6 +1928,8 @@ export type UserUncheckedCreateWithoutBillsharesInput = {
   rentalPayments?: Prisma.RentalPaymentUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutBillsharesInput = {
@@ -1625,6 +1971,8 @@ export type UserUpdateWithoutBillsharesInput = {
   rentalPayments?: Prisma.RentalPaymentUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBillsharesInput = {
@@ -1650,6 +1998,8 @@ export type UserUncheckedUpdateWithoutBillsharesInput = {
   rentalPayments?: Prisma.RentalPaymentUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserCreateWithoutViewingRequestsInput = {
@@ -1675,6 +2025,8 @@ export type UserCreateWithoutViewingRequestsInput = {
   billshares?: Prisma.UtilityBillShareCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchCreateNestedManyWithoutTenantBInput
 }
 
 export type UserUncheckedCreateWithoutViewingRequestsInput = {
@@ -1700,6 +2052,8 @@ export type UserUncheckedCreateWithoutViewingRequestsInput = {
   billshares?: Prisma.UtilityBillShareUncheckedCreateNestedManyWithoutTenantInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedCreateNestedManyWithoutUploaderInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantAInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedCreateNestedManyWithoutTenantBInput
 }
 
 export type UserCreateOrConnectWithoutViewingRequestsInput = {
@@ -1741,6 +2095,8 @@ export type UserUpdateWithoutViewingRequestsInput = {
   billshares?: Prisma.UtilityBillShareUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUpdateManyWithoutTenantBNestedInput
 }
 
 export type UserUncheckedUpdateWithoutViewingRequestsInput = {
@@ -1766,6 +2122,8 @@ export type UserUncheckedUpdateWithoutViewingRequestsInput = {
   billshares?: Prisma.UtilityBillShareUncheckedUpdateManyWithoutTenantNestedInput
   uploadedDocuments?: Prisma.RentalDocumentsUncheckedUpdateManyWithoutUploaderNestedInput
   reviewedApplicaions?: Prisma.ApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  roomMateMatchAsA?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantANestedInput
+  roomMateMatchAsB?: Prisma.RoomMateMatchUncheckedUpdateManyWithoutTenantBNestedInput
 }
 
 
@@ -1781,6 +2139,8 @@ export type UserCountOutputType = {
   billshares: number
   uploadedDocuments: number
   reviewedApplicaions: number
+  roomMateMatchAsA: number
+  roomMateMatchAsB: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1791,6 +2151,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   billshares?: boolean | UserCountOutputTypeCountBillsharesArgs
   uploadedDocuments?: boolean | UserCountOutputTypeCountUploadedDocumentsArgs
   reviewedApplicaions?: boolean | UserCountOutputTypeCountReviewedApplicaionsArgs
+  roomMateMatchAsA?: boolean | UserCountOutputTypeCountRoomMateMatchAsAArgs
+  roomMateMatchAsB?: boolean | UserCountOutputTypeCountRoomMateMatchAsBArgs
 }
 
 /**
@@ -1852,6 +2214,20 @@ export type UserCountOutputTypeCountReviewedApplicaionsArgs<ExtArgs extends runt
   where?: Prisma.ApplicationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRoomMateMatchAsAArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomMateMatchWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRoomMateMatchAsBArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomMateMatchWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1877,6 +2253,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   billshares?: boolean | Prisma.User$billsharesArgs<ExtArgs>
   uploadedDocuments?: boolean | Prisma.User$uploadedDocumentsArgs<ExtArgs>
   reviewedApplicaions?: boolean | Prisma.User$reviewedApplicaionsArgs<ExtArgs>
+  roomMateMatchAsA?: boolean | Prisma.User$roomMateMatchAsAArgs<ExtArgs>
+  roomMateMatchAsB?: boolean | Prisma.User$roomMateMatchAsBArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1942,6 +2320,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   billshares?: boolean | Prisma.User$billsharesArgs<ExtArgs>
   uploadedDocuments?: boolean | Prisma.User$uploadedDocumentsArgs<ExtArgs>
   reviewedApplicaions?: boolean | Prisma.User$reviewedApplicaionsArgs<ExtArgs>
+  roomMateMatchAsA?: boolean | Prisma.User$roomMateMatchAsAArgs<ExtArgs>
+  roomMateMatchAsB?: boolean | Prisma.User$roomMateMatchAsBArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1959,6 +2339,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     billshares: Prisma.$UtilityBillSharePayload<ExtArgs>[]
     uploadedDocuments: Prisma.$RentalDocumentsPayload<ExtArgs>[]
     reviewedApplicaions: Prisma.$ApplicationPayload<ExtArgs>[]
+    roomMateMatchAsA: Prisma.$RoomMateMatchPayload<ExtArgs>[]
+    roomMateMatchAsB: Prisma.$RoomMateMatchPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2378,6 +2760,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   billshares<T extends Prisma.User$billsharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$billsharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityBillSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploadedDocuments<T extends Prisma.User$uploadedDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedApplicaions<T extends Prisma.User$reviewedApplicaionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedApplicaionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roomMateMatchAsA<T extends Prisma.User$roomMateMatchAsAArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roomMateMatchAsAArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomMateMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roomMateMatchAsB<T extends Prisma.User$roomMateMatchAsBArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roomMateMatchAsBArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomMateMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3017,6 +3401,54 @@ export type User$reviewedApplicaionsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.ApplicationScalarFieldEnum | Prisma.ApplicationScalarFieldEnum[]
+}
+
+/**
+ * User.roomMateMatchAsA
+ */
+export type User$roomMateMatchAsAArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoomMateMatch
+   */
+  select?: Prisma.RoomMateMatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoomMateMatch
+   */
+  omit?: Prisma.RoomMateMatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomMateMatchInclude<ExtArgs> | null
+  where?: Prisma.RoomMateMatchWhereInput
+  orderBy?: Prisma.RoomMateMatchOrderByWithRelationInput | Prisma.RoomMateMatchOrderByWithRelationInput[]
+  cursor?: Prisma.RoomMateMatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomMateMatchScalarFieldEnum | Prisma.RoomMateMatchScalarFieldEnum[]
+}
+
+/**
+ * User.roomMateMatchAsB
+ */
+export type User$roomMateMatchAsBArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoomMateMatch
+   */
+  select?: Prisma.RoomMateMatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoomMateMatch
+   */
+  omit?: Prisma.RoomMateMatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomMateMatchInclude<ExtArgs> | null
+  where?: Prisma.RoomMateMatchWhereInput
+  orderBy?: Prisma.RoomMateMatchOrderByWithRelationInput | Prisma.RoomMateMatchOrderByWithRelationInput[]
+  cursor?: Prisma.RoomMateMatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomMateMatchScalarFieldEnum | Prisma.RoomMateMatchScalarFieldEnum[]
 }
 
 /**
