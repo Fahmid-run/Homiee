@@ -89,10 +89,12 @@ enum PaymentStatus {
     CANCELLED
     REFUNDED
     EXPIRED
+    PROCESSING
 }
 
 enum PaymentMethod {
     STRIPE
+    BKASH
 }
 
 //Utility
@@ -114,6 +116,7 @@ enum BillShareStatus {
     FAILED
     CANCELLED
     REFUNDED
+
     EXPIRED
 }
 

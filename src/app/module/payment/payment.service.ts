@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import {
+  BillShareStatus,
   PaymentMethod,
   PaymentStatus,
 } from "../../../../prisma/generated/prisma/enums";
@@ -10,16 +11,41 @@ import { checkExists } from "../../utils/checkExist";
 import httpstatus from "http-status";
 
 //STRIPE PAYMENT INTEGRATION
-const createCheckoutSession = async (tenancyID: string) => {
-  const tenancyExists = await checkExists(
-    prisma.tenancy,
-    tenancyID,
-    "Tenancy Does Not Exists",
-  );
-
-  const existingPayment = await prisma.rentalPayment.findUnique({
+const createBillStripeCheckout = async (
+  billShareId: string,
+  tenantId: string,
+) => {
+  const billShare = await prisma.utilityBillShare.findUnique({
     where: {
-      tenancyID,
+      id: billShareId,
+    },
+    include: {
+      bill: true,
+      tenant: true,
+    },
+  });
+
+  if (!billShare) {
+    throw new AppError("Bill share not found", httpstatus.NOT_FOUND);
+  }
+
+  // Make sure this bill belongs to the logged-in tenant
+  if (billShare.tenantId !== tenantId) {
+    throw new AppError("Forbidden", httpstatus.FORBIDDEN);
+  }
+
+  // Already paid?
+  if (billShare.status === BillShareStatus.PAID) {
+    throw new AppError("Bill already paid", httpstatus.BAD_REQUEST);
+  }
+
+  // Check if there is already an active payment
+  const existingPayment = await prisma.billPayment.findFirst({
+    where: {
+      billShareId,
+      status: {
+        in: [PaymentStatus.PENDING],
+      },
     },
   });
 
@@ -27,97 +53,123 @@ const createCheckoutSession = async (tenancyID: string) => {
     throw new AppError("Payment already initiated", httpstatus.BAD_REQUEST);
   }
 
+  // Create YOUR payment first
+  const payment = await prisma.billPayment.create({
+    data: {
+      billShareId,
+      provider: PaymentMethod.STRIPE,
+      amount: billShare.amount,
+      currency: "BDT",
+      reference: `BILL-${crypto.randomUUID()}`,
+      status: PaymentStatus.PENDING,
+    },
+  });
+
+  // Create Stripe checkout
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
+
     line_items: [
       {
         price_data: {
           currency: "usd",
           product_data: {
-            name: "House Rent",
+            name: "Utility Bill",
           },
-          unit_amount: Math.round(tenancyExists.monthlyRent * 100),
+          unit_amount: billShare.amount,
         },
         quantity: 1,
       },
     ],
+
     metadata: {
-      tenancyID,
+      paymentId: payment.id,
     },
 
-    success_url: `${process.env.CLIENT_URL}/dashboard/customer/checkout/success/${tenancyID}`,
+    success_url: `${process.env.CLIENT_URL}/dashboard/customer/payment/success`,
 
-    cancel_url: `${process.env.CLIENT_URL}/dashboard/customer/checkout/cancel`,
+    cancel_url: `${process.env.CLIENT_URL}/dashboard/customer/payment/cancel`,
   });
 
-  const payment = await prisma.rentalPayment.create({
+  // Save Stripe session
+  const updatedPayment = await prisma.billPayment.update({
+    where: {
+      id: payment.id,
+    },
     data: {
-      tenancyID,
-      amount: tenancyExists.totalAmount,
-      currency: "usd",
-      paymentMethod: PaymentMethod.STRIPE,
-      status: PaymentStatus.PENDING,
+      stripeSessionId: session.id,
+      status: PaymentStatus.PROCESSING,
     },
   });
 
   return {
-    payment,
+    payment: updatedPayment,
     checkoutUrl: session.url,
   };
 };
 
-const handleCheckoutSuccess = async (session: Stripe.Checkout.Session) => {
-  const tenancyID = session.metadata?.tenancyID;
-
-  if (!tenancyID) {
-    throw new AppError("tenancy ID missing", httpstatus.NOT_FOUND);
+const handleStripeWebhook = async (event: Stripe.Event) => {
+  if (event.type !== "checkout.session.completed") {
+    return;
   }
 
-  const payment = await prisma.rentalPayment.findUnique({
-    where: {
-      tenancyID,
-    },
-  });
+  const session = event.data.object as Stripe.Checkout.Session;
 
-  if (!payment) {
-    throw new AppError("Payment not found", 404);
+  const paymentId = session.metadata?.paymentId;
+
+  if (!paymentId) {
+    throw new AppError("Payment ID missing", httpstatus.BAD_REQUEST);
   }
 
-  if (payment.status === PaymentStatus.PAID) {
-    return payment;
-  }
+  await completeBillPayment(paymentId, session.id);
+};
 
-  const result = await prisma.$transaction(async (tx) => {
-    const updatedPayment = await tx.rentalPayment.update({
+const completeBillPayment = async (
+  paymentId: string,
+  transactionId: string,
+) => {
+  return prisma.$transaction(async (tx) => {
+    const payment = await tx.billPayment.findUnique({
       where: {
-        id: payment.id,
+        id: paymentId,
       },
+    });
 
+    if (!payment) {
+      throw new AppError("Payment not found", httpstatus.NOT_FOUND);
+    }
+
+    // Webhook can arrive multiple times
+    if (payment.status === PaymentStatus.PAID) {
+      return payment;
+    }
+
+    // Mark payment paid
+    const updatedPayment = await tx.billPayment.update({
+      where: {
+        id: paymentId,
+      },
       data: {
         status: PaymentStatus.PAID,
-
-        transactionId: session.id,
-
+        gatewayReference: transactionId,
         paidAt: new Date(),
       },
     });
 
-    // await tx.rentalOrder.update({
-    //   where: {
-    //     id: rentalOrderId,
-    //   },
-
-    //   data: {
-    //     rentalStatus: Rental_Status.PAID,
-    //   },
-    // });
+    // Mark individual bill share paid
+    await tx.utilityBillShare.update({
+      where: {
+        id: payment.billShareId,
+      },
+      data: {
+        status: BillShareStatus.PAID,
+        paidAt: new Date(),
+      },
+    });
 
     return updatedPayment;
   });
-
-  return result;
 };
-
 //BKASH PAYMENT INTEGRATION
 
 // const getSinglePayment = async (rentalOrderId: string) => {
@@ -150,4 +202,7 @@ const handleCheckoutSuccess = async (session: Stripe.Checkout.Session) => {
 //   });
 // };
 
-export const paymentService = { createCheckoutSession, handleCheckoutSuccess };
+export const paymentService = {
+  createBillStripeCheckout,
+  handleStripeWebhook,
+};

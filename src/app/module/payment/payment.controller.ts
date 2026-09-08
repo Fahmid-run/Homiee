@@ -7,13 +7,19 @@ import { paymentService } from "./payment.service";
 import httpStatus from "http-status";
 
 const createCheckoutSession = catchAsync(async (req, res) => {
-  const tenancyID = req.params.tenancyID as string;
-  const result = await paymentService.createCheckoutSession(tenancyID);
+  const { billShareId } = req.body;
+
+  const tenantId = req.user?.authorId as string;
+
+  const result = await paymentService.createBillStripeCheckout(
+    billShareId,
+    tenantId,
+  );
 
   sendResponse(res, {
+    statusCode: httpStatus.OK,
     success: true,
-    statusCode: httpStatus.CREATED,
-    message: "Checkout Session Created",
+    message: "Checkout created",
     data: result,
   });
 });

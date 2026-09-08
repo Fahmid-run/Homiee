@@ -213,8 +213,8 @@ const createBill = async (ownerId: string, roomId: string, payload) => {
   //   throw new AppError("bill already exists", httpstatus.NOT_FOUND);
   // }
 
-  const transaction = await prisma.$transaction(async () => {
-    const billCreate = await prisma.utilityBill.create({
+  const transaction = await prisma.$transaction(async (tx) => {
+    const billCreate = await tx.utilityBill.create({
       data: {
         type,
         description,
@@ -225,30 +225,48 @@ const createBill = async (ownerId: string, roomId: string, payload) => {
         status,
         roomId,
       },
+    });
+
+    const tenants = await tx.tenancy.findMany({
+      where: {
+        roomId,
+        status: TenancyStatus.ACTIVE,
+      },
+    });
+
+    if (tenants.length === 0) {
+      throw new AppError(
+        "No active tenants in this room",
+        httpstatus.BAD_REQUEST,
+      );
+    }
+
+    const baseAmount = Math.floor(billCreate.totalAmount / tenants.length);
+
+    const remainder = billCreate.totalAmount % tenants.length;
+
+    for (let i = 0; i < tenants.length; i++) {
+      const amount = baseAmount + (i < remainder ? 1 : 0);
+
+      await tx.utilityBillShare.create({
+        data: {
+          billid: billCreate.id,
+          tenantId: tenants[i].tenantId,
+          tenancyId: tenants[i].id,
+          amount,
+          dueDate: billCreate.dueDate,
+        },
+      });
+    }
+
+    return tx.utilityBill.findUnique({
+      where: {
+        id: billCreate.id,
+      },
       include: {
         shares: true,
       },
     });
-
-    const findTheRoomMate = await prisma.tenancy.findMany({
-      where: {
-        roomId,
-      },
-    });
-
-    findTheRoomMate.forEach(async (element) => {
-      const shareBill = await prisma.utilityBillShare.create({
-        data: {
-          billid: billCreate.id,
-          tenantId: element.tenantId,
-          tenancyId: element.id,
-          amount: billCreate.totalAmount / findTheRoomMate.length,
-          dueDate: billCreate.dueDate,
-        },
-      });
-    });
-
-    return billCreate;
   });
 
   return transaction;

@@ -28,6 +28,4 @@ router.post(
   tenantController.createRoomMatePreference,
 );
 
-// router.get("/", roomController.getAllRooms);
-
 export const TenantRoutes = router;
