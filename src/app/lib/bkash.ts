@@ -1,6 +1,6 @@
 import { configs } from "../config";
 
-const getGrandToken = async () => {
+export const getGrandToken = async () => {
   const res = await fetch(
     `${configs.bkash_baseUrl}/tokenized/checkout/token/grant`,
     {
@@ -9,7 +9,6 @@ const getGrandToken = async () => {
         "Content-Type": "application/json",
         accept: "application/json",
         username: configs.bkash_username,
-
         password: configs.bkash_password,
       },
       body: JSON.stringify({

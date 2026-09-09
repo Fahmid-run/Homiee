@@ -5,12 +5,12 @@ import { paymentController } from "./payment.controller";
 
 const router = Router();
 
-// router.post(
-//   "/rent/checkout-session/:tenancyID",
-//   auth(Role.TENANT),
-//   paymentController.createCheckoutSession,
-// );
+router.post(
+  "/bill/",
+  auth(Role.TENANT),
+  paymentController.createBillCheckoutSession,
+);
 
-// router.post("/rent/webhook", paymentController.webhook);
+router.post("/bill-shares/webhook", paymentController.billwebhook);
 
 export const paymentRoute = router;

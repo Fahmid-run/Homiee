@@ -7,7 +7,6 @@ import {
 import { stripe } from "../../config/stripe";
 import { prisma } from "../../lib/prisma";
 import AppError from "../../utils/appError";
-import { checkExists } from "../../utils/checkExist";
 import httpstatus from "http-status";
 
 //STRIPE PAYMENT INTEGRATION
@@ -29,22 +28,19 @@ const createBillStripeCheckout = async (
     throw new AppError("Bill share not found", httpstatus.NOT_FOUND);
   }
 
-  // Make sure this bill belongs to the logged-in tenant
   if (billShare.tenantId !== tenantId) {
     throw new AppError("Forbidden", httpstatus.FORBIDDEN);
   }
 
-  // Already paid?
   if (billShare.status === BillShareStatus.PAID) {
     throw new AppError("Bill already paid", httpstatus.BAD_REQUEST);
   }
 
-  // Check if there is already an active payment
   const existingPayment = await prisma.billPayment.findFirst({
     where: {
       billShareId,
       status: {
-        in: [PaymentStatus.PENDING],
+        in: [PaymentStatus.PENDING, PaymentStatus.PROCESSING],
       },
     },
   });
@@ -53,7 +49,6 @@ const createBillStripeCheckout = async (
     throw new AppError("Payment already initiated", httpstatus.BAD_REQUEST);
   }
 
-  // Create YOUR payment first
   const payment = await prisma.billPayment.create({
     data: {
       billShareId,
@@ -65,7 +60,6 @@ const createBillStripeCheckout = async (
     },
   });
 
-  // Create Stripe checkout
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
 
@@ -91,7 +85,6 @@ const createBillStripeCheckout = async (
     cancel_url: `${process.env.CLIENT_URL}/dashboard/customer/payment/cancel`,
   });
 
-  // Save Stripe session
   const updatedPayment = await prisma.billPayment.update({
     where: {
       id: payment.id,
@@ -108,13 +101,7 @@ const createBillStripeCheckout = async (
   };
 };
 
-const handleStripeWebhook = async (event: Stripe.Event) => {
-  if (event.type !== "checkout.session.completed") {
-    return;
-  }
-
-  const session = event.data.object as Stripe.Checkout.Session;
-
+const handleStripeWebhook = async (session: Stripe.Checkout.Session) => {
   const paymentId = session.metadata?.paymentId;
 
   if (!paymentId) {
@@ -139,12 +126,10 @@ const completeBillPayment = async (
       throw new AppError("Payment not found", httpstatus.NOT_FOUND);
     }
 
-    // Webhook can arrive multiple times
     if (payment.status === PaymentStatus.PAID) {
       return payment;
     }
 
-    // Mark payment paid
     const updatedPayment = await tx.billPayment.update({
       where: {
         id: paymentId,
@@ -156,7 +141,6 @@ const completeBillPayment = async (
       },
     });
 
-    // Mark individual bill share paid
     await tx.utilityBillShare.update({
       where: {
         id: payment.billShareId,
@@ -170,6 +154,7 @@ const completeBillPayment = async (
     return updatedPayment;
   });
 };
+
 //BKASH PAYMENT INTEGRATION
 
 // const getSinglePayment = async (rentalOrderId: string) => {
@@ -184,7 +169,7 @@ const completeBillPayment = async (
 //   });
 // };
 
-// const getAllPayments = async () => {
+// const getAllBillPayments = async () => {
 //   return prisma.payment.findMany();
 // };
 

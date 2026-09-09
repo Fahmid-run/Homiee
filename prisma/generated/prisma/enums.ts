@@ -123,14 +123,16 @@ export const PaymentStatus = {
   FAILED: 'FAILED',
   CANCELLED: 'CANCELLED',
   REFUNDED: 'REFUNDED',
-  EXPIRED: 'EXPIRED'
+  EXPIRED: 'EXPIRED',
+  PROCESSING: 'PROCESSING'
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 
 export const PaymentMethod = {
-  STRIPE: 'STRIPE'
+  STRIPE: 'STRIPE',
+  BKASH: 'BKASH'
 } as const
 
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
