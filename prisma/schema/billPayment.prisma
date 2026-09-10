@@ -6,6 +6,7 @@ model BillPayment {
 
   currency  String @default("BDT")
   reference String @unique
+  amount    Int
 
   stripeSessionId    String? @unique
   stripePaymentId    String? @unique

@@ -1,5 +1,3 @@
-
-
 # Dependencies
 node_modules/
 /.pnp
@@ -11,7 +9,7 @@ node_modules/
 *.tsbuildinfo
 
 # Prisma
-/generated/prisma
+prisma/generated/prisma
 prisma/migrations/
 !prisma/migrations/migration_lock.toml
 

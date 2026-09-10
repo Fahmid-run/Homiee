@@ -8,6 +8,7 @@ import { stripe } from "../../config/stripe";
 import { prisma } from "../../lib/prisma";
 import AppError from "../../utils/appError";
 import httpstatus from "http-status";
+import { configs } from "../../config";
 
 //STRIPE PAYMENT INTEGRATION
 const createBillStripeCheckout = async (
@@ -54,7 +55,7 @@ const createBillStripeCheckout = async (
       billShareId,
       provider: PaymentMethod.STRIPE,
       amount: billShare.amount,
-      currency: "BDT",
+      currency: "USD",
       reference: `BILL-${crypto.randomUUID()}`,
       status: PaymentStatus.PENDING,
     },
@@ -80,9 +81,9 @@ const createBillStripeCheckout = async (
       paymentId: payment.id,
     },
 
-    success_url: `${process.env.CLIENT_URL}/dashboard/customer/payment/success`,
+    success_url: `${configs.frontend_url}/dashboard/customer/payment/success`,
 
-    cancel_url: `${process.env.CLIENT_URL}/dashboard/customer/payment/cancel`,
+    cancel_url: `${configs.frontend_url}/dashboard/customer/payment/cancel`,
   });
 
   const updatedPayment = await prisma.billPayment.update({

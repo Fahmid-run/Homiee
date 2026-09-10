@@ -9,7 +9,7 @@ import httpStatus from "http-status";
 
 const createBillCheckoutSession = catchAsync(async (req, res) => {
   const { billShareId, paymentProvider } = req.body;
-  const tenantId = req.user?.authorId as string;
+  const tenantId = req.user?.userId as string;
 
   if (paymentProvider === PaymentMethod.STRIPE) {
     const result = await paymentService.createBillStripeCheckout(

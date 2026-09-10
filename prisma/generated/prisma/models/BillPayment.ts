@@ -20,8 +20,18 @@ export type BillPaymentModel = runtime.Types.Result.DefaultSelection<Prisma.$Bil
 
 export type AggregateBillPayment = {
   _count: BillPaymentCountAggregateOutputType | null
+  _avg: BillPaymentAvgAggregateOutputType | null
+  _sum: BillPaymentSumAggregateOutputType | null
   _min: BillPaymentMinAggregateOutputType | null
   _max: BillPaymentMaxAggregateOutputType | null
+}
+
+export type BillPaymentAvgAggregateOutputType = {
+  amount: number | null
+}
+
+export type BillPaymentSumAggregateOutputType = {
+  amount: number | null
 }
 
 export type BillPaymentMinAggregateOutputType = {
@@ -31,6 +41,7 @@ export type BillPaymentMinAggregateOutputType = {
   status: $Enums.PaymentStatus | null
   currency: string | null
   reference: string | null
+  amount: number | null
   stripeSessionId: string | null
   stripePaymentId: string | null
   bkashTransactionId: string | null
@@ -48,6 +59,7 @@ export type BillPaymentMaxAggregateOutputType = {
   status: $Enums.PaymentStatus | null
   currency: string | null
   reference: string | null
+  amount: number | null
   stripeSessionId: string | null
   stripePaymentId: string | null
   bkashTransactionId: string | null
@@ -65,6 +77,7 @@ export type BillPaymentCountAggregateOutputType = {
   status: number
   currency: number
   reference: number
+  amount: number
   stripeSessionId: number
   stripePaymentId: number
   bkashTransactionId: number
@@ -77,6 +90,14 @@ export type BillPaymentCountAggregateOutputType = {
 }
 
 
+export type BillPaymentAvgAggregateInputType = {
+  amount?: true
+}
+
+export type BillPaymentSumAggregateInputType = {
+  amount?: true
+}
+
 export type BillPaymentMinAggregateInputType = {
   id?: true
   billShareId?: true
@@ -84,6 +105,7 @@ export type BillPaymentMinAggregateInputType = {
   status?: true
   currency?: true
   reference?: true
+  amount?: true
   stripeSessionId?: true
   stripePaymentId?: true
   bkashTransactionId?: true
@@ -101,6 +123,7 @@ export type BillPaymentMaxAggregateInputType = {
   status?: true
   currency?: true
   reference?: true
+  amount?: true
   stripeSessionId?: true
   stripePaymentId?: true
   bkashTransactionId?: true
@@ -118,6 +141,7 @@ export type BillPaymentCountAggregateInputType = {
   status?: true
   currency?: true
   reference?: true
+  amount?: true
   stripeSessionId?: true
   stripePaymentId?: true
   bkashTransactionId?: true
@@ -167,6 +191,18 @@ export type BillPaymentAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BillPaymentAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BillPaymentSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BillPaymentMinAggregateInputType
@@ -197,6 +233,8 @@ export type BillPaymentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: BillPaymentCountAggregateInputType | true
+  _avg?: BillPaymentAvgAggregateInputType
+  _sum?: BillPaymentSumAggregateInputType
   _min?: BillPaymentMinAggregateInputType
   _max?: BillPaymentMaxAggregateInputType
 }
@@ -208,6 +246,7 @@ export type BillPaymentGroupByOutputType = {
   status: $Enums.PaymentStatus
   currency: string
   reference: string
+  amount: number
   stripeSessionId: string | null
   stripePaymentId: string | null
   bkashTransactionId: string | null
@@ -217,6 +256,8 @@ export type BillPaymentGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: BillPaymentCountAggregateOutputType | null
+  _avg: BillPaymentAvgAggregateOutputType | null
+  _sum: BillPaymentSumAggregateOutputType | null
   _min: BillPaymentMinAggregateOutputType | null
   _max: BillPaymentMaxAggregateOutputType | null
 }
@@ -246,6 +287,7 @@ export type BillPaymentWhereInput = {
   status?: Prisma.EnumPaymentStatusFilter<"BillPayment"> | $Enums.PaymentStatus
   currency?: Prisma.StringFilter<"BillPayment"> | string
   reference?: Prisma.StringFilter<"BillPayment"> | string
+  amount?: Prisma.IntFilter<"BillPayment"> | number
   stripeSessionId?: Prisma.StringNullableFilter<"BillPayment"> | string | null
   stripePaymentId?: Prisma.StringNullableFilter<"BillPayment"> | string | null
   bkashTransactionId?: Prisma.StringNullableFilter<"BillPayment"> | string | null
@@ -264,6 +306,7 @@ export type BillPaymentOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   reference?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   stripeSessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -289,6 +332,7 @@ export type BillPaymentWhereUniqueInput = Prisma.AtLeast<{
   provider?: Prisma.EnumPaymentMethodFilter<"BillPayment"> | $Enums.PaymentMethod
   status?: Prisma.EnumPaymentStatusFilter<"BillPayment"> | $Enums.PaymentStatus
   currency?: Prisma.StringFilter<"BillPayment"> | string
+  amount?: Prisma.IntFilter<"BillPayment"> | number
   gatewayReference?: Prisma.StringNullableFilter<"BillPayment"> | string | null
   paidAt?: Prisma.DateTimeNullableFilter<"BillPayment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"BillPayment"> | Date | string
@@ -303,6 +347,7 @@ export type BillPaymentOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   reference?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   stripeSessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -312,8 +357,10 @@ export type BillPaymentOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BillPaymentCountOrderByAggregateInput
+  _avg?: Prisma.BillPaymentAvgOrderByAggregateInput
   _max?: Prisma.BillPaymentMaxOrderByAggregateInput
   _min?: Prisma.BillPaymentMinOrderByAggregateInput
+  _sum?: Prisma.BillPaymentSumOrderByAggregateInput
 }
 
 export type BillPaymentScalarWhereWithAggregatesInput = {
@@ -326,6 +373,7 @@ export type BillPaymentScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumPaymentStatusWithAggregatesFilter<"BillPayment"> | $Enums.PaymentStatus
   currency?: Prisma.StringWithAggregatesFilter<"BillPayment"> | string
   reference?: Prisma.StringWithAggregatesFilter<"BillPayment"> | string
+  amount?: Prisma.IntWithAggregatesFilter<"BillPayment"> | number
   stripeSessionId?: Prisma.StringNullableWithAggregatesFilter<"BillPayment"> | string | null
   stripePaymentId?: Prisma.StringNullableWithAggregatesFilter<"BillPayment"> | string | null
   bkashTransactionId?: Prisma.StringNullableWithAggregatesFilter<"BillPayment"> | string | null
@@ -342,6 +390,7 @@ export type BillPaymentCreateInput = {
   status?: $Enums.PaymentStatus
   currency?: string
   reference: string
+  amount: number
   stripeSessionId?: string | null
   stripePaymentId?: string | null
   bkashTransactionId?: string | null
@@ -360,6 +409,7 @@ export type BillPaymentUncheckedCreateInput = {
   status?: $Enums.PaymentStatus
   currency?: string
   reference: string
+  amount: number
   stripeSessionId?: string | null
   stripePaymentId?: string | null
   bkashTransactionId?: string | null
@@ -376,6 +426,7 @@ export type BillPaymentUpdateInput = {
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -394,6 +445,7 @@ export type BillPaymentUncheckedUpdateInput = {
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -411,6 +463,7 @@ export type BillPaymentCreateManyInput = {
   status?: $Enums.PaymentStatus
   currency?: string
   reference: string
+  amount: number
   stripeSessionId?: string | null
   stripePaymentId?: string | null
   bkashTransactionId?: string | null
@@ -427,6 +480,7 @@ export type BillPaymentUpdateManyMutationInput = {
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -444,6 +498,7 @@ export type BillPaymentUncheckedUpdateManyInput = {
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -461,6 +516,7 @@ export type BillPaymentCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   reference?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   stripeSessionId?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrder
@@ -471,6 +527,10 @@ export type BillPaymentCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type BillPaymentAvgOrderByAggregateInput = {
+  amount?: Prisma.SortOrder
+}
+
 export type BillPaymentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   billShareId?: Prisma.SortOrder
@@ -478,6 +538,7 @@ export type BillPaymentMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   reference?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   stripeSessionId?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrder
@@ -495,6 +556,7 @@ export type BillPaymentMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   reference?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   stripeSessionId?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrder
@@ -503,6 +565,10 @@ export type BillPaymentMinOrderByAggregateInput = {
   paidAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type BillPaymentSumOrderByAggregateInput = {
+  amount?: Prisma.SortOrder
 }
 
 export type BillPaymentListRelationFilter = {
@@ -521,6 +587,14 @@ export type EnumPaymentMethodFieldUpdateOperationsInput = {
 
 export type EnumPaymentStatusFieldUpdateOperationsInput = {
   set?: $Enums.PaymentStatus
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type BillPaymentCreateNestedManyWithoutBillShareInput = {
@@ -571,6 +645,7 @@ export type BillPaymentCreateWithoutBillShareInput = {
   status?: $Enums.PaymentStatus
   currency?: string
   reference: string
+  amount: number
   stripeSessionId?: string | null
   stripePaymentId?: string | null
   bkashTransactionId?: string | null
@@ -587,6 +662,7 @@ export type BillPaymentUncheckedCreateWithoutBillShareInput = {
   status?: $Enums.PaymentStatus
   currency?: string
   reference: string
+  amount: number
   stripeSessionId?: string | null
   stripePaymentId?: string | null
   bkashTransactionId?: string | null
@@ -633,6 +709,7 @@ export type BillPaymentScalarWhereInput = {
   status?: Prisma.EnumPaymentStatusFilter<"BillPayment"> | $Enums.PaymentStatus
   currency?: Prisma.StringFilter<"BillPayment"> | string
   reference?: Prisma.StringFilter<"BillPayment"> | string
+  amount?: Prisma.IntFilter<"BillPayment"> | number
   stripeSessionId?: Prisma.StringNullableFilter<"BillPayment"> | string | null
   stripePaymentId?: Prisma.StringNullableFilter<"BillPayment"> | string | null
   bkashTransactionId?: Prisma.StringNullableFilter<"BillPayment"> | string | null
@@ -649,6 +726,7 @@ export type BillPaymentCreateManyBillShareInput = {
   status?: $Enums.PaymentStatus
   currency?: string
   reference: string
+  amount: number
   stripeSessionId?: string | null
   stripePaymentId?: string | null
   bkashTransactionId?: string | null
@@ -665,6 +743,7 @@ export type BillPaymentUpdateWithoutBillShareInput = {
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -681,6 +760,7 @@ export type BillPaymentUncheckedUpdateWithoutBillShareInput = {
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -697,6 +777,7 @@ export type BillPaymentUncheckedUpdateManyWithoutBillShareInput = {
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   reference?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
   stripeSessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -716,6 +797,7 @@ export type BillPaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   status?: boolean
   currency?: boolean
   reference?: boolean
+  amount?: boolean
   stripeSessionId?: boolean
   stripePaymentId?: boolean
   bkashTransactionId?: boolean
@@ -734,6 +816,7 @@ export type BillPaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   status?: boolean
   currency?: boolean
   reference?: boolean
+  amount?: boolean
   stripeSessionId?: boolean
   stripePaymentId?: boolean
   bkashTransactionId?: boolean
@@ -752,6 +835,7 @@ export type BillPaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   status?: boolean
   currency?: boolean
   reference?: boolean
+  amount?: boolean
   stripeSessionId?: boolean
   stripePaymentId?: boolean
   bkashTransactionId?: boolean
@@ -770,6 +854,7 @@ export type BillPaymentSelectScalar = {
   status?: boolean
   currency?: boolean
   reference?: boolean
+  amount?: boolean
   stripeSessionId?: boolean
   stripePaymentId?: boolean
   bkashTransactionId?: boolean
@@ -780,7 +865,7 @@ export type BillPaymentSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BillPaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "billShareId" | "provider" | "status" | "currency" | "reference" | "stripeSessionId" | "stripePaymentId" | "bkashTransactionId" | "bkashPaymentId" | "gatewayReference" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["billPayment"]>
+export type BillPaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "billShareId" | "provider" | "status" | "currency" | "reference" | "amount" | "stripeSessionId" | "stripePaymentId" | "bkashTransactionId" | "bkashPaymentId" | "gatewayReference" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["billPayment"]>
 export type BillPaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   billShare?: boolean | Prisma.UtilityBillShareDefaultArgs<ExtArgs>
 }
@@ -803,6 +888,7 @@ export type $BillPaymentPayload<ExtArgs extends runtime.Types.Extensions.Interna
     status: $Enums.PaymentStatus
     currency: string
     reference: string
+    amount: number
     stripeSessionId: string | null
     stripePaymentId: string | null
     bkashTransactionId: string | null
@@ -1241,6 +1327,7 @@ export interface BillPaymentFieldRefs {
   readonly status: Prisma.FieldRef<"BillPayment", 'PaymentStatus'>
   readonly currency: Prisma.FieldRef<"BillPayment", 'String'>
   readonly reference: Prisma.FieldRef<"BillPayment", 'String'>
+  readonly amount: Prisma.FieldRef<"BillPayment", 'Int'>
   readonly stripeSessionId: Prisma.FieldRef<"BillPayment", 'String'>
   readonly stripePaymentId: Prisma.FieldRef<"BillPayment", 'String'>
   readonly bkashTransactionId: Prisma.FieldRef<"BillPayment", 'String'>

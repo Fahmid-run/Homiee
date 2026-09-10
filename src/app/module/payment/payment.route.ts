@@ -8,6 +8,7 @@ const router = Router();
 router.post(
   "/bill/",
   auth(Role.TENANT),
+
   paymentController.createBillCheckoutSession,
 );
 

@@ -1618,6 +1618,7 @@ export const BillPaymentScalarFieldEnum = {
   status: 'status',
   currency: 'currency',
   reference: 'reference',
+  amount: 'amount',
   stripeSessionId: 'stripeSessionId',
   stripePaymentId: 'stripePaymentId',
   bkashTransactionId: 'bkashTransactionId',

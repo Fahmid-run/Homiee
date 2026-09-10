@@ -20,4 +20,9 @@ export const configs = {
   bkash_baseUrl: process.env.BKASH_TOKENIZE_BASE_URL,
   bkash_app_secret: process.env.BKASH_APP_SECRET,
   bkash_app_key: process.env.BKASH_APP_KEY,
+
+  redis_usrname: process.env.REDIS_USERNAME!,
+  redis_pwd: process.env.REDIS_PASSWORD!,
+  redis_host: process.env.REDIS_HOST!,
+  redis_port: process.env.REDIS_PORT!,
 };
