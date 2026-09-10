@@ -1,14 +1,22 @@
-import { ApplicationStatus } from "../../../../prisma/generated/prisma/enums";
+import {
+  ApplicationStatus,
+  RentalDocumentsType,
+  TenancyStatus,
+  ViewingStatus,
+} from "../../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import AppError from "../../utils/appError";
 import { checkExists } from "../../utils/checkExist";
 import httpstatus from "http-status";
+import { CreateBillPayload } from "./owner.interface";
 
 const updateApplicationStatus = async (
   userid: string,
   ownerId: string,
   applicationId: string,
-  payload,
+  payload: {
+    status: ApplicationStatus;
+  },
 ) => {
   const { status } = payload;
 
@@ -122,7 +130,11 @@ const updateApplicationStatus = async (
   }
 };
 
-const updateViewReqStatus = async (ownerId: string, id: string, payload) => {
+const updateViewReqStatus = async (
+  ownerId: string,
+  id: string,
+  payload: { status: ViewingStatus },
+) => {
   const { status } = payload;
 
   const viewReqData = await prisma.viewingRequest.findUnique({
@@ -160,7 +172,11 @@ const updateViewReqStatus = async (ownerId: string, id: string, payload) => {
   return res;
 };
 
-const uploadDocuments = async (userId: string, tenancyId: string, payload) => {
+const uploadDocuments = async (
+  userId: string,
+  tenancyId: string,
+  payload: { type: RentalDocumentsType; fileUrl: string },
+) => {
   const { type, fileUrl } = payload;
   await checkExists(prisma.tenancy, tenancyId, "Tenancy Does not exist");
 
@@ -176,7 +192,11 @@ const uploadDocuments = async (userId: string, tenancyId: string, payload) => {
   return res;
 };
 
-const createBill = async (ownerId: string, roomId: string, payload) => {
+const createBill = async (
+  ownerId: string,
+  roomId: string,
+  payload: CreateBillPayload,
+) => {
   const {
     type,
     description,
@@ -203,15 +223,15 @@ const createBill = async (ownerId: string, roomId: string, payload) => {
   if (ownerId !== room.property.ownerId) {
     throw new AppError("Forbidden ", httpstatus.FORBIDDEN);
   }
-  // const isBillExists = await prisma.utilityBill.findUnique({
-  //   where: {
-  //     id:roomId,
-  //     roomId,
-  //   },
-  // });
-  // if (isBillExists) {
-  //   throw new AppError("bill already exists", httpstatus.NOT_FOUND);
-  // }
+  const isBillExists = await prisma.utilityBill.findUnique({
+    where: {
+      id: roomId,
+      roomId,
+    },
+  });
+  if (isBillExists) {
+    throw new AppError("bill already exists", httpstatus.BAD_REQUEST);
+  }
 
   const transaction = await prisma.$transaction(async (tx) => {
     const billCreate = await tx.utilityBill.create({

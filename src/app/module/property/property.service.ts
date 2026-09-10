@@ -1,8 +1,8 @@
 import { Prisma } from "../../client";
 import { prisma } from "../../lib/prisma";
-import { SearchPropertiesQuery } from "./property.interface";
+import { PropertyPayload, SearchPropertiesQuery } from "./property.interface";
 
-const createProperty = async (ownerId: string, payload) => {
+const createProperty = async (ownerId: string, payload: PropertyPayload) => {
   const { name, address, description, city, totalrooms } = payload;
 
   const res = await prisma.property.create({

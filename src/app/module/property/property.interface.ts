@@ -15,3 +15,11 @@ export interface SearchPropertiesQuery {
   sortBy?: "createdAt" | "name" | "totalrooms";
   sortOrder?: "asc" | "desc";
 }
+
+export interface PropertyPayload {
+  name: string;
+  address: string;
+  description?: string;
+  city: string;
+  totalrooms: number;
+}

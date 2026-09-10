@@ -2,7 +2,12 @@ import { prisma } from "../../lib/prisma";
 import AppError from "../../utils/appError";
 import { checkExists } from "../../utils/checkExist";
 import httpstatus from "http-status";
-const createViewReq = async (roomId: string, tenantId: string, payload) => {
+import { CreateRoomMatePreferencePayload } from "./tenant.interface";
+const createViewReq = async (
+  roomId: string,
+  tenantId: string,
+  payload: { message: string; requestedDate: Date },
+) => {
   const { message, requestedDate } = payload;
 
   const data = await checkExists(prisma.room, roomId, "Room Does not exists");
@@ -22,7 +27,11 @@ const createViewReq = async (roomId: string, tenantId: string, payload) => {
   return res;
 };
 
-const createApplication = async (roomId: string, tenantId: string, payload) => {
+const createApplication = async (
+  roomId: string,
+  tenantId: string,
+  payload: { message: string },
+) => {
   const { message } = payload;
   await checkExists(prisma.room, roomId, "Room Does not exists");
 
@@ -51,7 +60,7 @@ const createApplication = async (roomId: string, tenantId: string, payload) => {
 const createRoomMatePreference = async (
   tenantId: string,
 
-  payload,
+  payload: CreateRoomMatePreferencePayload,
 ) => {
   const { minAge, maxAge, smokingAllowed, sleepSchedule, preferredMoveInDate } =
     payload;

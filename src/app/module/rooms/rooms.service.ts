@@ -1,6 +1,7 @@
 import { prisma } from "../../lib/prisma";
+import { RoomPayload } from "./room.interface";
 
-const createRoom = async (propertyId: string, payload) => {
+const createRoom = async (propertyId: string, payload: RoomPayload) => {
   const {
     roomNumber,
     roomType = "SHARED",
@@ -13,8 +14,8 @@ const createRoom = async (propertyId: string, payload) => {
     data: {
       roomNumber,
       roomType,
-      monthlyRent,
-      capacity,
+      monthlyRent: Number(monthlyRent),
+      capacity: Number(capacity),
       roomstatus,
       propertyId,
     },
