@@ -9,9 +9,11 @@ import { prisma } from "../../lib/prisma";
 import AppError from "../../utils/appError";
 import httpstatus from "http-status";
 import { configs } from "../../config";
+import { getGrandToken } from "../../lib/bkash";
 
 //STRIPE PAYMENT INTEGRATION
 const createBillStripeCheckout = async (
+  paymentProvider: PaymentMethod,
   billShareId: string,
   tenantId: string,
 ) => {
@@ -53,53 +55,103 @@ const createBillStripeCheckout = async (
   const payment = await prisma.billPayment.create({
     data: {
       billShareId,
-      provider: PaymentMethod.STRIPE,
+      provider: paymentProvider,
       amount: billShare.amount,
-      currency: "USD",
+      currency: "BDT",
       reference: `BILL-${crypto.randomUUID()}`,
       status: PaymentStatus.PENDING,
     },
   });
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "payment",
+  if (paymentProvider == PaymentMethod.STRIPE) {
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
 
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Utility Bill",
+      line_items: [
+        {
+          price_data: {
+            currency: "bdt",
+            product_data: {
+              name: "Utility Bill",
+            },
+            unit_amount: Math.round(billShare.amount * 100),
           },
-          unit_amount: billShare.amount,
+          quantity: 1,
         },
-        quantity: 1,
+      ],
+
+      metadata: {
+        paymentId: payment.id,
       },
-    ],
 
-    metadata: {
-      paymentId: payment.id,
-    },
+      success_url: `${configs.frontend_url}/dashboard/customer/payment/success`,
 
-    success_url: `${configs.frontend_url}/dashboard/customer/payment/success`,
+      cancel_url: `${configs.frontend_url}/dashboard/customer/payment/cancel`,
+    });
 
-    cancel_url: `${configs.frontend_url}/dashboard/customer/payment/cancel`,
-  });
+    const updatedPayment = await prisma.billPayment.update({
+      where: {
+        id: payment.id,
+      },
+      data: {
+        stripeSessionId: session.id,
+        status: PaymentStatus.PROCESSING,
+      },
+    });
 
-  const updatedPayment = await prisma.billPayment.update({
-    where: {
-      id: payment.id,
-    },
-    data: {
-      stripeSessionId: session.id,
-      status: PaymentStatus.PROCESSING,
-    },
-  });
+    return {
+      payment: updatedPayment,
+      checkoutUrl: session.url,
+    };
+  }
 
-  return {
-    payment: updatedPayment,
-    checkoutUrl: session.url,
-  };
+  if (paymentProvider === PaymentMethod.BKASH) {
+    const bkashIdToken = await getGrandToken();
+    if (!bkashIdToken) {
+      throw new AppError("Id token not found", httpstatus.NOT_FOUND);
+    }
+
+    const createPayment = await fetch(
+      `${configs.bkash_baseUrl}/checkout/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+          authorization: bkashIdToken,
+          "x-app-key": configs.bkash_app_key!,
+        },
+        body: JSON.stringify({
+          agreementID: `BKASH-${crypto.randomUUID()}`,
+          mode: "0011",
+          payerReference: crypto.randomUUID(),
+          callbackURL: `${configs.bkash_callback_Url}/callback`,
+          merchantAssociationInfo: "MI05MID54RF09123456One",
+          amount: billShare.amount,
+          currency: "BDT",
+          intent: "sale",
+          merchantInvoiceNumber: billShareId,
+        }),
+      },
+    );
+
+    const res = await createPayment.json();
+
+    const updatedPayment = await prisma.billPayment.update({
+      where: {
+        id: payment.id,
+      },
+      data: {
+        bkashPaymentId: res.paymentID,
+        status: PaymentStatus.PROCESSING,
+      },
+    });
+
+    return {
+      payment: updatedPayment,
+      ...res,
+    };
+  }
 };
 
 const handleStripeWebhook = async (session: Stripe.Checkout.Session) => {
@@ -156,39 +208,54 @@ const completeBillPayment = async (
   });
 };
 
-//BKASH PAYMENT INTEGRATION
+const handleBkashCallback = async (query: any) => {
+  const { paymentID, status, signature } = query;
+  return prisma.$transaction(async (tx) => {
+    const payment = await tx.billPayment.findUnique({
+      where: {
+        bkashPaymentId: paymentID,
+      },
+    });
 
-// const getSinglePayment = async (rentalOrderId: string) => {
-//   return prisma.payment.findUniqueOrThrow({
-//     where: {
-//       rentalOrderId,
-//     },
+    if (!payment) {
+      throw new AppError("Payment not found", httpstatus.NOT_FOUND);
+    }
+    if (!status) {
+      throw new AppError("Payment Failed", httpstatus.SERVICE_UNAVAILABLE);
+    }
 
-//     include: {
-//       rentalOrder: true,
-//     },
-//   });
-// };
+    if (payment.status === PaymentStatus.PAID) {
+      return payment;
+    }
 
-// const getAllBillPayments = async () => {
-//   return prisma.payment.findMany();
-// };
+    const updatedPayment = await tx.billPayment.update({
+      where: {
+        bkashPaymentId: paymentID,
+      },
+      data: {
+        status: PaymentStatus.PAID,
+        gatewayReference: signature,
+        paidAt: new Date(),
+      },
+    });
 
-// const getMyPayments = async (customerId: string) => {
-//   return prisma.payment.findMany({
-//     where: {
-//       rentalOrder: {
-//         customerId,
-//       },
-//     },
+    await tx.utilityBillShare.update({
+      where: {
+        id: payment.billShareId,
+      },
+      data: {
+        status: BillShareStatus.PAID,
+        paidAt: new Date(),
+      },
+    });
 
-//     include: {
-//       rentalOrder: true,
-//     },
-//   });
-// };
+    return updatedPayment;
+  });
+};
 
 export const paymentService = {
   createBillStripeCheckout,
   handleStripeWebhook,
+
+  handleBkashCallback,
 };

@@ -21,12 +21,12 @@ export const getGrandToken = async () => {
       bkashRefreshTokenTTl > 600
     ) {
       const refreshTokenRes = await fetch(
-        `${configs.bkash_baseUrl}/tokenized/checkout/token/refresh`,
+        `${configs.bkash_baseUrl}/checkout/token/refresh`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            accept: "application/json",
+            Accept: "application/json",
             username: configs.bkash_username ?? "",
             password: configs.bkash_password ?? "",
           },
@@ -57,22 +57,21 @@ export const getGrandToken = async () => {
     if (bkashIdTokenTTl > 600) {
       return bkashIdToken;
     }
-    const res = await fetch(
-      `${configs.bkash_baseUrl}/tokenized/checkout/token/grant`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accept: "application/json",
-          username: configs.bkash_username ?? "",
-          password: configs.bkash_password ?? "",
-        },
-        body: JSON.stringify({
-          app_key: configs.bkash_app_key,
-          app_secret: configs.bkash_app_secret,
-        }),
+    const res = await fetch(`${configs.bkash_baseUrl}/checkout/token/grant`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        username: configs.bkash_username ?? "",
+        password: configs.bkash_password ?? "",
       },
-    );
+      body: JSON.stringify({
+        app_key: configs.bkash_app_key,
+        app_secret: configs.bkash_app_secret,
+      }),
+    });
+
+    console.log(res);
 
     if (!res.ok) {
       throw new AppError(

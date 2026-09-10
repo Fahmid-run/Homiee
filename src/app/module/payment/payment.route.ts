@@ -14,4 +14,6 @@ router.post(
 
 router.post("/bill-shares/webhook", paymentController.billwebhook);
 
+router.get("/bill/callback", paymentController.handleBkashCallback);
+
 export const paymentRoute = router;

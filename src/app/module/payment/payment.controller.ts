@@ -11,29 +11,17 @@ const createBillCheckoutSession = catchAsync(async (req, res) => {
   const { billShareId, paymentProvider } = req.body;
   const tenantId = req.user?.userId as string;
 
-  if (paymentProvider === PaymentMethod.STRIPE) {
-    const result = await paymentService.createBillStripeCheckout(
-      billShareId,
-      tenantId,
-    );
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: "Checkout created",
-      data: result,
-    });
-  } else {
-    const result = await paymentService.createBillStripeCheckout(
-      billShareId,
-      tenantId,
-    );
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: "Checkout created",
-      data: result,
-    });
-  }
+  const result = await paymentService.createBillStripeCheckout(
+    paymentProvider,
+    billShareId,
+    tenantId,
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Checkout created",
+    data: result,
+  });
 });
 
 const billwebhook = catchAsync(async (req, res) => {
@@ -55,6 +43,18 @@ const billwebhook = catchAsync(async (req, res) => {
     received: true,
   });
 });
+
+const handleBkashCallback = catchAsync(async (req, res) => {
+  const query = req.query;
+  const result = await paymentService.handleBkashCallback(query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "true",
+    data: result,
+  });
+});
+
 // const getAllPAyments = catchAsync(async (req, res) => {
 //   const result = await paymentService.getAllPayments();
 
@@ -93,4 +93,5 @@ const billwebhook = catchAsync(async (req, res) => {
 export const paymentController = {
   createBillCheckoutSession,
   billwebhook,
+  handleBkashCallback,
 };
