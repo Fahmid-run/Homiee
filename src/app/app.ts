@@ -28,26 +28,26 @@ app.use(
   }),
 );
 
-// app.post(
-//   "/api/payments/webhook",
-//   express.raw({
-//     type: "application/json",
-//   }),
-//   paymentController.webhook,
-// );
+app.post(
+  "/api/v1/payments/webhook",
+  express.raw({
+    type: "application/json",
+  }),
+  paymentController.billwebhook,
+);
 
 app.use(express.json());
 
 //Routes
 app.get("/", (req, res) => {
-  res.end("root page");
+  res.end("root route");
 });
 
 app.use("/api/v1/auth", AuthRoutes);
 
 app.use("/api/v1/property", ProperyRoutes);
 
-app.use("/api/v1/property/room", RoomRoutes);
+app.use("/api/v1/room", RoomRoutes);
 app.use("/api/v1/tenant", TenantRoutes);
 app.use("/api/v1/owner", OwnerRoutes);
 

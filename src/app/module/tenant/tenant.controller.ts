@@ -42,7 +42,7 @@ const createApplication = catchAsync(async (req: Request, res: Response) => {
 const createRoomMatePreference = catchAsync(
   async (req: Request, res: Response) => {
     const payload = req.body;
-    const tenantId = req.user?.userId as string;
+    const tenantId = req.user?.authorId as string;
 
     const result = await tenantServices.createRoomMatePreference(
       tenantId,

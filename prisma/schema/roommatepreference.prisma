@@ -1,12 +1,12 @@
 model RoomMatePreference {
   id String @id @default(uuid())
 
-  tenantId        String  @unique
-  preferredGender String?
-  minAge          Int?
-  maxAge          Int?
-  smokingAllowed  Boolean @default(false)
-  sleepSchedule SleepSchedule @default(EARLY)
+  tenantId            String        @unique
+  preferredGender     String?
+  minAge              Int?
+  maxAge              Int?
+  smokingAllowed      Boolean       @default(false)
+  sleepSchedule       SleepSchedule @default(EARLY)
   preferredMoveInDate DateTime?
 
   status MatchStatus @default(PENDING)

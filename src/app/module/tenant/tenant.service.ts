@@ -59,17 +59,12 @@ const createApplication = async (
 
 const createRoomMatePreference = async (
   tenantId: string,
-
   payload: CreateRoomMatePreferencePayload,
 ) => {
   const { minAge, maxAge, smokingAllowed, sleepSchedule, preferredMoveInDate } =
     payload;
 
-  const data = await checkExists(
-    prisma.tenantProfile,
-    tenantId,
-    "user does not exist",
-  );
+  await checkExists(prisma.tenantProfile, tenantId, "user does not exist");
 
   const res = await prisma.roomMatePreference.create({
     data: {
