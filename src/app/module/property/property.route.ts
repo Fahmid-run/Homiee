@@ -28,12 +28,4 @@ router.delete(
   properyController.deleteProperty,
 );
 
-// router.post("/login", properyController.loginUser);
-// router.get(
-//   "/me",
-//   auth(Role.ADMIN, Role.TENANT, Role.PROPERTY_OWNER),
-//   AuthController.getMe,
-// );
-// router.post("/refresh-token", AuthController.refreshToken);
-
 export const ProperyRoutes = router;

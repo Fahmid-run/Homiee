@@ -15,6 +15,6 @@ model Room {
   viewingRequests ViewingRequest[]
   tenancy         Tenancy[]
 
-  @@unique([roomNumber])
+  @@unique([propertyId, roomNumber])
   @@map("room")
 }
