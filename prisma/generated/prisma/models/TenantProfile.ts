@@ -481,14 +481,14 @@ export type TenantProfileSumOrderByAggregateInput = {
   budgetMax?: Prisma.SortOrder
 }
 
-export type TenantProfileScalarRelationFilter = {
-  is?: Prisma.TenantProfileWhereInput
-  isNot?: Prisma.TenantProfileWhereInput
-}
-
 export type TenantProfileNullableScalarRelationFilter = {
   is?: Prisma.TenantProfileWhereInput | null
   isNot?: Prisma.TenantProfileWhereInput | null
+}
+
+export type TenantProfileScalarRelationFilter = {
+  is?: Prisma.TenantProfileWhereInput
+  isNot?: Prisma.TenantProfileWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -521,10 +521,12 @@ export type TenantProfileCreateNestedOneWithoutRentalsInput = {
   connect?: Prisma.TenantProfileWhereUniqueInput
 }
 
-export type TenantProfileUpdateOneRequiredWithoutRentalsNestedInput = {
+export type TenantProfileUpdateOneWithoutRentalsNestedInput = {
   create?: Prisma.XOR<Prisma.TenantProfileCreateWithoutRentalsInput, Prisma.TenantProfileUncheckedCreateWithoutRentalsInput>
   connectOrCreate?: Prisma.TenantProfileCreateOrConnectWithoutRentalsInput
   upsert?: Prisma.TenantProfileUpsertWithoutRentalsInput
+  disconnect?: Prisma.TenantProfileWhereInput | boolean
+  delete?: Prisma.TenantProfileWhereInput | boolean
   connect?: Prisma.TenantProfileWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantProfileUpdateToOneWithWhereWithoutRentalsInput, Prisma.TenantProfileUpdateWithoutRentalsInput>, Prisma.TenantProfileUncheckedUpdateWithoutRentalsInput>
 }

@@ -81,6 +81,22 @@ const createBill = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createRental = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body;
+
+  const roomId = req.params?.roomId as string;
+  const ownerId = req.user?.authorId as string;
+
+  const result = await ownerServices.createRental(ownerId, roomId, payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Rental Created successfully",
+    data: result,
+  });
+});
+
 const getMyPropertyBills = catchAsync(async (req: Request, res: Response) => {
   const ownerId = req.user?.authorId as string;
 
@@ -100,4 +116,5 @@ export const ownerController = {
   uploadDocuments,
   createBill,
   getMyPropertyBills,
+  createRental,
 };

@@ -34,6 +34,12 @@ router.post(
   ownerController.createBill,
 );
 
+router.post(
+  "/rental/create/:roomId",
+  auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),
+  ownerController.createRental,
+);
+
 router.get(
   "/bills/",
   auth(Role.PROPERTY_OWNER, Role.PROPERTY_MANAGER),

@@ -168,12 +168,13 @@ export type PropertyOwnerScalarFieldEnum = (typeof PropertyOwnerScalarFieldEnum)
 export const RentalScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
-  tenancyID: 'tenancyID',
+  roomId: 'roomId',
   amount: 'amount',
   dueDate: 'dueDate',
   paidAt: 'paidAt',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  tenancyId: 'tenancyId'
 } as const
 
 export type RentalScalarFieldEnum = (typeof RentalScalarFieldEnum)[keyof typeof RentalScalarFieldEnum]

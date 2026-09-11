@@ -223,9 +223,8 @@ const createBill = async (
   if (ownerId !== room.property.ownerId) {
     throw new AppError("Forbidden ", httpstatus.FORBIDDEN);
   }
-  const isBillExists = await prisma.utilityBill.findUnique({
+  const isBillExists = await prisma.utilityBill.findFirst({
     where: {
-      id: roomId,
       roomId,
     },
   });
@@ -309,10 +308,63 @@ const getMyPropertyBills = async (ownerId: string) => {
   return res;
 };
 
+const createRental = async (
+  ownerId: string,
+  roomId: string,
+  payload: { dueDate: Date },
+) => {
+  console.log(new Date());
+  const { dueDate } = payload;
+
+  const room = await prisma.room.findUnique({
+    where: {
+      id: roomId,
+    },
+    include: {
+      property: true,
+      tenancy: true,
+    },
+  });
+
+  if (!room) {
+    throw new AppError("Room does not exist", httpstatus.NOT_FOUND);
+  }
+
+  if (ownerId !== room.property.ownerId) {
+    throw new AppError("Forbidden ", httpstatus.FORBIDDEN);
+  }
+  const isRentalExists = await prisma.rental.findFirst({
+    where: {
+      roomId,
+    },
+  });
+  if (isRentalExists) {
+    throw new AppError("bill already exists", httpstatus.BAD_REQUEST);
+  }
+
+  if (room.tenancy.length === 0) {
+    throw new AppError(
+      "Sry there is no tenant there. YOu can not create rental!!!",
+      httpstatus.BAD_REQUEST,
+    );
+  }
+
+  const rentalCreate = await prisma.rental.create({
+    data: {
+      amount: room.monthlyRent,
+      dueDate,
+      roomId,
+    },
+  });
+
+  return rentalCreate;
+};
+
 export const ownerServices = {
   updateViewReqStatus,
   updateApplicationStatus,
   uploadDocuments,
   createBill,
   getMyPropertyBills,
+  createRental,
 };

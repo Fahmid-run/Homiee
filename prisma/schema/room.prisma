@@ -10,6 +10,7 @@ model Room {
   roomstatus   RoomStatus    @default(AVAILABLE)
   property     Property      @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   utilityBills UtilityBill[]
+  rentals      Rental[]
 
   applications    Application[]
   viewingRequests ViewingRequest[]
