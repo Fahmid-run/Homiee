@@ -58,12 +58,14 @@ const handleBillBkashCallback = catchAsync(async (req, res) => {
 //RenTal Payment
 
 const createRentalCheckoutSession = catchAsync(async (req, res) => {
-  const { renatlId, paymentProvider } = req.body;
+  const { renatalId, paymentProvider } = req.body;
   const tenantId = req.user?.userId as string;
+
+  console.log(renatalId);
 
   const result = await paymentService.createRentCheckout(
     paymentProvider,
-    renatlId,
+    renatalId,
     tenantId,
   );
   sendResponse(res, {

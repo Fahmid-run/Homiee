@@ -23,7 +23,7 @@ const createRentCheckout = async (
     },
     include: {
       tenant: true,
-      rentalPayments: true,
+      rentalPayment: true,
     },
   });
 
@@ -31,9 +31,9 @@ const createRentCheckout = async (
     throw new AppError("Rental not found", httpstatus.NOT_FOUND);
   }
 
-  if (rentalExist.tenantId !== tenantId) {
-    throw new AppError("Forbidden", httpstatus.FORBIDDEN);
-  }
+  // if (rentalExist.tenantId !== tenantId) {
+  //   throw new AppError("Forbidden", httpstatus.FORBIDDEN);
+  // }
 
   if (rentalExist.status === PaymentStatus.PAID) {
     throw new AppError("Rental already paid", httpstatus.BAD_REQUEST);
