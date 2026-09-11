@@ -261,6 +261,7 @@ export type TenantProfileWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"TenantProfile"> | Date | string
   roomMatePreferenceId?: Prisma.StringNullableFilter<"TenantProfile"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  rentals?: Prisma.RentalListRelationFilter
   roomMatePreference?: Prisma.XOR<Prisma.RoomMatePreferenceNullableScalarRelationFilter, Prisma.RoomMatePreferenceWhereInput> | null
 }
 
@@ -276,6 +277,7 @@ export type TenantProfileOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   roomMatePreferenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  rentals?: Prisma.RentalOrderByRelationAggregateInput
   roomMatePreference?: Prisma.RoomMatePreferenceOrderByWithRelationInput
 }
 
@@ -294,6 +296,7 @@ export type TenantProfileWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"TenantProfile"> | Date | string
   roomMatePreferenceId?: Prisma.StringNullableFilter<"TenantProfile"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  rentals?: Prisma.RentalListRelationFilter
   roomMatePreference?: Prisma.XOR<Prisma.RoomMatePreferenceNullableScalarRelationFilter, Prisma.RoomMatePreferenceWhereInput> | null
 }, "id" | "userId">
 
@@ -342,6 +345,7 @@ export type TenantProfileCreateInput = {
   updatedAt?: Date | string
   roomMatePreferenceId?: string | null
   user: Prisma.UserCreateNestedOneWithoutTenantProfileInput
+  rentals?: Prisma.RentalCreateNestedManyWithoutTenantInput
   roomMatePreference?: Prisma.RoomMatePreferenceCreateNestedOneWithoutTenantInput
 }
 
@@ -356,6 +360,7 @@ export type TenantProfileUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomMatePreferenceId?: string | null
+  rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutTenantInput
   roomMatePreference?: Prisma.RoomMatePreferenceUncheckedCreateNestedOneWithoutTenantInput
 }
 
@@ -370,6 +375,7 @@ export type TenantProfileUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutTenantProfileNestedInput
+  rentals?: Prisma.RentalUpdateManyWithoutTenantNestedInput
   roomMatePreference?: Prisma.RoomMatePreferenceUpdateOneWithoutTenantNestedInput
 }
 
@@ -384,6 +390,7 @@ export type TenantProfileUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentals?: Prisma.RentalUncheckedUpdateManyWithoutTenantNestedInput
   roomMatePreference?: Prisma.RoomMatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
 }
 
@@ -508,6 +515,20 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type TenantProfileCreateNestedOneWithoutRentalsInput = {
+  create?: Prisma.XOR<Prisma.TenantProfileCreateWithoutRentalsInput, Prisma.TenantProfileUncheckedCreateWithoutRentalsInput>
+  connectOrCreate?: Prisma.TenantProfileCreateOrConnectWithoutRentalsInput
+  connect?: Prisma.TenantProfileWhereUniqueInput
+}
+
+export type TenantProfileUpdateOneRequiredWithoutRentalsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantProfileCreateWithoutRentalsInput, Prisma.TenantProfileUncheckedCreateWithoutRentalsInput>
+  connectOrCreate?: Prisma.TenantProfileCreateOrConnectWithoutRentalsInput
+  upsert?: Prisma.TenantProfileUpsertWithoutRentalsInput
+  connect?: Prisma.TenantProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantProfileUpdateToOneWithWhereWithoutRentalsInput, Prisma.TenantProfileUpdateWithoutRentalsInput>, Prisma.TenantProfileUncheckedUpdateWithoutRentalsInput>
+}
+
 export type TenantProfileCreateNestedOneWithoutRoomMatePreferenceInput = {
   create?: Prisma.XOR<Prisma.TenantProfileCreateWithoutRoomMatePreferenceInput, Prisma.TenantProfileUncheckedCreateWithoutRoomMatePreferenceInput>
   connectOrCreate?: Prisma.TenantProfileCreateOrConnectWithoutRoomMatePreferenceInput
@@ -554,6 +575,78 @@ export type TenantProfileUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantProfileUpdateToOneWithWhereWithoutUserInput, Prisma.TenantProfileUpdateWithoutUserInput>, Prisma.TenantProfileUncheckedUpdateWithoutUserInput>
 }
 
+export type TenantProfileCreateWithoutRentalsInput = {
+  id?: string
+  bio?: string | null
+  occupation?: string | null
+  dateOfBirth?: Date | string | null
+  budgetMin?: number | null
+  budgetMax?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomMatePreferenceId?: string | null
+  user: Prisma.UserCreateNestedOneWithoutTenantProfileInput
+  roomMatePreference?: Prisma.RoomMatePreferenceCreateNestedOneWithoutTenantInput
+}
+
+export type TenantProfileUncheckedCreateWithoutRentalsInput = {
+  id?: string
+  userId: string
+  bio?: string | null
+  occupation?: string | null
+  dateOfBirth?: Date | string | null
+  budgetMin?: number | null
+  budgetMax?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomMatePreferenceId?: string | null
+  roomMatePreference?: Prisma.RoomMatePreferenceUncheckedCreateNestedOneWithoutTenantInput
+}
+
+export type TenantProfileCreateOrConnectWithoutRentalsInput = {
+  where: Prisma.TenantProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantProfileCreateWithoutRentalsInput, Prisma.TenantProfileUncheckedCreateWithoutRentalsInput>
+}
+
+export type TenantProfileUpsertWithoutRentalsInput = {
+  update: Prisma.XOR<Prisma.TenantProfileUpdateWithoutRentalsInput, Prisma.TenantProfileUncheckedUpdateWithoutRentalsInput>
+  create: Prisma.XOR<Prisma.TenantProfileCreateWithoutRentalsInput, Prisma.TenantProfileUncheckedCreateWithoutRentalsInput>
+  where?: Prisma.TenantProfileWhereInput
+}
+
+export type TenantProfileUpdateToOneWithWhereWithoutRentalsInput = {
+  where?: Prisma.TenantProfileWhereInput
+  data: Prisma.XOR<Prisma.TenantProfileUpdateWithoutRentalsInput, Prisma.TenantProfileUncheckedUpdateWithoutRentalsInput>
+}
+
+export type TenantProfileUpdateWithoutRentalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  budgetMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutTenantProfileNestedInput
+  roomMatePreference?: Prisma.RoomMatePreferenceUpdateOneWithoutTenantNestedInput
+}
+
+export type TenantProfileUncheckedUpdateWithoutRentalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  budgetMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roomMatePreference?: Prisma.RoomMatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
+}
+
 export type TenantProfileCreateWithoutRoomMatePreferenceInput = {
   id?: string
   bio?: string | null
@@ -565,6 +658,7 @@ export type TenantProfileCreateWithoutRoomMatePreferenceInput = {
   updatedAt?: Date | string
   roomMatePreferenceId?: string | null
   user: Prisma.UserCreateNestedOneWithoutTenantProfileInput
+  rentals?: Prisma.RentalCreateNestedManyWithoutTenantInput
 }
 
 export type TenantProfileUncheckedCreateWithoutRoomMatePreferenceInput = {
@@ -578,6 +672,7 @@ export type TenantProfileUncheckedCreateWithoutRoomMatePreferenceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomMatePreferenceId?: string | null
+  rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantProfileCreateOrConnectWithoutRoomMatePreferenceInput = {
@@ -607,6 +702,7 @@ export type TenantProfileUpdateWithoutRoomMatePreferenceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutTenantProfileNestedInput
+  rentals?: Prisma.RentalUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantProfileUncheckedUpdateWithoutRoomMatePreferenceInput = {
@@ -620,6 +716,7 @@ export type TenantProfileUncheckedUpdateWithoutRoomMatePreferenceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentals?: Prisma.RentalUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantProfileCreateWithoutUserInput = {
@@ -632,6 +729,7 @@ export type TenantProfileCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomMatePreferenceId?: string | null
+  rentals?: Prisma.RentalCreateNestedManyWithoutTenantInput
   roomMatePreference?: Prisma.RoomMatePreferenceCreateNestedOneWithoutTenantInput
 }
 
@@ -645,6 +743,7 @@ export type TenantProfileUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomMatePreferenceId?: string | null
+  rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutTenantInput
   roomMatePreference?: Prisma.RoomMatePreferenceUncheckedCreateNestedOneWithoutTenantInput
 }
 
@@ -674,6 +773,7 @@ export type TenantProfileUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentals?: Prisma.RentalUpdateManyWithoutTenantNestedInput
   roomMatePreference?: Prisma.RoomMatePreferenceUpdateOneWithoutTenantNestedInput
 }
 
@@ -687,9 +787,39 @@ export type TenantProfileUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomMatePreferenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rentals?: Prisma.RentalUncheckedUpdateManyWithoutTenantNestedInput
   roomMatePreference?: Prisma.RoomMatePreferenceUncheckedUpdateOneWithoutTenantNestedInput
 }
 
+
+/**
+ * Count Type TenantProfileCountOutputType
+ */
+
+export type TenantProfileCountOutputType = {
+  rentals: number
+}
+
+export type TenantProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  rentals?: boolean | TenantProfileCountOutputTypeCountRentalsArgs
+}
+
+/**
+ * TenantProfileCountOutputType without action
+ */
+export type TenantProfileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TenantProfileCountOutputType
+   */
+  select?: Prisma.TenantProfileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TenantProfileCountOutputType without action
+ */
+export type TenantProfileCountOutputTypeCountRentalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalWhereInput
+}
 
 
 export type TenantProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -704,7 +834,9 @@ export type TenantProfileSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updatedAt?: boolean
   roomMatePreferenceId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  rentals?: boolean | Prisma.TenantProfile$rentalsArgs<ExtArgs>
   roomMatePreference?: boolean | Prisma.TenantProfile$roomMatePreferenceArgs<ExtArgs>
+  _count?: boolean | Prisma.TenantProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenantProfile"]>
 
 export type TenantProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -751,7 +883,9 @@ export type TenantProfileSelectScalar = {
 export type TenantProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "bio" | "occupation" | "dateOfBirth" | "budgetMin" | "budgetMax" | "createdAt" | "updatedAt" | "roomMatePreferenceId", ExtArgs["result"]["tenantProfile"]>
 export type TenantProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  rentals?: boolean | Prisma.TenantProfile$rentalsArgs<ExtArgs>
   roomMatePreference?: boolean | Prisma.TenantProfile$roomMatePreferenceArgs<ExtArgs>
+  _count?: boolean | Prisma.TenantProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TenantProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -764,6 +898,7 @@ export type $TenantProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "TenantProfile"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    rentals: Prisma.$RentalPayload<ExtArgs>[]
     roomMatePreference: Prisma.$RoomMatePreferencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1172,6 +1307,7 @@ readonly fields: TenantProfileFieldRefs;
 export interface Prisma__TenantProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  rentals<T extends Prisma.TenantProfile$rentalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantProfile$rentalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roomMatePreference<T extends Prisma.TenantProfile$roomMatePreferenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantProfile$roomMatePreferenceArgs<ExtArgs>>): Prisma.Prisma__RoomMatePreferenceClient<runtime.Types.Result.GetResult<Prisma.$RoomMatePreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1610,6 +1746,30 @@ export type TenantProfileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many TenantProfiles to delete.
    */
   limit?: number
+}
+
+/**
+ * TenantProfile.rentals
+ */
+export type TenantProfile$rentalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Rental
+   */
+  select?: Prisma.RentalSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Rental
+   */
+  omit?: Prisma.RentalOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalInclude<ExtArgs> | null
+  where?: Prisma.RentalWhereInput
+  orderBy?: Prisma.RentalOrderByWithRelationInput | Prisma.RentalOrderByWithRelationInput[]
+  cursor?: Prisma.RentalWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalScalarFieldEnum | Prisma.RentalScalarFieldEnum[]
 }
 
 /**

@@ -56,6 +56,7 @@ export const ModelName = {
   BillPayment: 'BillPayment',
   Property: 'Property',
   PropertyOwner: 'PropertyOwner',
+  Rental: 'Rental',
   RentalPayment: 'RentalPayment',
   RentalDocuments: 'RentalDocuments',
   Room: 'Room',
@@ -164,17 +165,34 @@ export const PropertyOwnerScalarFieldEnum = {
 export type PropertyOwnerScalarFieldEnum = (typeof PropertyOwnerScalarFieldEnum)[keyof typeof PropertyOwnerScalarFieldEnum]
 
 
-export const RentalPaymentScalarFieldEnum = {
+export const RentalScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   tenancyID: 'tenancyID',
   amount: 'amount',
   dueDate: 'dueDate',
   paidAt: 'paidAt',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalScalarFieldEnum = (typeof RentalScalarFieldEnum)[keyof typeof RentalScalarFieldEnum]
+
+
+export const RentalPaymentScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  rentalId: 'rentalId',
+  amount: 'amount',
+  paidAt: 'paidAt',
   currency: 'currency',
   status: 'status',
   paymentMethod: 'paymentMethod',
-  transactionId: 'transactionId'
+  transactionId: 'transactionId',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentId: 'stripePaymentId',
+  bkashTransactionId: 'bkashTransactionId',
+  bkashPaymentId: 'bkashPaymentId'
 } as const
 
 export type RentalPaymentScalarFieldEnum = (typeof RentalPaymentScalarFieldEnum)[keyof typeof RentalPaymentScalarFieldEnum]

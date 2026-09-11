@@ -9,6 +9,8 @@ model TenantProfile {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  rentals Rental[]
+
   roomMatePreference RoomMatePreference?
 
   createdAt            DateTime @default(now())

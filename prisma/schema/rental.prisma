@@ -1,0 +1,17 @@
+model Rental {
+  id        String        @id @default(uuid())
+  tenantId  String
+  tenancyID String
+  amount    Int
+  dueDate   DateTime?
+  paidAt    DateTime?
+  status    PaymentStatus @default(PENDING)
+
+  tenant        TenantProfile   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenancy       Tenancy         @relation(fields: [tenancyID], references: [id], onDelete: Cascade)
+  rentalPayment RentalPayment[]
+
+  createdAt DateTime @default(now())
+
+  @@map("rental")
+}

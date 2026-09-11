@@ -402,6 +402,7 @@ export const ModelName = {
   BillPayment: 'BillPayment',
   Property: 'Property',
   PropertyOwner: 'PropertyOwner',
+  Rental: 'Rental',
   RentalPayment: 'RentalPayment',
   RentalDocuments: 'RentalDocuments',
   Room: 'Room',
@@ -427,7 +428,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tenantProfile" | "application" | "billPayment" | "property" | "propertyOwner" | "rentalPayment" | "rentalDocuments" | "room" | "roomMateMatch" | "roomMatePreference" | "tenancy" | "user" | "utilityBill" | "utilityBillShare" | "viewingRequest"
+    modelProps: "tenantProfile" | "application" | "billPayment" | "property" | "propertyOwner" | "rental" | "rentalPayment" | "rentalDocuments" | "room" | "roomMateMatch" | "roomMatePreference" | "tenancy" | "user" | "utilityBill" | "utilityBillShare" | "viewingRequest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -798,6 +799,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PropertyOwnerCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PropertyOwnerCountAggregateOutputType> | number
+        }
+      }
+    }
+    Rental: {
+      payload: Prisma.$RentalPayload<ExtArgs>
+      fields: Prisma.RentalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>
+        }
+        findMany: {
+          args: Prisma.RentalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>[]
+        }
+        create: {
+          args: Prisma.RentalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>
+        }
+        createMany: {
+          args: Prisma.RentalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>
+        }
+        update: {
+          args: Prisma.RentalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRental>
+        }
+        groupBy: {
+          args: Prisma.RentalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalCountAggregateOutputType> | number
         }
       }
     }
@@ -1660,17 +1735,34 @@ export const PropertyOwnerScalarFieldEnum = {
 export type PropertyOwnerScalarFieldEnum = (typeof PropertyOwnerScalarFieldEnum)[keyof typeof PropertyOwnerScalarFieldEnum]
 
 
-export const RentalPaymentScalarFieldEnum = {
+export const RentalScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   tenancyID: 'tenancyID',
   amount: 'amount',
   dueDate: 'dueDate',
   paidAt: 'paidAt',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalScalarFieldEnum = (typeof RentalScalarFieldEnum)[keyof typeof RentalScalarFieldEnum]
+
+
+export const RentalPaymentScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  rentalId: 'rentalId',
+  amount: 'amount',
+  paidAt: 'paidAt',
   currency: 'currency',
   status: 'status',
   paymentMethod: 'paymentMethod',
-  transactionId: 'transactionId'
+  transactionId: 'transactionId',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentId: 'stripePaymentId',
+  bkashTransactionId: 'bkashTransactionId',
+  bkashPaymentId: 'bkashPaymentId'
 } as const
 
 export type RentalPaymentScalarFieldEnum = (typeof RentalPaymentScalarFieldEnum)[keyof typeof RentalPaymentScalarFieldEnum]
@@ -2302,6 +2394,7 @@ export type GlobalOmitConfig = {
   billPayment?: Prisma.BillPaymentOmit
   property?: Prisma.PropertyOmit
   propertyOwner?: Prisma.PropertyOwnerOmit
+  rental?: Prisma.RentalOmit
   rentalPayment?: Prisma.RentalPaymentOmit
   rentalDocuments?: Prisma.RentalDocumentsOmit
   room?: Prisma.RoomOmit

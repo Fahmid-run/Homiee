@@ -1,18 +1,21 @@
 model RentalPayment {
   id            String        @id @default(uuid())
   tenantId      String
-  tenancyID     String
-  amount        String
-  dueDate       DateTime?
+  rentalId      String
+  amount        Int
   paidAt        DateTime?
-  currency      String        @default("usd")
+  currency      String        @default("BDT")
   status        PaymentStatus @default(PENDING)
   paymentMethod PaymentMethod @default(STRIPE)
   transactionId String?
 
-  tenant User @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  stripeSessionId    String? @unique
+  stripePaymentId    String? @unique
+  bkashTransactionId String? @unique
+  bkashPaymentId     String? @unique
 
-  property Tenancy @relation(fields: [tenancyID], references: [id], onDelete: Cascade)
+  tenant  User   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  rentals Rental @relation(fields: [rentalId], references: [id], onDelete: Cascade)
 
   @@map("rentalpayment")
 }

@@ -44,9 +44,59 @@ const billwebhook = catchAsync(async (req, res) => {
   });
 });
 
-const handleBkashCallback = catchAsync(async (req, res) => {
+const handleBillBkashCallback = catchAsync(async (req, res) => {
   const query = req.query;
   const result = await paymentService.handleBkashCallback(query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "true",
+    data: result,
+  });
+});
+
+//RenTal Payment
+
+const createRentalCheckoutSession = catchAsync(async (req, res) => {
+  const { renatlId, paymentProvider } = req.body;
+  const tenantId = req.user?.userId as string;
+
+  const result = await paymentService.createRentCheckout(
+    paymentProvider,
+    renatlId,
+    tenantId,
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Checkout created",
+    data: result,
+  });
+});
+
+const rentalBillWebhook = catchAsync(async (req, res) => {
+  const signature = req.headers["stripe-signature"] as string;
+
+  const event = stripe.webhooks.constructEvent(
+    req.body,
+    signature,
+    process.env.STRIPE_WEBHOOK_SECRET as string,
+  );
+
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object as Stripe.Checkout.Session;
+
+    await paymentService.handleRentalStripeWebhook(session);
+  }
+
+  res.status(httpStatus.OK).json({
+    received: true,
+  });
+});
+
+const handleRentalBkashCallback = catchAsync(async (req, res) => {
+  const query = req.query;
+  const result = await paymentService.handleRentalBkashCallback(query);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -93,5 +143,9 @@ const handleBkashCallback = catchAsync(async (req, res) => {
 export const paymentController = {
   createBillCheckoutSession,
   billwebhook,
-  handleBkashCallback,
+  rentalBillWebhook,
+  handleBillBkashCallback,
+  handleRentalBkashCallback,
+
+  createRentalCheckoutSession,
 };

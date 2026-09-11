@@ -260,10 +260,11 @@ export type RoomOrderByWithRelationInput = {
 
 export type RoomWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  roomNumber?: string
+  propertyId_roomNumber?: Prisma.RoomPropertyIdRoomNumberCompoundUniqueInput
   AND?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
   OR?: Prisma.RoomWhereInput[]
   NOT?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
+  roomNumber?: Prisma.StringFilter<"Room"> | string
   propertyId?: Prisma.StringFilter<"Room"> | string
   roomType?: Prisma.EnumRoomTypeFilter<"Room"> | $Enums.RoomType
   monthlyRent?: Prisma.IntFilter<"Room"> | number
@@ -274,7 +275,7 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   applications?: Prisma.ApplicationListRelationFilter
   viewingRequests?: Prisma.ViewingRequestListRelationFilter
   tenancy?: Prisma.TenancyListRelationFilter
-}, "id" | "roomNumber">
+}, "id" | "propertyId_roomNumber">
 
 export type RoomOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -402,6 +403,11 @@ export type RoomListRelationFilter = {
 
 export type RoomOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type RoomPropertyIdRoomNumberCompoundUniqueInput = {
+  propertyId: string
+  roomNumber: string
 }
 
 export type RoomCountOrderByAggregateInput = {

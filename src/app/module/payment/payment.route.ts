@@ -14,6 +14,17 @@ router.post(
 
 router.post("/bill-shares/webhook", paymentController.billwebhook);
 
-router.get("/bill/callback", paymentController.handleBkashCallback);
+router.get("/bill/callback", paymentController.handleBillBkashCallback);
+
+router.post(
+  "/rental/",
+  auth(Role.TENANT),
+
+  paymentController.createRentalCheckoutSession,
+);
+
+router.post("/rental/webhook", paymentController.rentalBillWebhook);
+
+router.get("/rental/callback", paymentController.handleRentalBkashCallback);
 
 export const paymentRoute = router;
