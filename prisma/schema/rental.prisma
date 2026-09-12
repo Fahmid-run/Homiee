@@ -4,16 +4,17 @@ model Rental {
   roomId   String
   amount   Int
   dueDate  DateTime?
-  paidAt   DateTime?
+  paidAt   String?
   status   PaymentStatus @default(PENDING)
 
-  tenant        TenantProfile?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  room          Room            @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  rentalPayment RentalPayment[]
+  tenant        TenantProfile? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  room          Room           @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  rentalPayment RentalPayment?
 
-  createdAt DateTime @default(now())
-  tenancy   Tenancy? @relation(fields: [tenancyId], references: [id])
-  tenancyId String?
+  createdAt       DateTime @default(now())
+  tenancy         Tenancy? @relation(fields: [tenancyId], references: [id])
+  tenancyId       String?
+  rentalPaymentId String
 
   @@map("rental")
 }

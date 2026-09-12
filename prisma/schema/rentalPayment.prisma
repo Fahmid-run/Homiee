@@ -1,9 +1,9 @@
 model RentalPayment {
   id            String        @id @default(uuid())
   tenantId      String
-  rentalId      String
+  rentalId      String        @unique
   amount        Int
-  paidAt        DateTime?
+  paidAt        String?
   currency      String        @default("BDT")
   status        PaymentStatus @default(PENDING)
   paymentMethod PaymentMethod @default(STRIPE)

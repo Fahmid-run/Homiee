@@ -31,10 +31,6 @@ const createRentCheckout = async (
     throw new AppError("Rental not found", httpstatus.NOT_FOUND);
   }
 
-  // if (rentalExist.tenantId !== tenantId) {
-  //   throw new AppError("Forbidden", httpstatus.FORBIDDEN);
-  // }
-
   if (rentalExist.status === PaymentStatus.PAID) {
     throw new AppError("Rental already paid", httpstatus.BAD_REQUEST);
   }
@@ -219,11 +215,83 @@ const handleRentalBkashCallback = async (query: any) => {
       throw new AppError("Payment not found", httpstatus.NOT_FOUND);
     }
     if (!status) {
-      throw new AppError("Payment Failed", httpstatus.SERVICE_UNAVAILABLE);
+      throw new AppError("status not found", httpstatus.NOT_FOUND);
     }
 
     if (payment.status === PaymentStatus.PAID) {
       return payment;
+    }
+
+    const bkashIdToken = await getGrandToken();
+    if (!bkashIdToken) {
+      throw new AppError("Id token not found", httpstatus.NOT_FOUND);
+    }
+
+    const executePayment = await fetch(
+      `${configs.bkash_baseUrl}/checkout/create/execute`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+          authorization: bkashIdToken,
+          "x-app-key": configs.bkash_app_key!,
+        },
+        body: JSON.stringify({
+          paymentID,
+        }),
+      },
+    );
+
+    const result = await executePayment.json();
+
+    if (status === "success") {
+      const updatedPayment = await tx.rentalPayment.update({
+        where: {
+          bkashPaymentId: paymentID,
+        },
+        data: {
+          status: PaymentStatus.PAID,
+          paidAt: result.paymentExecuteTime,
+        },
+      });
+
+      await tx.rental.update({
+        where: {
+          id: payment.rentalId,
+        },
+        data: {
+          status: PaymentStatus.PAID,
+          paidAt: result.paymentExecuteTime,
+        },
+      });
+      return {
+        result,
+        redirectURL: `${configs.frontend_url}/dashboard/rentals?status=success`,
+      };
+    }
+    if (status === "failure") {
+      const updatedPayment = await tx.rentalPayment.update({
+        where: {
+          bkashPaymentId: paymentID,
+        },
+        data: {
+          status: PaymentStatus.FAILED,
+        },
+      });
+
+      await tx.rental.update({
+        where: {
+          id: payment.rentalId,
+        },
+        data: {
+          status: PaymentStatus.FAILED,
+        },
+      });
+      return {
+        result,
+        redirectURL: `${configs.frontend_url}/dashboard/rentals?status=failure`,
+      };
     }
 
     const updatedPayment = await tx.rentalPayment.update({
@@ -231,8 +299,7 @@ const handleRentalBkashCallback = async (query: any) => {
         bkashPaymentId: paymentID,
       },
       data: {
-        status: PaymentStatus.PAID,
-        paidAt: new Date(),
+        status: PaymentStatus.CANCELLED,
       },
     });
 
@@ -241,12 +308,14 @@ const handleRentalBkashCallback = async (query: any) => {
         id: payment.rentalId,
       },
       data: {
-        status: PaymentStatus.PAID,
-        paidAt: new Date(),
+        status: PaymentStatus.CANCELLED,
       },
     });
 
-    return updatedPayment;
+    return {
+      result,
+      redirectURL: `${configs.frontend_url}/dashboard/rentals?status=cancel`,
+    };
   });
 };
 
@@ -447,7 +516,7 @@ const handleStripeWebhook = async (session: Stripe.Checkout.Session) => {
   await completeBillPayment(paymentId, session.id);
 };
 
-const handleBkashCallback = async (query: any) => {
+const handleBkashCallback = async (query: Record<string, any>) => {
   const { paymentID, status, signature } = query;
   return prisma.$transaction(async (tx) => {
     const payment = await tx.billPayment.findUnique({
@@ -467,13 +536,38 @@ const handleBkashCallback = async (query: any) => {
       return payment;
     }
 
+    const bkashIdToken = await getGrandToken();
+    if (!bkashIdToken) {
+      throw new AppError("Id token not found", httpstatus.NOT_FOUND);
+    }
+
+    const executePayment = await fetch(
+      `${configs.bkash_baseUrl}/checkout/create/execute`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+          authorization: bkashIdToken,
+          "x-app-key": configs.bkash_app_key!,
+        },
+        body: JSON.stringify({
+          paymentID,
+        }),
+      },
+    );
+
+    const result = await executePayment.json();
+
     const updatedPayment = await tx.billPayment.update({
       where: {
-        bkashPaymentId: paymentID,
+        bkashPaymentId: result.paymentID,
+        bkashTransactionId: result.trxID,
+        currency: result.currency,
       },
       data: {
         status: PaymentStatus.PAID,
-        gatewayReference: signature,
+        gatewayReference: result.merchantInvoiceNumber,
         paidAt: new Date(),
       },
     });
@@ -498,6 +592,5 @@ export const paymentService = {
   createRentCheckout,
   handleRentalStripeWebhook,
   handleRentalBkashCallback,
-
   handleBkashCallback,
 };
