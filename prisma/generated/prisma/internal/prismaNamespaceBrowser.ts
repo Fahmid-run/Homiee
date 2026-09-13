@@ -174,7 +174,8 @@ export const RentalScalarFieldEnum = {
   paidAt: 'paidAt',
   status: 'status',
   createdAt: 'createdAt',
-  tenancyId: 'tenancyId'
+  tenancyId: 'tenancyId',
+  rentalPaymentId: 'rentalPaymentId'
 } as const
 
 export type RentalScalarFieldEnum = (typeof RentalScalarFieldEnum)[keyof typeof RentalScalarFieldEnum]

@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const AuthProvider = {
+  GOOGLE: 'GOOGLE',
+  CREDENTIAL: 'CREDENTIAL'
+} as const
+
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
+
+
 export const Role = {
   PROPERTY_OWNER: 'PROPERTY_OWNER',
   TENANT: 'TENANT',
