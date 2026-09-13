@@ -44,9 +44,9 @@ const updateApplicationStatus = async (
   }
 
   if (
-    applicationData.status !== "APPROVED" ||
-    applicationData.status !== "REJECTED" ||
-    applicationData.status !== "WITHDRAWN"
+    !["APPROVED", "REJECTED", "WITHDRAWN"].includes(
+      applicationData.status as any,
+    )
   ) {
     const transaction = await prisma.$transaction(async (tx) => {
       const room = await tx.room.findUnique({
@@ -57,6 +57,7 @@ const updateApplicationStatus = async (
 
       const occupied = await tx.tenancy.count({
         where: {
+          roomId: applicationData.roomId,
           status: "ACTIVE",
         },
       });
@@ -67,7 +68,7 @@ const updateApplicationStatus = async (
 
       const tenancyStartDate = new Date();
 
-      const tenancy = await prisma.tenancy.create({
+      const tenancy = await tx.tenancy.create({
         data: {
           startDate: tenancyStartDate,
           securityDeposit: "0",
@@ -78,7 +79,7 @@ const updateApplicationStatus = async (
         },
       });
 
-      const res = await prisma.application.update({
+      const res = await tx.application.update({
         where: {
           id: applicationId,
         },
