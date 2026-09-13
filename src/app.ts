@@ -4,17 +4,17 @@ import cors from "cors";
 
 import httpstatus from "http-status";
 
-import AppError from "./utils/appError.js";
+import AppError from "./utils/appError";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
-import { configs } from "./config/index.js";
-import { AuthRoutes } from "./module/auth/auth.route.js";
-import { ProperyRoutes } from "./module/property/property.route.js";
-import { RoomRoutes } from "./module/rooms/rooms.route.js";
-import { TenantRoutes } from "./module/tenant/tenant.route.js";
-import { OwnerRoutes } from "./module/owner/owner.route.js";
-import { AdminRoutes } from "./module/admin/admin.route.js";
-import { paymentController } from "./module/payment/payment.controller.js";
-import { paymentRoute } from "./module/payment/payment.route.js";
+import { configs } from "./config/index";
+import { AuthRoutes } from "./module/auth/auth.route";
+import { ProperyRoutes } from "./module/property/property.route";
+import { RoomRoutes } from "./module/rooms/rooms.route";
+import { TenantRoutes } from "./module/tenant/tenant.route";
+import { OwnerRoutes } from "./module/owner/owner.route";
+import { AdminRoutes } from "./module/admin/admin.route";
+import { paymentController } from "./module/payment/payment.controller";
+import { paymentRoute } from "./module/payment/payment.route";
 
 const app: Application = express();
 
