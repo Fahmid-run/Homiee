@@ -14,7 +14,7 @@ model Rental {
   createdAt       DateTime @default(now())
   tenancy         Tenancy? @relation(fields: [tenancyId], references: [id])
   tenancyId       String?
-  rentalPaymentId String
+  rentalPaymentId String?
 
   @@map("rental")
 }

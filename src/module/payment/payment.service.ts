@@ -181,7 +181,7 @@ const handleRentalStripeWebhook = async (session: Stripe.Checkout.Session) => {
         },
         data: {
           status: PaymentStatus.PAID,
-          paidAt: new Date(),
+          paidAt: new Date().toString(),
         },
       });
 
@@ -191,7 +191,7 @@ const handleRentalStripeWebhook = async (session: Stripe.Checkout.Session) => {
         },
         data: {
           status: PaymentStatus.PAID,
-          paidAt: new Date(),
+          paidAt: new Date().toString(),
         },
       });
 
