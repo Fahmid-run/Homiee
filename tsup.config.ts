@@ -1,13 +1,13 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ['src/server.ts'],
+  entry: ["src/app/server.ts"],
 
-  format: ['esm', 'cjs'], // Keep this as ESM
+  format: ["esm", "cjs"], // Keep this as ESM
 
-  target: 'esnext',
+  target: "esnext",
 
-  outDir: 'dist',
+  outDir: "dist",
 
   clean: true,
 
