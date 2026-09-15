@@ -8,4 +8,5 @@ export default defineConfig({
   clean: false,
   bundle: true,
   sourcemap: true,
+  shims: true,
 });
