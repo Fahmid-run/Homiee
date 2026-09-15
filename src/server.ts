@@ -5,25 +5,38 @@ import { redisClient } from "./lib/redis.js";
 
 const port = configs.port;
 
-const main = async () => {
+// Safely connect Redis in Serverless context
+const connectRedis = async () => {
   try {
-    await prisma.$connect();
-    console.log("Connected to the database successfully.");
-
-    await redisClient.connect();
-
-    console.log("Connected to the redis  successfully.");
-
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
+    if (!redisClient.isOpen) {
+      await redisClient.connect();
+      console.log("Connected to Redis");
+    }
   } catch (error) {
-    console.error("Error starting the server:", error);
-    await prisma.$disconnect();
-    process.exit(1);
+    console.error("Redis connection error:", error);
   }
 };
 
-main();
+connectRedis();
+
+// Only listen locally
+if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
+  const main = async () => {
+    try {
+      await prisma.$connect();
+      console.log("Connected to database successfully.");
+
+      app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+      });
+    } catch (error) {
+      console.error("Error starting server:", error);
+      await prisma.$disconnect();
+      process.exit(1);
+    }
+  };
+
+  main();
+}
 
 export default app;
