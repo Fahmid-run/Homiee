@@ -1,16 +1,11 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/server.ts"],
-  format: ["esm"],
-  target: "esnext",
-  outDir: "dist",
-  clean: true,
+  entry: ["netlify/functions/api.ts"],
+  format: ["cjs"],
+  target: "node18",
+  outDir: "netlify/functions",
+  clean: false,
   bundle: true,
-  splitting: false,
   sourcemap: true,
-  banner: {
-    // Shim required for Node/Express CJS dependencies bundled in ESM
-    js: `import { createRequire } from 'module'; const require = createRequire(import.meta.url);`,
-  },
 });
