@@ -24,7 +24,7 @@ async function main() {
       name: "Super Admin",
       password: hashedPassword,
       role: Role.ADMIN,
-      isVerified: true,
+      isEmailVerified: true,
     },
   });
 
