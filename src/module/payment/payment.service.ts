@@ -228,7 +228,7 @@ const handleRentalBkashCallback = async (query: any) => {
     }
 
     const executePayment = await fetch(
-      `${configs.bkash_baseUrl}/checkout/create/execute`,
+      `${configs.bkash_baseUrl}/checkout/execute`,
       {
         method: "POST",
         headers: {
@@ -290,7 +290,7 @@ const handleRentalBkashCallback = async (query: any) => {
       });
       return {
         result,
-        redirectURL: `${configs.frontend_url}/dashboard/rentals?status=failure`,
+        redirectURL: `${configs.frontend_url}/dashboard/rentals?status=failed`,
       };
     }
 
