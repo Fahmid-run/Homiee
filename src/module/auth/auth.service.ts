@@ -30,7 +30,10 @@ const registerUser = async (payload: IRegisterPatientPayload) => {
     );
   }
 
-  const hashedPassword = await bcrypt.hash(password, 8);
+  const hashedPassword = await bcrypt.hash(
+    password,
+    Number(configs.bcrypt_salt_rounds),
+  );
 
   const user = await prisma.user.create({
     data: {

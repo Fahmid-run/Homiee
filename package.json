@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "tsx --watch src/server.ts",
     "build": "prisma generate && tsup",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "db:seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

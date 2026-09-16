@@ -24,7 +24,6 @@ model User {
 
   roomMateMatchAsA RoomMateMatch[] @relation("MatchTenantA")
   roomMateMatchAsB RoomMateMatch[] @relation("MatchTenantB")
-  
 
   deletedAt DateTime?
 
