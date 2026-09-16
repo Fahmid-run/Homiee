@@ -542,7 +542,7 @@ const handleBkashCallback = async (query: Record<string, any>) => {
     }
 
     const executePayment = await fetch(
-      `${configs.bkash_baseUrl}/checkout/create/execute`,
+      `${configs.bkash_baseUrl}/checkout/execute`,
       {
         method: "POST",
         headers: {
