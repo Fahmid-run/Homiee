@@ -558,16 +558,21 @@ const handleBkashCallback = async (query: Record<string, any>) => {
     );
 
     const result = await executePayment.json();
+    if (!executePayment.ok || result.statusCode !== "0000") {
+      throw new AppError(
+        result.statusMessage || "bKash execute payment failed",
+        httpstatus.BAD_REQUEST,
+      );
+    }
 
     const updatedPayment = await tx.billPayment.update({
       where: {
         bkashPaymentId: result.paymentID,
-        bkashTransactionId: result.trxID,
-        currency: result.currency,
       },
       data: {
         status: PaymentStatus.PAID,
         gatewayReference: result.merchantInvoiceNumber,
+        bkashTransactionId: result.trxID,
         paidAt: new Date(),
       },
     });

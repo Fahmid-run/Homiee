@@ -26,5 +26,5 @@ export const configs = {
   redis_host: process.env.REDIS_HOST!,
   redis_port: process.env.REDIS_PORT!,
 
-  bkash_callback_Url: process.env.BKASH_CALLBACK_URL,
+  bkash_callback_Url: process.env.BKASH_CALLBACK_URL!,
 };
