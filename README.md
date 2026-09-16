@@ -12,6 +12,33 @@ The platform supports three main user roles:
 
 ---
 
+# 🌐 Live API
+
+**Live API:** `https://homiee-89.netlify.app/`
+
+---
+
+# 📚 API Documentation
+
+The complete API documentation is available through Postman:
+
+[📚 View Homiee API Documentation](https://documenter.getpostman.com/view/54889996/2sBYB1M8AE)
+
+The documentation contains the available API endpoints, request formats, authentication requirements, and response structures.
+
+---
+
+# 🔑 Demo Credentials
+
+### 🛡️ Admin Account
+
+```text
+Email: admin@example.com
+Password: Admin@123456
+```
+
+---
+
 ## ✨ Core Features
 
 ### 🔐 Authentication & Authorization
@@ -254,33 +281,6 @@ Create Shared Bills
 Bills Automatically Split
       ↓
 Upload Rental Documents
-```
-
----
-
-# 🌐 Live API
-
-**Live API:** `https://homiee-89.netlify.app/`
-
----
-
-# 📚 API Documentation
-
-The complete API documentation is available through Postman:
-
-[📚 View Homiee API Documentation](https://documenter.getpostman.com/view/54889996/2sBYB1M8AE)
-
-The documentation contains the available API endpoints, request formats, authentication requirements, and response structures.
-
----
-
-# 🔑 Demo Credentials
-
-### 🛡️ Admin Account
-
-```text
-Email: admin@example.com
-Password: Admin@123456
 ```
 
 ---
