@@ -633,22 +633,62 @@ const handleBkashCallback = async (query: Record<string, any>) => {
     );
 
     const result = await executePayment.json();
-    if (!executePayment.ok || result.statusCode !== "0000") {
-      throw new AppError(
-        result.statusMessage || "bKash execute payment failed",
-        httpstatus.BAD_REQUEST,
-      );
+
+    if (status === "success") {
+      const updatedPayment = await tx.billPayment.update({
+        where: {
+          bkashPaymentId: paymentID,
+        },
+        data: {
+          status: PaymentStatus.PAID,
+          paidAt: result.paymentExecuteTime,
+        },
+      });
+
+      await tx.utilityBillShare.update({
+        where: {
+          id: payment.billShareId,
+        },
+        data: {
+          status: PaymentStatus.PAID,
+          paidAt: result.paymentExecuteTime,
+        },
+      });
+      return {
+        result,
+        redirectURL: `${configs.frontend_url}/tenant/dashboard/rentals?status=success`,
+      };
+    }
+    if (status === "failure") {
+      const updatedPayment = await tx.billPayment.update({
+        where: {
+          bkashPaymentId: paymentID,
+        },
+        data: {
+          status: PaymentStatus.FAILED,
+        },
+      });
+
+      await tx.utilityBillShare.update({
+        where: {
+          id: payment.billShareId,
+        },
+        data: {
+          status: PaymentStatus.FAILED,
+        },
+      });
+      return {
+        result,
+        redirectURL: `${configs.frontend_url}/tenant/dashboard/rentals?status=success`,
+      };
     }
 
     const updatedPayment = await tx.billPayment.update({
       where: {
-        bkashPaymentId: result.paymentID,
+        bkashPaymentId: paymentID,
       },
       data: {
-        status: PaymentStatus.PAID,
-        gatewayReference: result.merchantInvoiceNumber,
-        bkashTransactionId: result.trxID,
-        paidAt: new Date(),
+        status: PaymentStatus.CANCELLED,
       },
     });
 
@@ -657,12 +697,13 @@ const handleBkashCallback = async (query: Record<string, any>) => {
         id: payment.billShareId,
       },
       data: {
-        status: BillShareStatus.PAID,
-        paidAt: new Date(),
+        status: PaymentStatus.CANCELLED,
       },
     });
-
-    return updatedPayment;
+    return {
+      result,
+      redirectURL: `${configs.frontend_url}/tenant/dashboard/rentals?status=success`,
+    };
   });
 };
 
