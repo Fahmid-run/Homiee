@@ -19,24 +19,21 @@ const connectRedis = async () => {
 
 connectRedis();
 
-// Only listen locally
-if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
-  const main = async () => {
-    try {
-      await prisma.$connect();
-      console.log("Connected to database successfully.");
+const main = async () => {
+  try {
+    await prisma.$connect();
+    console.log("Connected to database successfully.");
 
-      app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
-      });
-    } catch (error) {
-      console.error("Error starting server:", error);
-      await prisma.$disconnect();
-      process.exit(1);
-    }
-  };
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (error) {
+    console.error("Error starting server:", error);
+    await prisma.$disconnect();
+    process.exit(1);
+  }
+};
 
-  main();
-}
+main();
 
 export default app;

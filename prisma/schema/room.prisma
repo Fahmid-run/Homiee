@@ -11,6 +11,8 @@ model Room {
   property     Property      @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   utilityBills UtilityBill[]
   rentals      Rental[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 
   applications    Application[]
   viewingRequests ViewingRequest[]

@@ -1,3 +1,4 @@
+import { PaymentStatus } from "../../enums";
 import { prisma } from "../../lib/prisma";
 import { checkExists } from "../../utils/checkExist";
 
@@ -76,7 +77,81 @@ const getStats = async () => {
   return statResult;
 };
 
+const getUsers = async (take: number) => {
+  const users = await prisma.user.findMany({
+    omit: {
+      password: true,
+    },
+    include: {
+      propertyOwner: true,
+      tenantProfile: true,
+    },
+    take,
+  });
+
+  return users;
+};
+
+const recentProperties = async () => {
+  const properties = await prisma.property.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+
+  return properties;
+};
+
+const recenetRooms = async () => {
+  const rooms = await prisma.room.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+
+  return rooms;
+};
+
+const recentRentalPayments = async () => {
+  const rooms = await prisma.rental.findMany({
+    where: {
+      status: {
+        in: [PaymentStatus.CANCELLED, PaymentStatus.FAILED, PaymentStatus.PAID],
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+
+  return rooms;
+};
+
+const recentBillPayments = async () => {
+  const rooms = await prisma.billPayment.findMany({
+    where: {
+      status: {
+        in: [PaymentStatus.CANCELLED, PaymentStatus.FAILED, PaymentStatus.PAID],
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+
+  return rooms;
+};
+
 export const AdminService = {
   banUserFromDb,
   getStats,
+  getUsers,
+  recenetRooms,
+  recentProperties,
+  recentRentalPayments,
+  recentBillPayments,
 };
