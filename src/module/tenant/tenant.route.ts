@@ -28,4 +28,28 @@ router.post(
   tenantController.createRoomMatePreference,
 );
 
+router.post(
+  "/payment/rental/",
+  auth(Role.TENANT),
+  tenantController.createRentalCheckoutSession,
+);
+
+router.post("/payment/rental/webhook", tenantController.rentalBillWebhook);
+
+router.get(
+  "/payment/rental/callback",
+  tenantController.handleRentalBkashCallback,
+);
+
+router.post(
+  "/payment/bill/",
+  auth(Role.TENANT),
+
+  tenantController.createBillCheckoutSession,
+);
+
+router.post("/payment/bill-shares/webhook", tenantController.billwebhook);
+
+router.get("/payment/bill/callback", tenantController.handleBillBkashCallback);
+
 export const TenantRoutes = router;
