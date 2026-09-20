@@ -44,6 +44,8 @@ export type RoomMinAggregateOutputType = {
   monthlyRent: number | null
   capacity: number | null
   roomstatus: $Enums.RoomStatus | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type RoomMaxAggregateOutputType = {
@@ -54,6 +56,8 @@ export type RoomMaxAggregateOutputType = {
   monthlyRent: number | null
   capacity: number | null
   roomstatus: $Enums.RoomStatus | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type RoomCountAggregateOutputType = {
@@ -64,6 +68,8 @@ export type RoomCountAggregateOutputType = {
   monthlyRent: number
   capacity: number
   roomstatus: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -86,6 +92,8 @@ export type RoomMinAggregateInputType = {
   monthlyRent?: true
   capacity?: true
   roomstatus?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type RoomMaxAggregateInputType = {
@@ -96,6 +104,8 @@ export type RoomMaxAggregateInputType = {
   monthlyRent?: true
   capacity?: true
   roomstatus?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type RoomCountAggregateInputType = {
@@ -106,6 +116,8 @@ export type RoomCountAggregateInputType = {
   monthlyRent?: true
   capacity?: true
   roomstatus?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -203,6 +215,8 @@ export type RoomGroupByOutputType = {
   monthlyRent: number
   capacity: number
   roomstatus: $Enums.RoomStatus
+  createdAt: Date
+  updatedAt: Date
   _count: RoomCountAggregateOutputType | null
   _avg: RoomAvgAggregateOutputType | null
   _sum: RoomSumAggregateOutputType | null
@@ -236,6 +250,8 @@ export type RoomWhereInput = {
   monthlyRent?: Prisma.IntFilter<"Room"> | number
   capacity?: Prisma.IntFilter<"Room"> | number
   roomstatus?: Prisma.EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   utilityBills?: Prisma.UtilityBillListRelationFilter
   rentals?: Prisma.RentalListRelationFilter
@@ -252,6 +268,8 @@ export type RoomOrderByWithRelationInput = {
   monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   roomstatus?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   property?: Prisma.PropertyOrderByWithRelationInput
   utilityBills?: Prisma.UtilityBillOrderByRelationAggregateInput
   rentals?: Prisma.RentalOrderByRelationAggregateInput
@@ -272,6 +290,8 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   monthlyRent?: Prisma.IntFilter<"Room"> | number
   capacity?: Prisma.IntFilter<"Room"> | number
   roomstatus?: Prisma.EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   utilityBills?: Prisma.UtilityBillListRelationFilter
   rentals?: Prisma.RentalListRelationFilter
@@ -288,6 +308,8 @@ export type RoomOrderByWithAggregationInput = {
   monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   roomstatus?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.RoomCountOrderByAggregateInput
   _avg?: Prisma.RoomAvgOrderByAggregateInput
   _max?: Prisma.RoomMaxOrderByAggregateInput
@@ -306,6 +328,8 @@ export type RoomScalarWhereWithAggregatesInput = {
   monthlyRent?: Prisma.IntWithAggregatesFilter<"Room"> | number
   capacity?: Prisma.IntWithAggregatesFilter<"Room"> | number
   roomstatus?: Prisma.EnumRoomStatusWithAggregatesFilter<"Room"> | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
 }
 
 export type RoomCreateInput = {
@@ -315,6 +339,8 @@ export type RoomCreateInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
   utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalCreateNestedManyWithoutRoomInput
@@ -331,6 +357,8 @@ export type RoomUncheckedCreateInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
@@ -345,6 +373,8 @@ export type RoomUpdateInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
   utilityBills?: Prisma.UtilityBillUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUpdateManyWithoutRoomNestedInput
@@ -361,6 +391,8 @@ export type RoomUncheckedUpdateInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUncheckedUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
@@ -376,6 +408,8 @@ export type RoomCreateManyInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type RoomUpdateManyMutationInput = {
@@ -385,6 +419,8 @@ export type RoomUpdateManyMutationInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomUncheckedUpdateManyInput = {
@@ -395,6 +431,8 @@ export type RoomUncheckedUpdateManyInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomScalarRelationFilter = {
@@ -425,6 +463,8 @@ export type RoomCountOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   roomstatus?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RoomAvgOrderByAggregateInput = {
@@ -440,6 +480,8 @@ export type RoomMaxOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   roomstatus?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RoomMinOrderByAggregateInput = {
@@ -450,6 +492,8 @@ export type RoomMinOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   capacity?: Prisma.SortOrder
   roomstatus?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RoomSumOrderByAggregateInput = {
@@ -591,6 +635,8 @@ export type RoomCreateWithoutApplicationsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
   utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalCreateNestedManyWithoutRoomInput
@@ -606,6 +652,8 @@ export type RoomUncheckedCreateWithoutApplicationsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutRoomInput
   viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutRoomInput
@@ -635,6 +683,8 @@ export type RoomUpdateWithoutApplicationsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
   utilityBills?: Prisma.UtilityBillUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUpdateManyWithoutRoomNestedInput
@@ -650,6 +700,8 @@ export type RoomUncheckedUpdateWithoutApplicationsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUncheckedUpdateManyWithoutRoomNestedInput
   viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput
@@ -663,6 +715,8 @@ export type RoomCreateWithoutPropertyInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationCreateNestedManyWithoutRoomInput
@@ -677,6 +731,8 @@ export type RoomUncheckedCreateWithoutPropertyInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
@@ -721,6 +777,8 @@ export type RoomScalarWhereInput = {
   monthlyRent?: Prisma.IntFilter<"Room"> | number
   capacity?: Prisma.IntFilter<"Room"> | number
   roomstatus?: Prisma.EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
 }
 
 export type RoomCreateWithoutRentalsInput = {
@@ -730,6 +788,8 @@ export type RoomCreateWithoutRentalsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
   utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationCreateNestedManyWithoutRoomInput
@@ -745,6 +805,8 @@ export type RoomUncheckedCreateWithoutRentalsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
   viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutRoomInput
@@ -774,6 +836,8 @@ export type RoomUpdateWithoutRentalsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
   utilityBills?: Prisma.UtilityBillUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUpdateManyWithoutRoomNestedInput
@@ -789,6 +853,8 @@ export type RoomUncheckedUpdateWithoutRentalsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
   viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput
@@ -802,6 +868,8 @@ export type RoomCreateWithoutTenancyInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
   utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalCreateNestedManyWithoutRoomInput
@@ -817,6 +885,8 @@ export type RoomUncheckedCreateWithoutTenancyInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
@@ -846,6 +916,8 @@ export type RoomUpdateWithoutTenancyInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
   utilityBills?: Prisma.UtilityBillUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUpdateManyWithoutRoomNestedInput
@@ -861,6 +933,8 @@ export type RoomUncheckedUpdateWithoutTenancyInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUncheckedUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
@@ -874,6 +948,8 @@ export type RoomCreateWithoutUtilityBillsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
   rentals?: Prisma.RentalCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationCreateNestedManyWithoutRoomInput
@@ -889,6 +965,8 @@ export type RoomUncheckedCreateWithoutUtilityBillsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
   viewingRequests?: Prisma.ViewingRequestUncheckedCreateNestedManyWithoutRoomInput
@@ -918,6 +996,8 @@ export type RoomUpdateWithoutUtilityBillsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
   rentals?: Prisma.RentalUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUpdateManyWithoutRoomNestedInput
@@ -933,6 +1013,8 @@ export type RoomUncheckedUpdateWithoutUtilityBillsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rentals?: Prisma.RentalUncheckedUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
   viewingRequests?: Prisma.ViewingRequestUncheckedUpdateManyWithoutRoomNestedInput
@@ -946,6 +1028,8 @@ export type RoomCreateWithoutViewingRequestsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
   utilityBills?: Prisma.UtilityBillCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalCreateNestedManyWithoutRoomInput
@@ -961,6 +1045,8 @@ export type RoomUncheckedCreateWithoutViewingRequestsInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   utilityBills?: Prisma.UtilityBillUncheckedCreateNestedManyWithoutRoomInput
   rentals?: Prisma.RentalUncheckedCreateNestedManyWithoutRoomInput
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutRoomInput
@@ -990,6 +1076,8 @@ export type RoomUpdateWithoutViewingRequestsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
   utilityBills?: Prisma.UtilityBillUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUpdateManyWithoutRoomNestedInput
@@ -1005,6 +1093,8 @@ export type RoomUncheckedUpdateWithoutViewingRequestsInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUncheckedUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
@@ -1018,6 +1108,8 @@ export type RoomCreateManyPropertyInput = {
   monthlyRent: number
   capacity: number
   roomstatus?: $Enums.RoomStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type RoomUpdateWithoutPropertyInput = {
@@ -1027,6 +1119,8 @@ export type RoomUpdateWithoutPropertyInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBills?: Prisma.UtilityBillUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUpdateManyWithoutRoomNestedInput
@@ -1041,6 +1135,8 @@ export type RoomUncheckedUpdateWithoutPropertyInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   utilityBills?: Prisma.UtilityBillUncheckedUpdateManyWithoutRoomNestedInput
   rentals?: Prisma.RentalUncheckedUpdateManyWithoutRoomNestedInput
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutRoomNestedInput
@@ -1055,6 +1151,8 @@ export type RoomUncheckedUpdateManyWithoutPropertyInput = {
   monthlyRent?: Prisma.IntFieldUpdateOperationsInput | number
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   roomstatus?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -1132,6 +1230,8 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   monthlyRent?: boolean
   capacity?: boolean
   roomstatus?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   utilityBills?: boolean | Prisma.Room$utilityBillsArgs<ExtArgs>
   rentals?: boolean | Prisma.Room$rentalsArgs<ExtArgs>
@@ -1149,6 +1249,8 @@ export type RoomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   monthlyRent?: boolean
   capacity?: boolean
   roomstatus?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
@@ -1160,6 +1262,8 @@ export type RoomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   monthlyRent?: boolean
   capacity?: boolean
   roomstatus?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["room"]>
 
@@ -1171,9 +1275,11 @@ export type RoomSelectScalar = {
   monthlyRent?: boolean
   capacity?: boolean
   roomstatus?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomNumber" | "propertyId" | "roomType" | "monthlyRent" | "capacity" | "roomstatus", ExtArgs["result"]["room"]>
+export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomNumber" | "propertyId" | "roomType" | "monthlyRent" | "capacity" | "roomstatus" | "createdAt" | "updatedAt", ExtArgs["result"]["room"]>
 export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   utilityBills?: boolean | Prisma.Room$utilityBillsArgs<ExtArgs>
@@ -1208,6 +1314,8 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     monthlyRent: number
     capacity: number
     roomstatus: $Enums.RoomStatus
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["room"]>
   composites: {}
 }
@@ -1644,6 +1752,8 @@ export interface RoomFieldRefs {
   readonly monthlyRent: Prisma.FieldRef<"Room", 'Int'>
   readonly capacity: Prisma.FieldRef<"Room", 'Int'>
   readonly roomstatus: Prisma.FieldRef<"Room", 'RoomStatus'>
+  readonly createdAt: Prisma.FieldRef<"Room", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Room", 'DateTime'>
 }
     
 

@@ -1,4 +1,4 @@
-import { PaymentStatus } from "../../enums";
+import { PaymentStatus } from "../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { checkExists } from "../../utils/checkExist";
 

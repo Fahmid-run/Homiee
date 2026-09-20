@@ -3,7 +3,11 @@ import AppError from "../../utils/appError";
 import { checkExists } from "../../utils/checkExist";
 import httpstatus from "http-status";
 import { CreateRoomMatePreferencePayload } from "./tenant.interface";
-import { BillShareStatus, PaymentMethod, PaymentStatus } from "../../enums";
+import {
+  BillShareStatus,
+  PaymentMethod,
+  PaymentStatus,
+} from "../../../prisma/generated/prisma/enums";
 import { configs } from "../../config";
 import { getGrandToken } from "../../lib/bkash";
 import { stripe } from "../../config/stripe";
