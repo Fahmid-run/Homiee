@@ -87,7 +87,7 @@ const rentalBillWebhook = catchAsync(async (req, res) => {
   const event = stripe.webhooks.constructEvent(
     req.body,
     signature,
-    process.env.STRIPE_WEBHOOK_SECRET as string,
+    process.env.STRIPE_RENTAL_WEBHOOK_SECRET as string,
   );
 
   if (event.type === "checkout.session.completed") {
@@ -135,7 +135,7 @@ const billwebhook = catchAsync(async (req, res) => {
   const event = stripe.webhooks.constructEvent(
     req.body,
     signature,
-    process.env.STRIPE_WEBHOOK_SECRET as string,
+    process.env.STRIPE_BILL_WEBHOOK_SECRET as string,
   );
 
   if (event.type === "checkout.session.completed") {
