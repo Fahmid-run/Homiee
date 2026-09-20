@@ -243,7 +243,6 @@ const handleRentalStripeWebhook = async (session: Stripe.Checkout.Session) => {
       const payment = await tx.rentalPayment.findUnique({
         where: {
           id: paymentId,
-          transactionId,
         },
       });
 
