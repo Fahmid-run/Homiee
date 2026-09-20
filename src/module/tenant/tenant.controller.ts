@@ -66,8 +66,6 @@ const createRentalCheckoutSession = catchAsync(async (req, res) => {
   const { renatalId, paymentProvider } = req.body;
   const tenantId = req.user?.userId as string;
 
-  console.log(renatalId);
-
   const result = await tenantServices.createRentCheckout(
     paymentProvider,
     renatalId,
@@ -86,8 +84,8 @@ const rentalBillWebhook = catchAsync(async (req, res) => {
 
   const event = stripe.webhooks.constructEvent(
     req.body,
-    signature,
-    process.env.STRIPE_RENTAL_WEBHOOK_SECRET as string,
+    signature!,
+    process.env.STRIPE_RENTAL_WEBHOOK_SECRET! as string,
   );
 
   if (event.type === "checkout.session.completed") {
@@ -134,8 +132,8 @@ const billwebhook = catchAsync(async (req, res) => {
 
   const event = stripe.webhooks.constructEvent(
     req.body,
-    signature,
-    process.env.STRIPE_BILL_WEBHOOK_SECRET as string,
+    signature!,
+    process.env.STRIPE_BILL_WEBHOOK_SECRET! as string,
   );
 
   if (event.type === "checkout.session.completed") {
