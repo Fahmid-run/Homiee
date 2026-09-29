@@ -7,7 +7,7 @@ export default class AppError extends Error {
     this.statusCode = statusCode;
     this.isOperational = true;
     if (stack) {
-      this.stack = this.stack;
+      this.stack = stack;
     } else {
       Error.captureStackTrace(this, this.constructor);
     }

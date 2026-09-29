@@ -26,7 +26,7 @@ const registerUser = async (payload: IRegisterPatientPayload) => {
   if (isUserExists) {
     throw new AppError(
       "User with this email already exists",
-      httpstatus.NOT_FOUND,
+      httpstatus.CONFLICT,
     );
   }
 

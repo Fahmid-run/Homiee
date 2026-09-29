@@ -47,7 +47,7 @@ app.use(express.json());
 
 //Routes
 app.get("/", (req, res) => {
-  res.end("root route");
+  res.json({});
 });
 
 app.use("/api/v1/auth", AuthRoutes);
@@ -63,7 +63,12 @@ app.use("/api/v1/admin", AdminRoutes);
 // 404 Not found
 
 app.use((req, res, next) => {
-  next(new AppError("Route Not Found", httpstatus.NOT_FOUND));
+  next(
+    new AppError(
+      `Can't find ${req.originalUrl} on this server!`,
+      httpstatus.NOT_FOUND,
+    ),
+  );
 });
 
 app.use(globalErrorHandler);

@@ -5,7 +5,10 @@ import { redisClient } from "./lib/redis.js";
 
 const port = configs.port;
 
-// Safely connect Redis in Serverless context
+redisClient.on("error", (err) => {
+  console.error("Redis Client Error:", err);
+});
+
 const connectRedis = async () => {
   try {
     if (!redisClient.isOpen) {
@@ -26,6 +29,14 @@ const main = async () => {
 
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
+    });
+
+    process.on("unhandledRejection", (reason) => {
+      console.error("Unhandled Rejection:", reason);
+    });
+
+    process.on("uncaughtException", (error) => {
+      console.error("Uncaught Exception:", error);
     });
   } catch (error) {
     console.error("Error starting server:", error);
