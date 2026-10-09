@@ -15,6 +15,13 @@ router.post(
   validationReq(tenantDataValidator.ViewReqZodSchema),
   tenantController.createViewReq,
 );
+
+router.get(
+  "/view-request",
+  auth(Role.TENANT),
+  tenantController.getMyViewRequest,
+);
+
 router.post(
   "/application/:roomId",
   auth(Role.TENANT),

@@ -12,6 +12,27 @@ import { configs } from "../../config";
 import { getGrandToken } from "../../lib/bkash";
 import { stripe } from "../../config/stripe";
 import Stripe from "stripe";
+
+const getMyViewRequest = async (tenantId: string) => {
+  const data = await checkExists(
+    prisma.tenantProfile,
+    tenantId,
+    "Tenant Does not exists",
+  );
+
+  const res = await prisma.viewingRequest.findMany({
+    where: {
+      id: tenantId,
+    },
+    include: {
+      tenant: true,
+      property: true,
+    },
+  });
+
+  return res;
+};
+
 const createViewReq = async (
   roomId: string,
   tenantId: string,
@@ -713,6 +734,7 @@ const handleBkashCallback = async (query: Record<string, any>) => {
 };
 
 export const tenantServices = {
+  getMyViewRequest,
   createViewReq,
   createRoomMatePreference,
   createApplication,

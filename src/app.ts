@@ -14,7 +14,9 @@ import { TenantRoutes } from "./module/tenant/tenant.route";
 import { OwnerRoutes } from "./module/owner/owner.route";
 import { AdminRoutes } from "./module/admin/admin.route";
 import { tenantController } from "./module/tenant/tenant.controller";
+import session from "express-session";
 
+import passport from "passport";
 const app: Application = express();
 
 //middlewares
@@ -24,6 +26,15 @@ app.use(
   cors({
     origin: configs.frontend_url,
     credentials: true,
+  }),
+);
+
+app.set("view engine", "ejs");
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: "SECRET",
   }),
 );
 

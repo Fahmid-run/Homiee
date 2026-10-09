@@ -7,6 +7,19 @@ import { tenantServices } from "./tenant.service";
 import Stripe from "stripe";
 import { stripe } from "../../config/stripe";
 
+const getMyViewRequest = catchAsync(async (req: Request, res: Response) => {
+  const tenantId = req.user?.authorId as string;
+
+  const result = await tenantServices.getMyViewRequest(tenantId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "View Requests Retrieved Sucessfully",
+    data: result,
+  });
+});
+
 const createViewReq = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
   const tenantId = req.user?.userId as string;
@@ -159,6 +172,7 @@ const handleBillBkashCallback = catchAsync(async (req, res) => {
 });
 
 export const tenantController = {
+  getMyViewRequest,
   createViewReq,
   createApplication,
   createRoomMatePreference,

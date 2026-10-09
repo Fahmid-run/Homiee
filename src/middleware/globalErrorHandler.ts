@@ -4,16 +4,12 @@ import httpStatus from "http-status";
 import { configs } from "../config";
 import { Prisma } from "../../prisma/generated/prisma/client";
 
-export const globalErrorHandler = (
+export const globalErrorHandler = async (
   err: any,
   _req: Request,
   res: Response,
   _next: NextFunction,
 ) => {
-  if (configs.node_env === "development") {
-    console.log("Error from Global Error Handler:", err);
-  }
-
   let statusCode = 500;
   let errorMessage = "Internal Server Error";
   let errorName = err?.name || "Error";
@@ -64,16 +60,12 @@ export const globalErrorHandler = (
 
   const finalStatusCode = Number.isInteger(statusCode) ? statusCode : 500;
 
-  if (res.headersSent) {
-    return _next(err);
-  }
-
   return res.status(finalStatusCode).json({
     success: false,
     statusCode: finalStatusCode,
     name: errorName,
     message: errorMessage,
-    // error: configs.node_env === "development" ? err : undefined,
+    error: configs.node_env === "development" ? err : undefined,
     stack: configs.node_env === "development" ? err.stack : undefined,
   });
 };

@@ -1,4 +1,4 @@
-import { PaymentStatus } from "../../../prisma/generated/prisma/enums";
+import { PaymentStatus, Role } from "../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { checkExists } from "../../utils/checkExist";
 
@@ -23,6 +23,8 @@ const getStats = async () => {
   const statResult = await prisma.$transaction(async (tx) => {
     const [
       totalActiveUsers,
+      totalTenants,
+      totalOwners,
       totalPublishedProperties,
       totalAvailablerooms,
       totalPartiallyOccupiedRooms,
@@ -39,15 +41,24 @@ const getStats = async () => {
         },
       }),
 
+      tx.user.count({
+        where: {
+          role: Role.TENANT,
+        },
+      }),
+
+      tx.user.count({
+        where: {
+          role: Role.PROPERTY_OWNER,
+        },
+      }),
       tx.property.count({
         where: {
           propertyStatus: "PUBLISHED",
         },
       }),
       tx.room.count({
-        where: {
-          roomstatus: "AVAILABLE",
-        },
+        where: {},
       }),
       tx.room.count({
         where: {
@@ -63,14 +74,40 @@ const getStats = async () => {
       tx.viewingRequest.count(),
     ]);
 
+    const recentUsers = await prisma.user.findMany({
+      omit: {
+        password: true,
+      },
+      where: {
+        role: {
+          not: Role.ADMIN,
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 5,
+    });
+
+    const recentProperties = await prisma.property.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 10,
+    });
+
     return {
       totalActiveUsers,
+      totalTenants,
+      totalOwners,
       totalPublishedProperties,
       totalAvailablerooms,
       totalPartiallyOccupiedRooms,
       totalActiveTenancies,
       totalApplicationReq,
       totalViewReq,
+      recentUsers,
+      recentProperties,
     };
   });
 
@@ -92,18 +129,7 @@ const getUsers = async (take: number) => {
   return users;
 };
 
-const recentProperties = async () => {
-  const properties = await prisma.property.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 10,
-  });
-
-  return properties;
-};
-
-const recenetRooms = async () => {
+const recentRooms = async () => {
   const rooms = await prisma.room.findMany({
     orderBy: {
       createdAt: "desc",
@@ -150,8 +176,7 @@ export const AdminService = {
   banUserFromDb,
   getStats,
   getUsers,
-  recenetRooms,
-  recentProperties,
+  recentRooms,
   recentRentalPayments,
   recentBillPayments,
 };
