@@ -733,6 +733,36 @@ const handleBkashCallback = async (query: Record<string, any>) => {
   });
 };
 
+const recentPayments = async (tenantId: string) => {
+  const rentalPayments = await prisma.rentalPayment.findMany({
+    where: {
+      tenantId,
+      status: {
+        in: [PaymentStatus.CANCELLED, PaymentStatus.FAILED, PaymentStatus.PAID],
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+
+  const billPayments = await prisma.utilityBillShare.findMany({
+    where: {
+      tenantId,
+      status: {
+        in: [PaymentStatus.CANCELLED, PaymentStatus.FAILED, PaymentStatus.PAID],
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 10,
+  });
+
+  return rentalPayments;
+};
+
 export const tenantServices = {
   getMyViewRequest,
   createViewReq,
@@ -744,4 +774,6 @@ export const tenantServices = {
   handleStripeWebhook,
   handleBkashCallback,
   handleRentalBkashCallback,
+
+  recentPayments,
 };

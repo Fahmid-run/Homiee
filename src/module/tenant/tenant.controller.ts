@@ -171,6 +171,19 @@ const handleBillBkashCallback = catchAsync(async (req, res) => {
   });
 });
 
+const getRecentPayments = catchAsync(async (req: Request, res: Response) => {
+  const tenantId = req.user?.authorId as string;
+
+  const result = await tenantServices.recentPayments(tenantId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Payments Retrieved Sucessfully",
+    data: result,
+  });
+});
+
 export const tenantController = {
   getMyViewRequest,
   createViewReq,
@@ -182,4 +195,5 @@ export const tenantController = {
   handleBillBkashCallback,
   handleRentalBkashCallback,
   createBillCheckoutSession,
+  getRecentPayments,
 };

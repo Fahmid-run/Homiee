@@ -1,7 +1,7 @@
 import z from "zod";
 
 const PropertyZodSchema = z.object({
-  name: z.string().min(10, "Minimum 10 characters"),
+  name: z.string().min(5, "Minimum 5 characters"),
   address: z.string().min(10, "Minimum 10 characters"),
   description: z
     .string()

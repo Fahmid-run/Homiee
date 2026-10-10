@@ -1764,7 +1764,9 @@ export const RentalPaymentScalarFieldEnum = {
   stripeSessionId: 'stripeSessionId',
   stripePaymentId: 'stripePaymentId',
   bkashTransactionId: 'bkashTransactionId',
-  bkashPaymentId: 'bkashPaymentId'
+  bkashPaymentId: 'bkashPaymentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type RentalPaymentScalarFieldEnum = (typeof RentalPaymentScalarFieldEnum)[keyof typeof RentalPaymentScalarFieldEnum]

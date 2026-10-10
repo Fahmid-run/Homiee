@@ -9,6 +9,8 @@ import { tenantDataValidator } from "./tenant.validation";
 
 const router = Router();
 
+router.get("/payments/", auth(Role.TENANT), tenantController.getRecentPayments);
+
 router.post(
   "/:roomId",
   auth(Role.TENANT),
@@ -51,7 +53,6 @@ router.get(
 router.post(
   "/payment/bill/",
   auth(Role.TENANT),
-
   tenantController.createBillCheckoutSession,
 );
 
