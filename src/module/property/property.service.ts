@@ -136,6 +136,9 @@ const getPropertiesById = async (id: string) => {
     where: {
       id,
     },
+    include: {
+      rooms: true,
+    },
   });
 
   return res;
