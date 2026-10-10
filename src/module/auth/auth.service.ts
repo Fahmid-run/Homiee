@@ -152,7 +152,7 @@ const getMe = async (user: IRequestUser) => {
   });
 
   if (!isUserExists) {
-    throw new Error("User not found");
+    throw new AppError("User not found", httpstatus.NOT_FOUND);
   }
 
   return isUserExists;

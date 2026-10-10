@@ -12,7 +12,7 @@ const router = Router();
 router.get("/payments/", auth(Role.TENANT), tenantController.getRecentPayments);
 
 router.post(
-  "/:roomId",
+  "/view-request/:roomId",
   auth(Role.TENANT),
   validationReq(tenantDataValidator.ViewReqZodSchema),
   tenantController.createViewReq,
